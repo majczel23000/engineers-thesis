@@ -1,24 +1,51 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const mondodb = require('mongodb');
-const ObjectID = mondodb.ObjectID;
-
+const mongoose = require('mongoose');
+let User = require('./models/User');
 const app = express();
 app.use(bodyParser.json());
 
-let db;
+let db = mongoose.connect('mongodb://localhost:27017/cms', function(err, response){
+    if(err)
+        console.log("There is error in connecting with mongodb.");
+    console.log("Connection has been added");
+});
 
-mondodb.MongoClient.connect("mongodb://localhost:27017/cms", function(err, client){
-    if(err){
-        console.log(err);
-        process.exit(1);
-    }
+app.post('/users', (req, res) => {
+    let firstName = req.body.firstName;
+    let lastName = req.body.lastName;
+    let email = req.body.email;
+    let password = req.body.password;
+    let phoneNumber = req.body.phoneNumber;
 
-    db = client.db();
-    console.log("Database connection ready");
+    //szukamy uzytkownika po emailu (ktory jest unikalny w kolekcji)
+    User.findOne({email: email}, (error, user) =>{
+        if(error){
+            console.log("There was an error while registering user, please try again", error);
+        } else{
+            if(!user){  // Można założyć użytkownika
+                // tworzymy nowy dokument (Usera)
+                let user = new User();
+                user.firstName = firstName;
+                user.lastName = lastName;
+                user.email = email;
+                user.password = password;
+                user.phoneNumber = phoneNumber;
+                // zapisujemy go w kolekcji
+                user.save((err, result) => {
+                    if(err){
+                        console.log("There is an error in adding user into collection");
+                        res.status(400).send("Error");
+                    }
+                    res.status(200).send(user);
+                });
+            } else{ // Emial podany w rejestracji już istnieje 
+                res.status(500).send("Podany email już jest w bazie");
+            }
+        }
+    })    
+});
 
-    const server = app.listen(8080, function(){
-        const port = server.address().port;
-        console.log("App is running on port: ", port);
-    })
-})
+app.listen(3000, function(err, response){
+    console.log("Server is running on port:", 3000);
+});
