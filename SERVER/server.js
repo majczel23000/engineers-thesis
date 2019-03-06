@@ -5,7 +5,9 @@ let User = require('./models/User');
 const app = express();
 app.use(bodyParser.json());
 let createResponse = require('./middlewares/createResponse');
+let checkRequiredFields = require('./middlewares/checkRequiredFields');
 
+// Connection to database
 let db = mongoose.connect('mongodb://localhost:27017/cms', function(err, response){
     if(err)
         console.log("There is error in connecting with mongodb.");
@@ -13,17 +15,16 @@ let db = mongoose.connect('mongodb://localhost:27017/cms', function(err, respons
 });
 
 app.post('/users', (req, res) => {
-    // let firstName = req.body.firstName;
-    // let lastName = req.body.lastName;
-    // let email = req.body.email;
-    // let password = req.body.password;
-    // let phoneNumber = req.body.phoneNumber;
-    res.status(200).send(createResponse.createResponse(
-        200,
-        'Response message',
-        req.body
-    ))
-
+    // Check if all neccessary fields are in req.body
+    let checkResult = checkRequiredFields.checkRequiredFields('user', req.body);
+    if (!checkResult.success) {
+        res.status(400).send(
+            createResponse.createResponse(
+                400,
+                checkResult.message
+            )
+        )
+    } else {
     //szukamy uzytkownika po emailu (ktory jest unikalny w kolekcji)
     // User.findOne({email: email}, (error, user) =>{
     //     if(error){
@@ -49,7 +50,11 @@ app.post('/users', (req, res) => {
     //             res.status(500).send("Podany email już jest w bazie");
     //         }
     //     }
-    // })    
+    // }) 
+    }
+    
+
+       
 });
 
 app.listen(3000, function(err, response){
