@@ -1,9 +1,10 @@
 module.exports = {
-    createResponse: function(code, message, data){
+    createResponse: function(code, message, data = null){
         const response = new Object();
         response.code = code;
         response.message = message;
-        response.data = data;
+        if (data != null )
+            response.data = data;
         return response;
     }
 }
