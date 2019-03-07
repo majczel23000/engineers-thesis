@@ -18,8 +18,15 @@ const UserSchema = new Schema({
         required: true
     },
     phoneNumber: {
-        type:String, 
-        required: true
+        type:String
+    },
+    createdAt: {
+        type: Date,
+        default: new Date
+    },
+    updatedAt: {
+        type: Date,
+        default: new Date
     },
     roles: [String]
 })

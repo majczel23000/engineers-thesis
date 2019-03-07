@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
-import user from '../models/userModel.js';
+import User from '../models/userModel.js';
+let errorResponse = require('../models/errorResponseModel').error;
+let successResponse = require('../models/successResponseModel').success;
 
 exports.getUserById = (req, res) => {
     user.findById(req.body.id, (err, user) => {
@@ -21,15 +23,26 @@ exports.getAllUsers = (req, res) => {
     })
 }
 
+// Create new user
+// required: firstName, lastName, username, password, email
 exports.createUser = (req, res) => {
-    const newUser = new user(req.body);
-    newUser.save((err, user) => {
-        if (err) {
-            res.send(err);
+    User.findOne({email: req.body.email}, (error, user) => {
+        if (error) {
+            res.send(error);
         }
-
-        res.json(user);
-    })
+        if (user) {
+            res.status(409).json(errorResponse(409, 'User with specified email already exists'));
+        } else {
+            const newUser = new User(req.body);
+            newUser.save((err, user3) => {
+                if (err) {
+                    res.send(err);
+                }
+                
+                res.status(200).json(successResponse(200, 'User successfully created', user3));
+            })
+        }
+    })    
 }
 
 exports.updateUser = (req, res) => {
