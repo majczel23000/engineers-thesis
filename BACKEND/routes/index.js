@@ -1,4 +1,5 @@
 import user from '../controllers/userController';
+import role from '../controllers/roleController';
 
 export default (app) => {
     app.route('/users')
@@ -8,4 +9,12 @@ export default (app) => {
         .get(user.getUserById)
         .put(user.updateUser)
         .delete(user.deleteUser);
+
+    app.route('/roles')
+        .get(role.getAllRoles)
+        .post(role.createRole);
+    app.route('/roles/:id')
+        .get(role.getRoleById)
+        .put(role.updateRole)
+        .delete(role.deleteRole);
 };

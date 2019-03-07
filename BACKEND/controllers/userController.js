@@ -3,7 +3,7 @@ import User from '../models/userModel.js';
 let errorResponse = require('../models/errorResponseModel').error;
 let successResponse = require('../models/successResponseModel').success;
 
-// Create new user and return user node
+// CREATE: Create new user and return user node
 exports.createUser = (req, res) => {
     User.findOne({email: req.body.email}, (error, user) => {
         if (error) {
@@ -23,7 +23,7 @@ exports.createUser = (req, res) => {
     })    
 }
 
-// Return all user nodes
+// GET-ALL: Return all user nodes
 exports.getAllUsers = (req, res) => {
     User.find({}, (err, users) => {
         if (err) {
@@ -34,7 +34,7 @@ exports.getAllUsers = (req, res) => {
     })
 }
 
-// Return user with specified id
+// GET-ID: Return user with specified id
 exports.getUserById = (req, res) => {
     User.findById(req.params.id, (err, user) => {
         if (err) {
@@ -47,7 +47,7 @@ exports.getUserById = (req, res) => {
     });
 };
 
-// Update user and return updated user node
+// UPDATE: Update user and return updated user node
 exports.updateUser = (req, res) => {
     req.body.updatedAt = new Date;
     User.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, user) => {
@@ -61,7 +61,7 @@ exports.updateUser = (req, res) => {
     })
 };
 
-// Remove user from database
+// REMOVE: Remove user from database
 exports.deleteUser = (req, res) => {
     User.findByIdAndRemove(req.params.id, (err, user) => {
         if (err) {
