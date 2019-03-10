@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import User from '../models/userModel.js';
 let errorResponse = require('../models/errorResponseModel').error;
 let successResponse = require('../models/successResponseModel').success;
+let validateEmail = require('../middlewares/validateEmail').validateEmial;
 
 // CREATE: Create new user and return user node
 exports.createUser = (req, res) => {
@@ -11,14 +12,19 @@ exports.createUser = (req, res) => {
         } else if (user) {
             res.status(409).json(errorResponse(409, 'User with specified email already exists'));
         } else {
-            const newUser = new User(req.body);
-            newUser.save((err, user2) => {
-                if (err) {
-                    res.send(err);
-                } else {
-                    res.status(200).json(successResponse(200, 'User successfully created', user2));
-                }
-            })
+            if(validateEmail(req.body.email)) {
+                const newUser = new User(req.body);
+                newUser.save((err, user2) => {
+                    if (err) {
+                        res.send(err);
+                    } else {
+                        res.status(200).json(successResponse(200, 'User successfully created', user2));
+                    }
+                })
+            } else {
+                res.status(409).send(errorResponse(409, 'Please enter valid email'));
+            }
+            
         }
     })    
 }
