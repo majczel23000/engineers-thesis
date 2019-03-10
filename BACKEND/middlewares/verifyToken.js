@@ -1,5 +1,4 @@
 let errorResponse = require('../models/errorResponseModel').error;
-let successResponse = require('../models/successResponseModel').success;
 
 module.exports = {
     verifyToken: function(req, res, next) {
