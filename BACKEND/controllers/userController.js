@@ -1,10 +1,12 @@
 import mongoose from 'mongoose';
 import User from '../models/userModel.js';
+let jwt = require('jsonwebtoken');
 let bcrypt = require('bcrypt');
 let errorResponse = require('../models/errorResponseModel').error;
 let successResponse = require('../models/successResponseModel').success;
 let validateEmail = require('../middlewares/validators').validateEmail;
 let validateFields = require('../middlewares/validators').validateFields;
+let verifyToken = require('../middlewares/verifyToken').verifyToken;
 let BRYPT_SALT_ROUNDS = 12;
 
 // CREATE: Create new user and return user node
@@ -38,8 +40,7 @@ exports.createUser = (req, res) => {
         } else if (user) {
             res.status(409).json(errorResponse(409, 'User with specified email already exists'));
         } else {
-            bcrypt.hash(req.body.password, BRYPT_SALT_ROUNDS)
-            .then(function(hashedPassword){
+            bcrypt.hash(req.body.password, BRYPT_SALT_ROUNDS).then(function(hashedPassword){
                 const newUser = new User(req.body);
                 newUser.password = hashedPassword;
                 newUser.save((err, user2) => {
@@ -110,3 +111,22 @@ exports.deleteUser = (req, res) => {
         }
     })
 };
+
+// LOGIN: Login user to system
+exports.login = (req, res) => {
+    User.findOne({email: req.body.email}, (err, user) => {
+        if(err){
+            res.send(err);
+        } else{
+            if(!user){
+                res.status(404).json(errorResponse(404, 'User with specified email not found'));
+            } else if(!bcrypt.compareSync(req.body.password, user.password)){
+                res.status(402).json(errorResponse(402, 'Wrong password'));
+            } else {
+               let payload = { subject: user._id};
+               let token = jwt.sign(payload, 'secretKey');
+               res.status(200).json(successResponse(200, 'Successfully loged in', {token: token, user}));
+           }
+        }
+    });
+}
