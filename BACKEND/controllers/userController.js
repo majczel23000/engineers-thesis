@@ -3,30 +3,36 @@ import User from '../models/userModel.js';
 let errorResponse = require('../models/errorResponseModel').error;
 let successResponse = require('../models/successResponseModel').success;
 let validateEmail = require('../middlewares/validateEmail').validateEmial;
+let validateFields = require('../middlewares/validateFields').validateFields;
 
 // CREATE: Create new user and return user node
 exports.createUser = (req, res) => {
-    User.findOne({email: req.body.email}, (error, user) => {
-        if (error) {
-            res.send(error);
-        } else if (user) {
-            res.status(409).json(errorResponse(409, 'User with specified email already exists'));
-        } else {
-            if(validateEmail(req.body.email)) {
-                const newUser = new User(req.body);
-                newUser.save((err, user2) => {
-                    if (err) {
-                        res.send(err);
-                    } else {
-                        res.status(200).json(successResponse(200, 'User successfully created', user2));
-                    }
-                })
+    const result = validateFields(User.schema.obj, req.body);
+    if (result.status) {
+        User.findOne({email: req.body.email}, (error, user) => {
+            if (error) {
+                res.send(error);
+            } else if (user) {
+                res.status(409).json(errorResponse(409, 'User with specified email already exists'));
             } else {
-                res.status(409).send(errorResponse(409, 'Please enter valid email'));
+                if(validateEmail(req.body.email)) {
+                    const newUser = new User(req.body);
+                    newUser.save((err, user2) => {
+                        if (err) {
+                            res.send(err);
+                        } else {
+                            res.status(200).json(successResponse(200, 'User successfully created', user2));
+                        }
+                    })
+                } else {
+                    res.status(409).send(errorResponse(409, 'Please enter valid email'));
+                }
+                
             }
-            
-        }
-    })    
+        })
+    } else {
+        res.status(409).send(errorResponse(409, result.message));
+    }
 }
 
 // GET-ALL: Return all user nodes
@@ -56,6 +62,8 @@ exports.getUserById = (req, res) => {
 // UPDATE: Update user and return updated user node
 exports.updateUser = (req, res) => {
     req.body.updatedAt = new Date;
+    if (req.body.email)
+        delete req.body.email;
     User.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, user) => {
         if (err) {
             res.send(err);
