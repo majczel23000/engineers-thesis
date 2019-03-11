@@ -88,6 +88,18 @@ exports.updateUser = (req, res) => {
         delete req.body.createdAt;
     if (req.body.updatedAt)
         delete req.body.updatedAt;
+    if (!(/^[a-zA-Z]+$/.test(req.body.firstName))) {
+        res.status(409).send(errorResponse(409, 'First Name must contain only letters without spaces'));
+        return;
+    }
+    if (!(/^[a-zA-Z]+$/.test(req.body.lastName))) {
+        res.status(409).send(errorResponse(409, 'Last Name must contain only letters without spaces'));
+        return;
+    }
+    if (req.body.password.length < 6) {
+        res.status(409).send(errorResponse(409, 'Password must have at least 6 characters'));
+        return;
+    }
     User.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, user) => {
         if (err) {
             res.send(err);
