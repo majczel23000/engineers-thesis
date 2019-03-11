@@ -1,4 +1,5 @@
 let errorResponse = require('../models/errorResponseModel').error;
+let jwt = require('jsonwebtoken');
 
 module.exports = {
     verifyToken: function(req, res, next) {
@@ -13,7 +14,7 @@ module.exports = {
         if(!payload) {
             return res.status(401).json(errorResponse(401, 'Unauthorized request'));    
         }
-        req.userId = payload.subject
+        req.user = payload.subject
         next()
     }
 }

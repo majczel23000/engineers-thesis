@@ -57,7 +57,7 @@ exports.createUser = (req, res) => {
 
 // GET-ALL: Return all user nodes
 exports.getAllUsers = (req, res) => {
-    User.find({}, (err, users) => {
+    User.find({}, 'firstName lastName email', (err, users) => {
         if (err) {
             res.send(err);
         } else {
@@ -135,7 +135,7 @@ exports.login = (req, res) => {
             } else if(!bcrypt.compareSync(req.body.password, user.password)){
                 res.status(402).json(errorResponse(402, 'Wrong password'));
             } else {
-               let payload = { subject: user._id};
+               let payload = { subject: user };
                let token = jwt.sign(payload, 'secretKey');
                res.status(200).json(successResponse(200, 'Successfully loged in', {token: token, user}));
            }
