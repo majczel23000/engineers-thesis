@@ -5,20 +5,20 @@ let checkRole = require('../middlewares/checkRole').checkRole;
 
 export default (app) => {
     app.route('/users')
-        .get(verifyToken, checkRole('GET_ALL_USERSS'), user.getAllUsers)
-        .post(user.createUser);
+        .get(verifyToken, checkRole('USERS/GET_ALL'), user.getAllUsers)
+        .post(verifyToken, checkRole('USERS/CREATE'), user.createUser);
     app.route('/users/:id')
-        .get(user.getUserById)
-        .put(user.updateUser)
-        .delete(user.deleteUser);
+        .get(verifyToken, checkRole('USERS/GET_ID'), user.getUserById)
+        .put(verifyToken, checkRole('USERS/UPDATE'), user.updateUser)
+        .delete(verifyToken, checkRole('USERS/DELETE'), user.deleteUser);
     app.route('/users/login')
         .post(user.login);
 
     app.route('/roles')
-        .get(role.getAllRoles)
-        .post(role.createRole);
+        .get(verifyToken, checkRole('ROLES/GET_ALL'), role.getAllRoles)
+        .post(verifyToken, checkRole('ROLES/CREATE'), role.createRole);
     app.route('/roles/:id')
-        .get(role.getRoleById)
-        .put(role.updateRole)
-        .delete(role.deleteRole);
+        .get(verifyToken, checkRole('ROLES/GET_ID'), role.getRoleById)
+        .put(verifyToken, checkRole('ROLES/UPDATE'), role.updateRole)
+        .delete(verifyToken, checkRole('ROLES/DELETE'), role.deleteRole);
 };

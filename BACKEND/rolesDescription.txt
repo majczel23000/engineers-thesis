@@ -1,0 +1,13 @@
+USERS:
+    - USERS/GET_ALL     : get all users
+    - USERS/GET_ID      : get one user
+    - USERS/CREATE      : create user
+    - USERS/UPDATE      : update user
+    - USERS/DELETE      : delete user
+
+ROLES:
+    - ROLES/GET_ALL     : get all roles
+    - ROLES/GET_ID      : get one role
+    - ROLES/CREATE      : create role
+    - ROLES/UPDATE      : update role
+    - ROLES/DELETE      : delete role
