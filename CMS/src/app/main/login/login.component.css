@@ -1,0 +1,8 @@
+.example-full-width {
+    width: 100%;
+}
+
+#bt-login {
+    display: block;
+    margin: 0 auto;
+}
