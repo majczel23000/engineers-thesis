@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
+import { LoginService } from '../shared/services/login.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,7 +9,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 })
 export class SidebarComponent {
 
-  constructor() {
+  constructor(private loginService: LoginService) {
   }
 
 }
