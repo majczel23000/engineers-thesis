@@ -1,7 +1,31 @@
-<mat-sidenav-container class="example-container">
-  <button mat-button [matMenuTriggerFor]="menu">Menu</button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item>Item 1</button>
-    <button mat-menu-item>Item 2</button>
-  </mat-menu>
-</mat-sidenav-container>
+<div class="example-container">
+  <mat-toolbar color="primary" class="example-toolbar">
+    <button mat-icon-button (click)="sideMenu.toggle()" class="btn-toggle-menu">
+        <i class="material-icons">menu</i>
+    </button>
+    <h1 class="example-app-name">Content Management System</h1>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="example-sidenav-container">
+    <mat-sidenav #sideMenu id="menu">
+      <mat-nav-list>
+        <a mat-list-item routerLink=".">
+          <div class="width-30">
+              <i class="material-icons">account_circle</i>
+          </div>
+          <div class="width-80"> Users</div>
+        </a>
+        <a mat-list-item routerLink=".">
+          <div class="width-30">
+            <i class="material-icons">accessibility_new</i>
+          </div>
+          <div class="width-80"> Users</div>
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

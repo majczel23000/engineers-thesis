@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainModule } from './main/main.module';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { MatToolbarModule, MatSidenavModule, MatMenuModule, MatIconModule } from '@angular/material';
+import { MatToolbarModule, MatSidenavModule, MatMenuModule, MatIconModule, MatListModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,8 @@ import { MatToolbarModule, MatSidenavModule, MatMenuModule, MatIconModule } from
     MatToolbarModule,
     MatSidenavModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
