@@ -21,4 +21,8 @@ export class LoginService {
   loginUser(userData: UserLoginData) {
     return this.http.post('http://localhost:3000/users/login', userData);
   }
+
+  getToken(){
+    return localStorage.getItem('token');
+  }
 }
