@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { LoginService } from '../../shared/services/login.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -27,11 +28,18 @@ export class LoginComponent {
 
   matcher = new MyErrorStateMatcher();
 
-  constructor() { }
+  constructor(private loginService: LoginService) { }
 
   login() {
     if (this.loginFormGroup.valid) {
-      console.log(this.loginFormGroup);
+      this.loginService.loginUser(this.loginFormGroup.value).subscribe(
+        (res) => {
+          console.log(res);
+        },
+        (err) => {
+          console.log(err.error);
+        }
+      )
     }
   }
 

@@ -1,9 +1,12 @@
 <div class="example-container">
   <mat-toolbar color="primary" class="example-toolbar">
     <button mat-icon-button (click)="sideMenu.toggle()" class="btn-toggle-menu">
-        <i class="material-icons">menu</i>
+      <div style="display:flex; justify-content: center">
+          <i class="material-icons" style="line-height: unset">menu</i>
+          <h1 class="example-app-name">Content Management System</h1>
+      </div>
     </button>
-    <h1 class="example-app-name">Content Management System</h1>
+    
 
     <button *ngIf="loginService.isUserLogged()" mat-button [matMenuTriggerFor]="menu" class="user-menu btn-toggle-menu">
       <div style="display:flex; justify-content: center">

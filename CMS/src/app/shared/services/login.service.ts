@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { UserLoginData } from '../models/userLoginData.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +12,13 @@ export class LoginService {
     lastName: "Raźny"
   }
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   isUserLogged() {
     return false;
+  }
+
+  loginUser(userData: UserLoginData) {
+    return this.http.post('http://localhost:3000/users/login', userData);
   }
 }
