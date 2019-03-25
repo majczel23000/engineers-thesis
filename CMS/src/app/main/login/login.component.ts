@@ -37,6 +37,7 @@ export class LoginComponent {
         (res) => {
           console.log(res);
           this.router.navigate(['/dashboard']);
+          this.loginService.setToken(res.data.token);
         },
         (err) => {
           console.log(err.error);
