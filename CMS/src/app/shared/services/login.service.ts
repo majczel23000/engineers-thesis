@@ -2,18 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserLoginData } from '../models/userLoginData.model';
 import { UserLoginResponse } from '../models/userLoginData.model';
+import { Router } from '@angular/router';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  user: any = {
-    firstName: "Michał",
-    lastName: "Raźny"
-  }
+  user: User;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   isUserLogged() {
     return localStorage.getItem('token');
@@ -27,8 +26,22 @@ export class LoginService {
     return localStorage.getItem('token');
   }
 
+  getUser(): User{
+    return JSON.parse(localStorage.getItem('user'));
+  }
+
   setToken(token: string){
     localStorage.setItem('token', token);
+  }
+
+  setUser(user: User){
+    this.user = user;
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  logout(): void{
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
 
 }

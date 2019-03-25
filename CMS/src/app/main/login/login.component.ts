@@ -36,8 +36,9 @@ export class LoginComponent {
       this.loginService.loginUser(this.loginFormGroup.value).subscribe(
         (res) => {
           console.log(res);
-          this.router.navigate(['/dashboard']);
           this.loginService.setToken(res.data.token);
+          this.loginService.setUser(res.data.user);
+          this.router.navigate(['/dashboard']);
         },
         (err) => {
           console.log(err.error);

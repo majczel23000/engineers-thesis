@@ -11,13 +11,13 @@
     <button *ngIf="loginService.isUserLogged()" mat-button [matMenuTriggerFor]="menu" class="user-menu btn-toggle-menu">
       <div style="display:flex; justify-content: center">
         <i class="material-icons" style="line-height: unset">person</i>
-        <span style="height: 100%; display: block">{{loginService?.user.firstName}} {{loginService?.user.lastName}}</span>
+        <span style="height: 100%; display: block">{{loginService?.getUser().firstName}} {{loginService?.getUser().lastName}}</span>
       </div>
     </button>
     <!-- User profile section-->
     <mat-menu #menu="matMenu">
       <button mat-menu-item>Item 1</button>
-      <button mat-menu-item>Item 2</button>
+      <button mat-menu-item (click)="logout()">Logout</button>
     </mat-menu>
 
     <button mat-button *ngIf="!loginService.isUserLogged()" class="user-menu btn-toggle-menu">
