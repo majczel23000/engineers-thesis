@@ -22,24 +22,24 @@ export class LoginService {
     return this.http.post<UserLoginResponse>('http://localhost:3000/users/login', userData);
   }
 
-  getToken(){
+  getToken() {
     return localStorage.getItem('token');
   }
 
-  getUser(): User{
+  getUser(): User {
     return JSON.parse(localStorage.getItem('user'));
   }
 
-  setToken(token: string){
+  setToken(token: string) {
     localStorage.setItem('token', token);
   }
 
-  setUser(user: User){
+  setUser(user: User) {
     this.user = user;
     localStorage.setItem('user', JSON.stringify(user));
   }
 
-  logout(): void{
+  logout(): void {
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
   }

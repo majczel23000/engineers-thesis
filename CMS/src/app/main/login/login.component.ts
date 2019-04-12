@@ -23,9 +23,9 @@ export class LoginComponent {
   }
 
   loginFormGroup = new FormGroup({
-    email: new FormControl('', [ Validators.required, Validators.email,]),
-    password: new FormControl('', [ Validators.required])
-  })
+    email: new FormControl('', [ Validators.required, Validators.email ]),
+    password: new FormControl('', [ Validators.required ])
+  });
 
   matcher = new MyErrorStateMatcher();
 
@@ -43,7 +43,7 @@ export class LoginComponent {
         (err) => {
           console.log(err.error);
         }
-      )
+      );
     }
   }
 

@@ -13,7 +13,7 @@ export class SidebarComponent {
   }
 
 
-  logout(): void{
+  logout(): void {
     this.loginService.logout();
   }
 }
