@@ -137,7 +137,7 @@ exports.login = (req, res) => {
             } else {
                let payload = { subject: user };
                let token = jwt.sign(payload, 'secretKey');
-               res.status(200).json(successResponse(200, 'Successfully loged in', {token: token, user}));
+               res.status(200).json(successResponse(200, 'Successfully logged in', {token: token, user}));
            }
         }
     });

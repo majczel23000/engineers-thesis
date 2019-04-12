@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MainRoutingModule } from './main-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule, MatCardModule, MatButtonModule } from '@angular/material';
+import { TokenInterceptorService } from '../shared/interceptors/token-interceptor.service';
 
 @NgModule({
   declarations: [DashboardComponent, LoginComponent],
@@ -16,7 +17,15 @@ import { MatInputModule, MatCardModule, MatButtonModule } from '@angular/materia
     ReactiveFormsModule,
     MatInputModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    HttpClientModule
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
   ]
 })
 export class MainModule { }

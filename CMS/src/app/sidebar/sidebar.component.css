@@ -9,7 +9,8 @@
 }
 
 h1.example-app-name {
-margin-left: 8px;
+    margin-left: 8px;
+    color: white;
 }
 
 .example-sidenav-container {
@@ -50,4 +51,15 @@ margin-left: 8px;
 .user-menu { 
     position: absolute;
     right: 5%;
+}
+.material-icons{
+    color: white;
+}
+
+span {
+    color: white;
+}
+
+a .material-icons{
+    color: black;
 }

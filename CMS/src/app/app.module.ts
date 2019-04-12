@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -9,6 +9,8 @@ import { MainModule } from './main/main.module';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MatToolbarModule, MatSidenavModule, MatMenuModule, MatIconModule, MatListModule } from '@angular/material';
+
+import { TokenInterceptorService } from './shared/interceptors/token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -25,9 +27,16 @@ import { MatToolbarModule, MatSidenavModule, MatMenuModule, MatIconModule, MatLi
     MatSidenavModule,
     MatMenuModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: TokenInterceptorService,
+    //   multi: true
+    // }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
