@@ -3,6 +3,7 @@ import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '
 import { ErrorStateMatcher } from '@angular/material/core';
 import { LoginService } from '../../shared/services/login.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -29,7 +30,9 @@ export class LoginComponent {
 
   matcher = new MyErrorStateMatcher();
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private loginService: LoginService, 
+              private router: Router,
+              private snackBar: MatSnackBar) { }
 
   login() {
     if (this.loginFormGroup.valid) {
@@ -42,6 +45,11 @@ export class LoginComponent {
         },
         (err) => {
           console.log(err.error);
+          this.snackBar.open(err.error.message, 'X', {
+            duration: 500000,
+            horizontalPosition: "right",
+            panelClass: ['error-snackbar']
+          });
         }
       );
     }

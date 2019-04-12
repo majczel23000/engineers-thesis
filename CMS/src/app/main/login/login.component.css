@@ -6,3 +6,10 @@
     display: block;
     margin: 0 auto;
 }
+
+::ng-deep .error-snackbar {
+    background: #ff0033;
+    color: #f6f6f6;
+    max-width: 50% !important;
+    right: 0 !important;
+}
