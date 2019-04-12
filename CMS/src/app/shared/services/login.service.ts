@@ -4,6 +4,7 @@ import { UserLoginData } from '../models/userLoginData.model';
 import { UserLoginResponse } from '../models/userLoginData.model';
 import { Router } from '@angular/router';
 import { User } from '../models/user.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ import { User } from '../models/user.model';
 export class LoginService {
 
   user: User;
+  apiUrl = environment.setting.apiUrl;
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -19,7 +21,7 @@ export class LoginService {
   }
 
   loginUser(userData: UserLoginData) {
-    return this.http.post<UserLoginResponse>('http://localhost:3000/users/login', userData);
+    return this.http.post<UserLoginResponse>(`${this.apiUrl}/users/login`, userData);
   }
 
   getToken() {
