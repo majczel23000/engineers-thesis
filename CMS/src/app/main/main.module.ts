@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule, MatCardModule, MatButtonModule } from '@angular/material';
 import { TokenInterceptorService } from '../shared/interceptors/token-interceptor.service';
+import { UsersModule } from '../users/users.module';
 
 @NgModule({
   declarations: [DashboardComponent, LoginComponent],
@@ -18,7 +19,8 @@ import { TokenInterceptorService } from '../shared/interceptors/token-intercepto
     MatInputModule,
     MatCardModule,
     MatButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    UsersModule
   ],
   providers: [
     {
