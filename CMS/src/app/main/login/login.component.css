@@ -13,3 +13,10 @@
     max-width: 50% !important;
     right: 0 !important;
 }
+
+::ng-deep .success-snackbar {
+    background: green;
+    color: #f6f6f6;
+    max-width: 50% !important;
+    right: 0 !important;
+}

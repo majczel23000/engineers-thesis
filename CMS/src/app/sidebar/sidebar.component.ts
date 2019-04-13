@@ -12,7 +12,6 @@ export class SidebarComponent {
   constructor(private loginService: LoginService) {
   }
 
-
   logout(): void {
     this.loginService.logout();
   }

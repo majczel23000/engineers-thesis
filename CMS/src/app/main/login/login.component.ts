@@ -42,6 +42,11 @@ export class LoginComponent {
           this.loginService.setToken(res.data.token);
           this.loginService.setUser(res.data.user);
           this.router.navigate(['/dashboard']);
+          this.snackBar.open(res.message, 'X', {
+            duration: 500000,
+            horizontalPosition: "right",
+            panelClass: ['success-snackbar']
+          });
         },
         (err) => {
           console.log(err.error);

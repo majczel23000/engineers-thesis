@@ -7,13 +7,13 @@
       </div>
     </button>
     
-
     <button *ngIf="loginService.isUserLogged()" mat-button [matMenuTriggerFor]="menu" class="user-menu btn-toggle-menu">
       <div style="display:flex; justify-content: center">
         <i class="material-icons" style="line-height: unset">person</i>
         <span style="height: 100%; display: block">{{loginService?.getUser().firstName}} {{loginService?.getUser().lastName}}</span>
       </div>
     </button>
+    
     <!-- User profile section-->
     <mat-menu #menu="matMenu">
       <button mat-menu-item>Item 1</button>
@@ -32,7 +32,7 @@
   <mat-sidenav-container class="example-sidenav-container">
     <mat-sidenav #sideMenu id="menu">
       <mat-nav-list>
-        <a mat-list-item routerLink=".">
+        <a mat-list-item routerLink="/users">
           <div class="width-30">
               <i class="material-icons">account_circle</i>
           </div>
