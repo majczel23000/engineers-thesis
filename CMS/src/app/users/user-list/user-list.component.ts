@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../services/user.service';
+import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { User } from 'src/app/shared/models/user.model';
 
 @Component({
   selector: 'app-user-list',
@@ -8,10 +10,16 @@ import { UserService } from '../services/user.service';
 })
 export class UserListComponent implements OnInit {
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  displayedColumns: string[] = ['firstName', 'lastName', 'email'];
+  dataSource = new MatTableDataSource<User>(ELEMENT_DATA);
+
   constructor(private userService: UserService) { }
 
   ngOnInit() {
     this.getUsers();
+    this.dataSource.paginator = this.paginator;
   }
 
   getUsers(): void {
@@ -25,4 +33,28 @@ export class UserListComponent implements OnInit {
     )
   }
 
+  goToRegisterUser(): void {
+    console.log('Go to register user');
+  }
+
+  goToUsersList(): void {
+    console.log('Go to users list');
+  }
+
 }
+
+const ELEMENT_DATA: User[] = [
+  {firstName: 'Raz', lastName: 'Hydrogen', email: 'raz@raz.pl'},
+  {firstName: 'Raz', lastName: 'Hydrogen', email: 'raz@raz.pl'},
+  {firstName: 'Raz', lastName: 'Hydrogen', email: 'raz@raz.pl'},
+  {firstName: 'Raz', lastName: 'Hydrogen', email: 'raz@raz.pl'},
+  {firstName: 'Raz', lastName: 'Hydrogen', email: 'raz@raz.pl'},
+  {firstName: 'Raz', lastName: 'Hydrogen', email: 'raz@raz.pl'},
+  {firstName: 'Raz', lastName: 'Hydrogen', email: 'raz@raz.pl'},
+  {firstName: 'Raz', lastName: 'Hydrogen', email: 'raz@raz.pl'},
+  {firstName: 'Raz', lastName: 'Hydrogen', email: 'raz@raz.pl'},
+  {firstName: 'Raz', lastName: 'Hydrogen', email: 'raz@raz.pl'},
+  {firstName: 'Raz', lastName: 'Hydrogen', email: 'raz@raz.pl'},
+  {firstName: 'Raz', lastName: 'Hydrogen', email: 'raz@raz.pl'},
+  {firstName: 'Raz', lastName: 'Hydrogen', email: 'raz@raz.pl'},
+];

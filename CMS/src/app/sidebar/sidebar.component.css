@@ -63,3 +63,7 @@ span {
 a .material-icons{
     color: black;
 }
+
+.example-toolbar {
+    padding: 20px 0px;
+}
