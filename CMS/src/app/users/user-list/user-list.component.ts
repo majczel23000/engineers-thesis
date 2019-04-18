@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { User } from 'src/app/shared/models/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-list',
@@ -15,7 +16,8 @@ export class UserListComponent implements OnInit {
   displayedColumns: string[] = ['firstName', 'lastName', 'email'];
   dataSource = new MatTableDataSource<User>(ELEMENT_DATA);
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+              private router: Router) { }
 
   ngOnInit() {
     this.getUsers();
@@ -31,14 +33,6 @@ export class UserListComponent implements OnInit {
         console.log(err);
       }
     )
-  }
-
-  goToRegisterUser(): void {
-    console.log('Go to register user');
-  }
-
-  goToUsersList(): void {
-    console.log('Go to users list');
   }
 
 }

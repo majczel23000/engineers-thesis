@@ -6,9 +6,10 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserAddComponent } from './user-add/user-add.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { MatButtonModule, MatCardModule, MatTableModule, MatPaginatorModule } from '@angular/material';
+import { UserNavigationComponent } from './user-navigation/user-navigation.component';
 
 @NgModule({
-  declarations: [UserListComponent, UserAddComponent, UserDetailsComponent],
+  declarations: [UserListComponent, UserAddComponent, UserDetailsComponent, UserNavigationComponent],
   imports: [
     CommonModule,
     UsersRoutingModule,
