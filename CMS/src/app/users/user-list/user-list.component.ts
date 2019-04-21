@@ -25,7 +25,6 @@ export class UserListComponent implements OnInit {
 
   ngOnInit() {
     this.getUsers();
-    this.dataSource.paginator = this.paginator;
     this.paginatorIntl.itemsPerPageLabel = 'Users per page';
   }
 
@@ -34,14 +33,14 @@ export class UserListComponent implements OnInit {
     .pipe(
       finalize(() => {
         this.loadingData = false;
+        this.dataSource.paginator = this.paginator;
         console.log(this.paginator);
       })
     )
     .subscribe(
       (res) => {
         console.log(res);
-        this.dataSource = <any>res.data;
-        
+        this.dataSource.data = res.data;    
       },
       (err) => {
         console.log(err);
@@ -50,19 +49,3 @@ export class UserListComponent implements OnInit {
   }
 
 }
-
-const ELEMENT_DATA: User[] = [
-  {firstName: 'Raz', lastName: 'Hydrogen', email: 'raz@raz.pl'},
-  {firstName: 'Raz', lastName: 'Hydrogen', email: 'raz@raz.pl'},
-  {firstName: 'Raz', lastName: 'Hydrogen', email: 'raz@raz.pl'},
-  {firstName: 'Raz', lastName: 'Hydrogen', email: 'raz@raz.pl'},
-  {firstName: 'Raz', lastName: 'Hydrogen', email: 'raz@raz.pl'},
-  {firstName: 'Raz', lastName: 'Hydrogen', email: 'raz@raz.pl'},
-  {firstName: 'Raz', lastName: 'Hydrogen', email: 'raz@raz.pl'},
-  {firstName: 'Raz', lastName: 'Hydrogen', email: 'raz@raz.pl'},
-  {firstName: 'Raz', lastName: 'Hydrogen', email: 'raz@raz.pl'},
-  {firstName: 'Raz', lastName: 'Hydrogen', email: 'raz@raz.pl'},
-  {firstName: 'Raz', lastName: 'Hydrogen', email: 'raz@raz.pl'},
-  {firstName: 'Raz', lastName: 'Hydrogen', email: 'raz@raz.pl'},
-  {firstName: 'Raz', lastName: 'Hydrogen', email: 'raz@raz.pl'},
-];
