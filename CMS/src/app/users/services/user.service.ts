@@ -22,4 +22,8 @@ export class UserService {
   addUser(userData: User) {
     return this.httpClient.post<AddUserModel>(`${this.apiUrl}/users`, userData);
   }
+
+  getRoles() {
+    return this.httpClient.get(`${this.apiUrl}/roles`);
+  }
 }
