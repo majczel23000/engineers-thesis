@@ -43,7 +43,7 @@ export class LoginComponent {
           this.loginService.setUser(res.data.user);
           this.router.navigate(['/dashboard']);
           this.snackBar.open(res.message, 'X', {
-            duration: 500000,
+            duration: 5000,
             horizontalPosition: "right",
             panelClass: ['success-snackbar']
           });
@@ -51,7 +51,7 @@ export class LoginComponent {
         (err) => {
           console.log(err.error);
           this.snackBar.open(err.error.message, 'X', {
-            duration: 500000,
+            duration: 5000,
             horizontalPosition: "right",
             panelClass: ['error-snackbar']
           });
