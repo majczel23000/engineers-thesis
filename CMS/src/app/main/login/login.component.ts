@@ -44,7 +44,7 @@ export class LoginComponent {
           this.router.navigate(['/dashboard']);
           this.snackBar.open(res.message, 'X', {
             duration: 5000,
-            horizontalPosition: "right",
+            horizontalPosition: 'right',
             panelClass: ['success-snackbar']
           });
         },
@@ -52,7 +52,7 @@ export class LoginComponent {
           console.log(err.error);
           this.snackBar.open(err.error.message, 'X', {
             duration: 5000,
-            horizontalPosition: "right",
+            horizontalPosition: 'right',
             panelClass: ['error-snackbar']
           });
         }

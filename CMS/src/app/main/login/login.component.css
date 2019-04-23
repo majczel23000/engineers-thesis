@@ -1,22 +1,8 @@
-.example-full-width {
+.login-full-width {
     width: 100%;
 }
 
 #bt-login {
     display: block;
     margin: 0 auto;
-}
-
-::ng-deep .error-snackbar {
-    background: #ff0033;
-    color: #f6f6f6;
-    max-width: 50% !important;
-    right: 0 !important;
-}
-
-::ng-deep .success-snackbar {
-    background: green;
-    color: #f6f6f6;
-    max-width: 50% !important;
-    right: 0 !important;
 }

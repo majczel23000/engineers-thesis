@@ -1,4 +1,4 @@
-.example-container {
+.main-container {
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -8,16 +8,17 @@
     right: 0;
 }
 
-h1.example-app-name {
+.header-user-info {
+    height: 100%; 
+    display: block;
+}
+
+h1.header-app-name {
     margin-left: 8px;
     color: white;
 }
 
-.example-sidenav-container {
-    flex: 1;
-}
-
-.example-sidenav-container {
+.main-sidenav-container {
     flex: 1 0 auto;
 }
 
@@ -30,11 +31,11 @@ h1.example-app-name {
     cursor: pointer;
 }
   
-#menu {
+#main-menu {
     min-width: 300px;
 }
 
-#menu a {
+#main-menu a {
     width: 100%;
 }
 
@@ -48,7 +49,7 @@ h1.example-app-name {
     float: left;
 }
 
-.user-menu { 
+.header-user-menu { 
     position: absolute;
     right: 5%;
 }
@@ -64,6 +65,6 @@ a .material-icons{
     color: black;
 }
 
-.example-toolbar {
+.main-toolbar {
     padding: 20px 0px;
 }

@@ -1,48 +1,40 @@
-<div class="example-container">
-  <mat-toolbar color="primary" class="example-toolbar">
+<div class="main-container">
+  <mat-toolbar color="primary" class="header-toolbar">
     <button mat-icon-button (click)="sideMenu.toggle()" class="btn-toggle-menu">
       <div style="display:flex; justify-content: center">
           <i class="material-icons" style="line-height: unset">menu</i>
-          <h1 class="example-app-name">Content Management System</h1>
+          <h1 class="header-app-name">Content Management System</h1>
       </div>
     </button>
     
-    <button *ngIf="loginService.isUserLogged()" mat-button [matMenuTriggerFor]="menu" class="user-menu btn-toggle-menu">
+    <button *ngIf="loginService.isUserLogged()" mat-button [matMenuTriggerFor]="menu" class="header-user-menu btn-toggle-menu">
       <div style="display:flex; justify-content: center">
         <i class="material-icons" style="line-height: unset">person</i>
-        <span style="height: 100%; display: block">{{loginService?.getUser().firstName}} {{loginService?.getUser().lastName}}</span>
+        <span class="header-user-info">{{loginService?.getUser().firstName}} {{loginService?.getUser().lastName}}</span>
       </div>
     </button>
     
-    <!-- User profile section-->
     <mat-menu #menu="matMenu">
       <button mat-menu-item>Item 1</button>
       <button mat-menu-item (click)="logout()">Logout</button>
     </mat-menu>
 
-    <button mat-button *ngIf="!loginService.isUserLogged()" class="user-menu btn-toggle-menu">
+    <button mat-button *ngIf="!loginService.isUserLogged()" class="header-user-menu btn-toggle-menu">
       <div style="display:flex; justify-content: center">
         <i class="material-icons" style="line-height: unset">person</i>
-        <span style="height: 100%; display: block">User not logged</span>
+        <span class="header-user-info">User not logged</span>
       </div>
     </button>
-    
   </mat-toolbar>
 
-  <mat-sidenav-container class="example-sidenav-container">
-    <mat-sidenav #sideMenu id="menu">
+  <mat-sidenav-container class="main-sidenav-container">
+    <mat-sidenav #sideMenu id="main-menu">
       <mat-nav-list>
-        <a mat-list-item routerLink="/users">
+        <a *ngFor="let item of menuItems" mat-list-item routerLink="{{item.routerLink}}">
           <div class="width-30">
-              <i class="material-icons">account_circle</i>
+              <i class="material-icons">{{item.icon}}</i>
           </div>
-          <div class="width-80">Users</div>
-        </a>
-        <a mat-list-item routerLink=".">
-          <div class="width-30">
-            <i class="material-icons">accessibility_new</i>
-          </div>
-          <div class="width-80">Roles</div>
+          <div class="width-80">{{item.text}}</div>
         </a>
       </mat-nav-list>
     </mat-sidenav>

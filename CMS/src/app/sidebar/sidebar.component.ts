@@ -9,6 +9,19 @@ import { LoginService } from '../shared/services/login.service';
 })
 export class SidebarComponent {
 
+  menuItems = [
+    {
+      routerLink: '/users',
+      text: 'Users',
+      icon: 'account_circle'
+    },
+    {
+      routerLink: '/roles',
+      text: 'Roles',
+      icon: 'accessibility_new'
+    }
+  ]
+
   constructor(private loginService: LoginService) {
   }
 

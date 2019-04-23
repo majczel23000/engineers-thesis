@@ -23,3 +23,21 @@ table {
     width: 80%;
     margin: 30px auto !important;
 }
+
+.error-snackbar {
+    background: #ff0033 !important;
+    color: #f6f6f6 !important;
+    max-width: 50% !important;
+    right: 0 !important;
+}
+
+.success-snackbar {
+    background: #28a745 !important;
+    color: #f6f6f6 !important;
+    max-width: 50% !important;
+    right: 0 !important;
+}
+
+.mat-simple-snackbar-action {
+    color: #f6f6f6 !important;
+}
