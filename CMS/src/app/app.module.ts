@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainModule } from './main/main.module';
-import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MatToolbarModule, MatSidenavModule, MatMenuModule, MatIconModule, MatListModule, MatSnackBarModule } from '@angular/material';
 
@@ -15,7 +14,6 @@ import { TokenInterceptorService } from './shared/interceptors/token-interceptor
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     SidebarComponent
   ],
   imports: [
