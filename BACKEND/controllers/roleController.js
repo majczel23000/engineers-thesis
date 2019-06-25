@@ -1,4 +1,3 @@
-import mongoose from 'mongoose';
 import Role from '../models/roleModel.js';
 let errorResponse = require('../models/errorResponseModel').error;
 let successResponse = require('../models/successResponseModel').success;

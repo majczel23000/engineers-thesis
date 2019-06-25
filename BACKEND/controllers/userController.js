@@ -1,4 +1,3 @@
-import mongoose from 'mongoose';
 import User from '../models/userModel.js';
 let jwt = require('jsonwebtoken');
 let bcrypt = require('bcrypt');
@@ -6,7 +5,6 @@ let errorResponse = require('../models/errorResponseModel').error;
 let successResponse = require('../models/successResponseModel').success;
 let validateEmail = require('../middlewares/validators').validateEmail;
 let validateFields = require('../middlewares/validators').validateFields;
-let verifyToken = require('../middlewares/verifyToken').verifyToken;
 let BRYPT_SALT_ROUNDS = 12;
 let messages = require('../environments/environments').messages;
 
