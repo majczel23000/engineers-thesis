@@ -8,6 +8,7 @@ let validateEmail = require('../middlewares/validators').validateEmail;
 let validateFields = require('../middlewares/validators').validateFields;
 let verifyToken = require('../middlewares/verifyToken').verifyToken;
 let BRYPT_SALT_ROUNDS = 12;
+let messages = require('../environments/environments').messages;
 
 // CREATE: Create new user and return user node
 exports.createUser = (req, res) => {
@@ -18,19 +19,19 @@ exports.createUser = (req, res) => {
         return;
     }
     if (!validateEmail(req.body.email)) {
-        res.status(409).send(errorResponse(409, 'Please enter valid email'));
+        res.status(409).send(errorResponse(409, messages.users.errors.email));
         return;
     }
     if (!(/^[a-zA-Z]+$/.test(req.body.firstName))) {
-        res.status(409).send(errorResponse(409, 'First Name must contain only letters without spaces'));
+        res.status(409).send(errorResponse(409, messages.users.errors.firstName));
         return;
     }
     if (!(/^[a-zA-Z]+$/.test(req.body.lastName))) {
-        res.status(409).send(errorResponse(409, 'Last Name must contain only letters without spaces'));
+        res.status(409).send(errorResponse(409, messages.users.errors.lastName));
         return;
     }
     if (req.body.password.length < 6) {
-        res.status(409).send(errorResponse(409, 'Password must have at least 6 characters'));
+        res.status(409).send(errorResponse(409, messages.users.errors.password));
         return;
     }
 
@@ -38,7 +39,7 @@ exports.createUser = (req, res) => {
         if (error) {
             res.send(error);
         } else if (user) {
-            res.status(409).json(errorResponse(409, 'User with specified email already exists'));
+            res.status(409).json(errorResponse(409, messages.users.errors.emailExists));
         } else {
             bcrypt.hash(req.body.password, BRYPT_SALT_ROUNDS).then(function(hashedPassword){
                 const newUser = new User(req.body);
@@ -47,7 +48,7 @@ exports.createUser = (req, res) => {
                     if (err) {
                         res.send(err);
                     } else {
-                        res.status(200).json(successResponse(200, 'User successfully created', user2));
+                        res.status(200).json(successResponse(200, messages.users.success.created, user2));
                     }
                 }) 
             });           
@@ -61,7 +62,7 @@ exports.getAllUsers = (req, res) => {
         if (err) {
             res.send(err);
         } else {
-            res.status(200).json(successResponse(200, 'Users successfully fetched', users));
+            res.status(200).json(successResponse(200, messages.users.success.fetched, users));
         }
     })
 }
@@ -72,9 +73,9 @@ exports.getUserById = (req, res) => {
         if (err) {
             res.send(err);
         } else if (user) {
-            res.status(200).json(successResponse(200, 'User successfully fetched', user));
+            res.status(200).json(successResponse(200, messages.users.success.fetched, user));
         } else {
-            res.status(404).json(errorResponse(404, 'User with specified id not found'));
+            res.status(404).json(errorResponse(404, messages.users.errors.idNotFound));
         }  
     });
 };
@@ -89,24 +90,24 @@ exports.updateUser = (req, res) => {
     if (req.body.updatedAt)
         delete req.body.updatedAt;
     if (!(/^[a-zA-Z]+$/.test(req.body.firstName))) {
-        res.status(409).send(errorResponse(409, 'First Name must contain only letters without spaces'));
+        res.status(409).send(errorResponse(409, messages.users.errors.firstName));
         return;
     }
     if (!(/^[a-zA-Z]+$/.test(req.body.lastName))) {
-        res.status(409).send(errorResponse(409, 'Last Name must contain only letters without spaces'));
+        res.status(409).send(errorResponse(409, messages.users.errors.lastName));
         return;
     }
     if (req.body.password.length < 6) {
-        res.status(409).send(errorResponse(409, 'Password must have at least 6 characters'));
+        res.status(409).send(errorResponse(409, messages.users.errors.password));
         return;
     }
     User.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, user) => {
         if (err) {
             res.send(err);
         } else if (user) {
-            res.status(200).json(successResponse(200, 'User successfully updated', user));
+            res.status(200).json(successResponse(200, messages.users.success.updated, user));
         } else {
-            res.status(404).json(errorResponse(404, 'User with specified id not found'));
+            res.status(404).json(errorResponse(404, messages.users.errors.idNotFound));
         }
     })
 };
@@ -117,9 +118,9 @@ exports.deleteUser = (req, res) => {
         if (err) {
             res.send(err);
         } else if (user) {
-            res.status(200).json(successResponse(200, 'User successfully removed', user));
+            res.status(200).json(successResponse(200, messages.users.success.removed, user));
         } else {
-            res.status(404).json(errorResponse(404, 'User with specified id not found'));
+            res.status(404).json(errorResponse(404, messages.users.errors.idNotFound));
         }
     })
 };
@@ -131,13 +132,13 @@ exports.login = (req, res) => {
             res.send(err);
         } else{
             if(!user){
-                res.status(404).json(errorResponse(404, 'User with specified email not found'));
+                res.status(404).json(errorResponse(404, messages.users.errors.emailNotFound));
             } else if(!bcrypt.compareSync(req.body.password, user.password)){
-                res.status(402).json(errorResponse(402, 'Wrong password'));
+                res.status(402).json(errorResponse(402, messages.users.errors.wrongPassword));
             } else {
                let payload = { subject: user };
                let token = jwt.sign(payload, 'secretKey');
-               res.status(200).json(successResponse(200, 'Successfully logged in', {token: token, user}));
+               res.status(200).json(successResponse(200, messages.users.success.loggedIn, {token: token, user}));
            }
         }
     });

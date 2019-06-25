@@ -1,10 +1,11 @@
 let errorResponse = require('../models/errorResponseModel').error;
+let messages = require('../environments/environments').messages;
 
 module.exports = {
     checkRole: function(roleName){
         return (request, response, next) => {
             if (!request.user.roles.length) {
-                return response.status(401).json(errorResponse(401, "You don't have permission to perform this action!"));
+                return response.status(401).json(errorResponse(401, messages.global.errors.permission));
             } else {
                 let status = false;
                 for (let i = 0; i < request.user.roles.length; i++) {
@@ -13,7 +14,7 @@ module.exports = {
                     }
                 }
                 if (!status) {
-                    return response.status(401).json(errorResponse(401, "You don't have permission to perform this action!"));
+                    return response.status(401).json(errorResponse(401, messages.global.errors.permission));
                 } else {
                     next()
                 }
