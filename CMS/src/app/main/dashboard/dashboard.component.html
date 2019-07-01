@@ -1,3 +1,14 @@
-<p>
-  dashboard works!
-</p>
+<mat-grid-list [cols]="breakpoint" [rowHeight]="rowHeight" (window:resize)="onResize($event)">
+  <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="'#f6f6f6'">
+    <div class="grid-tile-title">Users statistics</div>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="'#f6f6f6'">
+    <div class="grid-tile-title">Roles statistics</div>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="'#f6f6f6'">
+    <div class="grid-tile-title">Other statistics</div>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1" [style.background]="'#f6f6f6'">
+    <div class="grid-tile-title">Don't know what else</div>
+  </mat-grid-tile>
+</mat-grid-list>

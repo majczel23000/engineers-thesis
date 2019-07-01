@@ -37,5 +37,21 @@ module.exports = {
                 removed: "Role successfully removed",
             }
         }
+    },
+    roles: {
+        users: {
+            getAll: "USERS/GET_ALL",
+            getId: "USERS/GET_ID",
+            create: "USERS/CREATE",
+            update: "USERS/UPDATE",
+            delete: "USERS/DELETE"
+        },
+        roles: {
+            getAll: "ROLES/GET_ALL",
+            getId: "ROLES/GET_ID",
+            create: "ROLES/CREATE",
+            update: "ROLES/UPDATE",
+            delete: "ROLES/DELETE"
+        }
     }
 }

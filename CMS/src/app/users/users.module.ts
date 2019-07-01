@@ -5,7 +5,7 @@ import { UsersRoutingModule } from './users-routing.module';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserAddComponent } from './user-add/user-add.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
-import { MatInputModule, MatButtonModule, MatCardModule, MatTableModule, MatPaginatorModule, MatPaginatorIntl } from '@angular/material';
+import { MatInputModule, MatButtonModule, MatCardModule, MatTableModule, MatPaginatorModule, MatPaginatorIntl, MatToolbarModule } from '@angular/material';
 import { UserNavigationComponent } from './user-navigation/user-navigation.component';
 
 @NgModule({
@@ -19,7 +19,8 @@ import { UserNavigationComponent } from './user-navigation/user-navigation.compo
     MatPaginatorModule,
     FormsModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
+    MatToolbarModule
   ],
   providers: [MatPaginatorIntl]
 })

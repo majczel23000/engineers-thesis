@@ -1,3 +1,13 @@
 .users-btn {
     margin: 0 20px !important;
 }
+
+.user-navigation-container {
+  margin: 0 auto;
+  width: 90%;
+}
+
+.user-navigation-row {
+  display: flex;
+  justify-content: center;
+}

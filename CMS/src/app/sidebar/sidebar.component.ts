@@ -11,6 +11,11 @@ export class SidebarComponent {
 
   menuItems = [
     {
+      routerLink: '/dashboard',
+      text: 'Dashboard',
+      icon: 'dashboard'
+    },
+    {
       routerLink: '/users',
       text: 'Users',
       icon: 'account_circle'
@@ -22,7 +27,7 @@ export class SidebarComponent {
     }
   ]
 
-  constructor(private loginService: LoginService) {
+  constructor(public loginService: LoginService) {
   }
 
   logout(): void {
