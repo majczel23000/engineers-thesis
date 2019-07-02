@@ -1,3 +1,70 @@
-<p>
-  user-details works!
-</p>
+<app-user-navigation></app-user-navigation>
+<mat-card class="user-details-card pb-5 mt-4">
+
+  <mat-card-header>
+    <mat-card-title>
+      <h1 class="user-details-title">User: {{user?.firstName}} {{user?.lastName}}</h1>
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form class="user-details-form" [formGroup]="editUserFormGroup" *ngIf="user">
+
+      <table class="user-details-table">
+        <tr class="user-details-row">
+          <td class="user-details-item">First Name:</td>
+          <td class="user-details-item">
+            <mat-form-field>
+              <input matInput value="{{user?.firstName}}" name="firstName" formControlName="firstName" [errorStateMatcher]="matcher">
+              <mat-error *ngIf="control.firstName.hasError('required')">
+                First Name is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr class="user-details-row">
+          <td class="user-details-item">Last Name:</td>
+          <td class="user-details-item">
+            <mat-form-field>
+              <input matInput value="{{user?.lastName}}" name="lastName" formControlName="lastName" [errorStateMatcher]="matcher">
+              <mat-error *ngIf="control.lastName.hasError('required')">
+                Last Name is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr class="user-details-row">
+          <td class="user-details-item">Email:</td>
+          <td class="user-details-item" style="text-align: left">{{user?.email}}</td>
+        </tr>
+        <tr class="user-details-row">
+          <td class="user-details-item">Password:</td>
+          <td class="user-details-item">
+            <mat-form-field>
+              <input matInput name="password" formControlName="password" [errorStateMatcher]="matcher">
+              <mat-error *ngIf="control.password.hasError('required')">
+                Password is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr class="user-details-row">
+          <td class="user-details-item">Roles:</td>
+          <td class="user-details-item" style="text-align: left">
+            <div class="role-list" *ngIf="user?.roles">
+              <mat-checkbox [checked]="checkIfUserHasThisRole(role.code)" color="primary" #checkbox class="role-list-item" (change)="onCheckboxChange(role.code, checkbox)"
+                            *ngFor="let role of roles" >{{role.name}}</mat-checkbox>
+            </div>
+          </td>
+        </tr>
+      </table>
+
+    </form>
+  </mat-card-content>
+
+  <mat-card-actions class="user-edit-actions">
+    <button mat-raised-button class="user-edit-btn" (click)="editUser()" color="primary">Save changes</button>
+    <button mat-raised-button class="user-edit-btn" (click)="clearChanges()" color="accent">Clear changes</button>
+  </mat-card-actions>
+
+</mat-card>

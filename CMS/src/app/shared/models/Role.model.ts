@@ -3,5 +3,4 @@ export interface RoleModel {
     code: string;
     description: string;
     createdAt: string;
-    updatedAt: string;
 }

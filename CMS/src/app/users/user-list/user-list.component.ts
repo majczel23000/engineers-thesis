@@ -48,4 +48,9 @@ export class UserListComponent implements OnInit {
     );
   }
 
+  goToUserDetails(row): void {
+    console.log(row);
+    this.router.na
+  }
+
 }

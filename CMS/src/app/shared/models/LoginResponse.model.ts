@@ -7,5 +7,5 @@ export interface LoginResponseModel {
     data: {
         token: string;
         user: User;
-    }
+    };
 }

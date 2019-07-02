@@ -1,4 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../services/user.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { User } from '../../shared/models/user.model';
+import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { RoleModel } from '../../shared/models/Role.model';
+import {MatCheckbox} from "@angular/material";
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-user-details',
@@ -7,9 +21,106 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserDetailsComponent implements OnInit {
 
-  constructor() { }
+  userId: string = undefined;
+  user: User = null;
+  roles: RoleModel[];
+  checkedCheckboxes = [];
+
+  editUserFormGroup: FormGroup;
+
+  get control() {
+    return this.editUserFormGroup.controls;
+  }
+
+  matcher = new MyErrorStateMatcher();
+
+  constructor(private userService: UserService,
+              private activatedRoute: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() {
+    this.getAllRoles();
+    this.getUserById();
+  }
+
+  getUserById(): void {
+    this.userId = this.activatedRoute.snapshot.paramMap.get('id');
+    this.userService.getUserById(this.userId).subscribe(
+      res => {
+        this.user = res.data;
+        console.log(this.user);
+        for (let i = 0; i < this.user.roles.length; i++) {
+          this.checkedCheckboxes.push(this.user.roles[i]);
+        }
+
+        this.editUserFormGroup = new FormGroup({
+          password: new FormControl('', [ Validators.required, Validators.minLength(6) ]),
+          firstName: new FormControl(this.user.firstName, [ Validators.required]),
+          lastName: new FormControl(this.user.lastName, [ Validators.required])
+        });
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+  getAllRoles(): void {
+    this.userService.getAllRoles().subscribe(
+      res => {
+        this.roles = res.data;
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+  checkIfUserHasThisRole(code: string): boolean {
+    for (let i = 0; i < this.roles.length; i++) {
+      for (let j = 0; j < this.user.roles.length; j++) {
+        if (code === this.user.roles[j]) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  onCheckboxChange(role, checkbox: MatCheckbox): void {
+    if (checkbox.checked) {
+      this.checkedCheckboxes.push(role);
+    } else {
+      for (let i = 0; i < this.checkedCheckboxes.length; i++) {
+        if (this.checkedCheckboxes[i] === role) {
+          this.checkedCheckboxes.splice(i, 1);
+        }
+      }
+    }
+  }
+
+  editUser(): void {
+    const userData = this.prepareDataToSend();
+    this.userService.updateUser(this.userId, userData).subscribe(
+      res => {
+        console.log(res);
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+  clearChanges(): void {
+    this.editUserFormGroup.controls.firstName.setValue(this.user.firstName);
+    this.editUserFormGroup.controls.lastName.setValue(this.user.lastName);
+    this.editUserFormGroup.controls.password.setValue('');
+  }
+
+  prepareDataToSend(): User {
+    const userData: User = this.editUserFormGroup.value;
+    userData.roles = this.checkedCheckboxes;
+    return userData;
   }
 
 }

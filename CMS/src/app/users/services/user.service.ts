@@ -5,6 +5,8 @@ import { User } from '../../shared/models/user.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { AddUserModel } from '../../shared/models/AddUser.model';
+import { UserResponseModel } from '../../shared/models/UserResponse.model';
+import { RoleResponseModel } from '../../shared/models/RoleResponse.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +25,15 @@ export class UserService {
     return this.httpClient.post<AddUserModel>(`${this.apiUrl}/users`, userData);
   }
 
-  getRoles() {
-    return this.httpClient.get(`${this.apiUrl}/roles`);
+  getUserById(_id: string) {
+    return this.httpClient.get<UserResponseModel>(`${this.apiUrl}/users/${_id}`);
+  }
+
+  updateUser(_id: string, body) {
+    return this.httpClient.put(`${this.apiUrl}/users/${_id}`, body);
+  }
+
+  getAllRoles() {
+    return this.httpClient.get<RoleResponseModel>(`${this.apiUrl}/roles`);
   }
 }

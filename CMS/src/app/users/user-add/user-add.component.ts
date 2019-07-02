@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { MatCheckbox, MatSnackBar} from '@angular/material';
 import { UserService } from '../services/user.service';
 import { User } from '../../shared/models/user.model';
+import { RoleModel } from '../../shared/models/Role.model';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -20,40 +21,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class UserAddComponent implements OnInit {
 
-  roles = [
-    {
-      name: 'Get all users',
-      code: 'USERS/GET_ALL'
-    },
-    {
-      name: 'Get specific user',
-      code: 'USERS/GET_ID'
-    },
-    {
-      name: 'Create users',
-      code: 'USERS/CREATE'
-    },
-    {
-      name: 'Update users',
-      code: 'USERS/UPDATE'
-    },
-    {
-      name: 'Delete users',
-      code: 'USERS/DELETE'
-    },
-    {
-      name: 'Get all roles',
-      code: 'ROLES/GET_ALL'
-    },
-    {
-      name: 'Get specific role',
-      code: 'ROLES/GET_ID'
-    },
-    {
-      name: 'Update roles',
-      code: 'ROLES/UPDATE'
-    }
-  ];
+  roles: RoleModel[];
 
   checkedCheckboxes = [];
 
@@ -75,6 +43,7 @@ export class UserAddComponent implements OnInit {
               private userService: UserService) { }
 
   ngOnInit() {
+    this.getAllRoles();
   }
 
   addUser(): void {
@@ -115,4 +84,14 @@ export class UserAddComponent implements OnInit {
     return userData;
   }
 
+  getAllRoles(): void {
+    this.userService.getAllRoles().subscribe(
+      res => {
+        this.roles = res.data;
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
 }

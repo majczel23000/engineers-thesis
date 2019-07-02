@@ -31,7 +31,7 @@
   <mat-sidenav-container class="main-sidenav-container">
     <mat-sidenav #sideMenu id="main-menu">
       <mat-nav-list>
-        <a *ngFor="let item of menuItems" mat-list-item routerLink="{{item.routerLink}}">
+        <a *ngFor="let item of menuItems" mat-list-item routerLink="{{item.routerLink}}" (click)="sideMenu.toggle()">
           <div class="width-30">
               <i class="material-icons">{{item.icon}}</i>
           </div>
