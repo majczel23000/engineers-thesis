@@ -17,9 +17,7 @@ export default (app) => {
 
     app.route('/roles')
         .get(verifyToken, checkRole(roles.roles.getAll), role.getAllRoles)
-        .post(verifyToken, checkRole(roles.roles.create), role.createRole);
     app.route('/roles/:id')
         .get(verifyToken, checkRole(roles.roles.getId), role.getRoleById)
         .put(verifyToken, checkRole(roles.roles.update), role.updateRole)
-        .delete(verifyToken, checkRole(roles.roles.delete), role.deleteRole);
 };

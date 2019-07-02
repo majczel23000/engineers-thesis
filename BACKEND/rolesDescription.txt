@@ -8,6 +8,4 @@ USERS:
 ROLES:
     - ROLES/GET_ALL     : get all roles
     - ROLES/GET_ID      : get one role
-    - ROLES/CREATE      : create role
     - ROLES/UPDATE      : update role
-    - ROLES/DELETE      : delete role

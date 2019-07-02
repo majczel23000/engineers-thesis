@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import routes from './routes/index.js';
+let createCollectionsScripts = require('./middlewares/createCollectionsScripts');
 
 const app = express();
 
@@ -13,8 +14,9 @@ mongoose.connect('mongodb://localhost:27017/cms', { useNewUrlParser: true }, fun
     console.log("Connection has been added");
 });
 
-app.use(cors());
+createCollectionsScripts.createRoles();
 
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
