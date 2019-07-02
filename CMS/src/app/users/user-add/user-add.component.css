@@ -24,3 +24,17 @@ mat-form-field {
 .user-add-btn {
   width: 100%;
 }
+
+.role-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.role-list-title {
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+.role-list-item {
+  flex: 1 0 50%;
+}

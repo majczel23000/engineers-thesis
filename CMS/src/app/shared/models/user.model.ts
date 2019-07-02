@@ -4,5 +4,5 @@ export class User {
     email: string;
     createdAt?: string;
     updatedAt?: string;
-    roles?: [string];
+    roles?: string[];
 }

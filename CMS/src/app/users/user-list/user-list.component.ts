@@ -40,12 +40,12 @@ export class UserListComponent implements OnInit {
     .subscribe(
       (res) => {
         console.log(res);
-        this.dataSource.data = res.data;    
+        this.dataSource.data = res.data;
       },
       (err) => {
         console.log(err);
       }
-    )
+    );
   }
 
 }
