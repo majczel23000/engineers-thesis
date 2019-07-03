@@ -63,3 +63,7 @@ mat-form-field {
   display: flex;
   justify-content: center;
 }
+
+a.role-edit-btn:hover {
+  text-decoration: none;
+}

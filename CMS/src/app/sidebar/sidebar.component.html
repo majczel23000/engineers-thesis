@@ -15,6 +15,7 @@
     </button>
     
     <mat-menu #menu="matMenu">
+      <button mat-menu-item [routerLink]="['/users/user', loginService.getUser()._id]">Profile</button>
       <button mat-menu-item (click)="logout()">Logout</button>
     </mat-menu>
   </mat-toolbar>

@@ -39,6 +39,14 @@
           <td class="user-details-item" style="text-align: left">{{user?.email}}</td>
         </tr>
         <tr class="user-details-row">
+          <td class="user-details-item">Created at:</td>
+          <td class="user-details-item" style="text-align: left">{{user?.createdAt}}</td>
+        </tr>
+        <tr class="user-details-row">
+          <td class="user-details-item">Updated at:</td>
+          <td class="user-details-item" style="text-align: left">{{user?.updatedAt}}</td>
+        </tr>
+        <tr class="user-details-row">
           <td class="user-details-item">Status:</td>
           <td class="user-details-item user-details-status" (click)="changeStatus()" [ngStyle]="{ 'background': user.status === 'INACTIVE' ? '#ff0033' : '#28a745' }">{{user?.status}}</td>
         </tr>

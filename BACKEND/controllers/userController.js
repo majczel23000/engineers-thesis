@@ -80,13 +80,13 @@ exports.getUserById = (req, res) => {
 
 // UPDATE: Update user and return updated user node
 exports.updateUser = (req, res) => {
-    req.body.updatedAt = new Date;
     if (req.body.email)
         delete req.body.email;
     if (req.body.createdAt)
         delete req.body.createdAt;
     if (req.body.updatedAt)
         delete req.body.updatedAt;
+    req.body.updatedAt = new Date();
     if (!(/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u.test(req.body.firstName))) {
         res.status(409).send(errorResponse(409, messages.users.errors.firstName));
         return;
@@ -100,9 +100,7 @@ exports.updateUser = (req, res) => {
         return;
     }
     bcrypt.hash(req.body.password, BRYPT_SALT_ROUNDS).then(function(hashedPassword){
-        console.log(req.body.password, hashedPassword);
         req.body.password = hashedPassword;
-        console.log(req.body.password, hashedPassword);
         User.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, user) => {
             if (err) {
                 res.send(err);
@@ -148,7 +146,7 @@ exports.login = (req, res) => {
 }
 
 exports.activate = (req, res) => {
-    User.findByIdAndUpdate(req.params.id, { status: 'ACTIVE' }, { new: true }, (err, user) => {
+    User.findByIdAndUpdate(req.params.id, { status: 'ACTIVE', updatedAt: new Date() }, { new: true }, (err, user) => {
         if (err) {
             res.send(err);
         } else if (user) {
@@ -160,7 +158,7 @@ exports.activate = (req, res) => {
 }
 
 exports.deactivate = (req, res) => {
-    User.findByIdAndUpdate(req.params.id, { status: 'INACTIVE' }, { new: true }, (err, user) => {
+    User.findByIdAndUpdate(req.params.id, { status: 'INACTIVE', updatedAt: new Date() }, { new: true }, (err, user) => {
         if (err) {
             res.send(err);
         } else if (user) {
