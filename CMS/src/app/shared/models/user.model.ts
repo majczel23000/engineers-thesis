@@ -5,4 +5,5 @@ export class User {
     createdAt?: string;
     updatedAt?: string;
     roles?: string[];
+    status: string;
 }

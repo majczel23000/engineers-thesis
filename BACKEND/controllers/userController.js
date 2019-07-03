@@ -10,6 +10,7 @@ let messages = require('../environments/environments').messages;
 
 // CREATE: Create new user and return user node
 exports.createUser = (req, res) => {
+    req.body.status = "INACTIVE";
     const validateFieldsResult = validateFields(User.schema.obj, req.body);
     // firstName, lastName, email, password
     if (!validateFieldsResult.status) {
@@ -20,11 +21,11 @@ exports.createUser = (req, res) => {
         res.status(409).send(errorResponse(409, messages.users.errors.email));
         return;
     }
-    if (!(/^[a-zA-Z]+$/.test(req.body.firstName))) {
+    if (!(/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u.test(req.body.firstName))) {
         res.status(409).send(errorResponse(409, messages.users.errors.firstName));
         return;
     }
-    if (!(/^[a-zA-Z]+$/.test(req.body.lastName))) {
+    if (!(/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u.test(req.body.lastName))) {
         res.status(409).send(errorResponse(409, messages.users.errors.lastName));
         return;
     }
@@ -32,7 +33,6 @@ exports.createUser = (req, res) => {
         res.status(409).send(errorResponse(409, messages.users.errors.password));
         return;
     }
-
     User.findOne({email: req.body.email}, (error, user) => {
         if (error) {
             res.send(error);
@@ -87,11 +87,11 @@ exports.updateUser = (req, res) => {
         delete req.body.createdAt;
     if (req.body.updatedAt)
         delete req.body.updatedAt;
-    if (!(/^[a-zA-Z]+$/.test(req.body.firstName))) {
+    if (!(/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u.test(req.body.firstName))) {
         res.status(409).send(errorResponse(409, messages.users.errors.firstName));
         return;
     }
-    if (!(/^[a-zA-Z]+$/.test(req.body.lastName))) {
+    if (!(/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u.test(req.body.lastName))) {
         res.status(409).send(errorResponse(409, messages.users.errors.lastName));
         return;
     }
@@ -99,15 +99,20 @@ exports.updateUser = (req, res) => {
         res.status(409).send(errorResponse(409, messages.users.errors.password));
         return;
     }
-    User.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, user) => {
-        if (err) {
-            res.send(err);
-        } else if (user) {
-            res.status(200).json(successResponse(200, messages.users.success.updated, user));
-        } else {
-            res.status(404).json(errorResponse(404, messages.users.errors.idNotFound));
-        }
-    })
+    bcrypt.hash(req.body.password, BRYPT_SALT_ROUNDS).then(function(hashedPassword){
+        console.log(req.body.password, hashedPassword);
+        req.body.password = hashedPassword;
+        console.log(req.body.password, hashedPassword);
+        User.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, user) => {
+            if (err) {
+                res.send(err);
+            } else if (user) {
+                res.status(200).json(successResponse(200, messages.users.success.updated, user));
+            } else {
+                res.status(404).json(errorResponse(404, messages.users.errors.idNotFound));
+            }
+        })
+    });
 };
 
 // REMOVE: Remove user from database
@@ -140,4 +145,28 @@ exports.login = (req, res) => {
            }
         }
     });
+}
+
+exports.activate = (req, res) => {
+    User.findByIdAndUpdate(req.params.id, { status: 'ACTIVE' }, { new: true }, (err, user) => {
+        if (err) {
+            res.send(err);
+        } else if (user) {
+            res.status(200).json(successResponse(200, messages.users.success.activated));
+        } else {
+            res.status(404).json(errorResponse(404, messages.users.errors.idNotFound));
+        }
+    })
+}
+
+exports.deactivate = (req, res) => {
+    User.findByIdAndUpdate(req.params.id, { status: 'INACTIVE' }, { new: true }, (err, user) => {
+        if (err) {
+            res.send(err);
+        } else if (user) {
+            res.status(200).json(successResponse(200, messages.users.success.deactivated));
+        } else {
+            res.status(404).json(errorResponse(404, messages.users.errors.idNotFound));
+        }
+    })
 }

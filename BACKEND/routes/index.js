@@ -12,6 +12,10 @@ export default (app) => {
         .get(verifyToken, checkRole(roles.users.getId), user.getUserById)
         .put(verifyToken, checkRole(roles.users.update), user.updateUser)
         .delete(verifyToken, checkRole(roles.users.delete), user.deleteUser);
+    app.route('/users/:id/activate')
+        .post(verifyToken, checkRole(roles.users.update), user.activate);
+    app.route('/users/:id/deactivate')
+        .post(verifyToken, checkRole(roles.users.update), user.deactivate);
     app.route('/users/login')
         .post(user.login);
 

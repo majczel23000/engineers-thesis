@@ -1,0 +1,13 @@
+.mat-dialog-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  border-radius: 0px;
+}
+
+button:first-of-type {
+  margin-right: 20px;
+}

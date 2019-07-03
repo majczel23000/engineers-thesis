@@ -21,7 +21,9 @@ module.exports = {
                 fetched: "User successfully fetched",
                 updated: "User successfully updated",
                 removed: "User successfully removed",
-                loggedIn: "Successfully logged in"
+                loggedIn: "Successfully logged in",
+                activated: "User successfully activated",
+                deactivated: "User successfully deactivated"
             }
         },
         roles: {

@@ -6,6 +6,9 @@ import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '
 import { ErrorStateMatcher } from '@angular/material/core';
 import { RoleModel } from '../../shared/models/Role.model';
 import { MatCheckbox, MatSnackBar } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogConfirmComponent } from '../../shared/components/dialog-confirm/dialog-confirm.component';
+import { DialogDataModel } from '../../shared/models/DialogData.model';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -36,7 +39,8 @@ export class UserDetailsComponent implements OnInit {
 
   constructor(private userService: UserService,
               private activatedRoute: ActivatedRoute,
-              private snackBar: MatSnackBar) { }
+              private snackBar: MatSnackBar,
+              public dialog: MatDialog) { }
 
   ngOnInit() {
     this.getAllRoles();
@@ -132,6 +136,24 @@ export class UserDetailsComponent implements OnInit {
     const userData: User = this.editUserFormGroup.value;
     userData.roles = this.checkedCheckboxes;
     return userData;
+  }
+
+  changeStatus(): void {
+    const dialogRef = this.dialog.open(DialogConfirmComponent, {
+      width: '40%',
+      data: {
+        title: 'Change status',
+        description: 'Are you sure you want to change status of this user?',
+        action: 'CHANGE_STATUS',
+        status: this.user.status,
+        _id: this.userId
+      }
+    });
+    dialogRef.afterClosed().subscribe( result => {
+      if (result) {
+        this.getUserById();
+      }
+    });
   }
 
 }

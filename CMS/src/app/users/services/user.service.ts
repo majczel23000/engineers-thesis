@@ -35,4 +35,12 @@ export class UserService {
   getAllRoles() {
     return this.httpClient.get<RoleListResponseModel>(`${this.apiUrl}/roles`);
   }
+
+  activateUser(_id: string) {
+    return this.httpClient.post<UserResponseModel>(`${this.apiUrl}/users/${_id}/activate`, {});
+  }
+
+  deactivateUser(_id: string) {
+    return this.httpClient.post<UserResponseModel>(`${this.apiUrl}/users/${_id}/deactivate`, {});
+  }
 }
