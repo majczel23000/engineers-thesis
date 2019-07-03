@@ -19,11 +19,6 @@ table {
     width: 100%;
 }
 
-.users-table {
-    width: 90%;
-    margin: 30px auto !important;
-}
-
 .error-snackbar {
     background: #ff0033 !important;
     color: #f6f6f6 !important;

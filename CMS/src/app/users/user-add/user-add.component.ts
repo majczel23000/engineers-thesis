@@ -60,7 +60,11 @@ export class UserAddComponent implements OnInit {
           });
         },
         (err) => {
-          console.log(err.error);
+          this.snackBar.open(err.error.message, 'X', {
+            duration: 5000,
+            horizontalPosition: 'right',
+            panelClass: ['error-snackbar']
+          });
         }
       );
     }

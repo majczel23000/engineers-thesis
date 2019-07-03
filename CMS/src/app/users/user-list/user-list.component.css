@@ -2,3 +2,12 @@
   background: #f6f6f6;
   cursor: pointer;
 }
+
+.users-table {
+  width: 90%;
+  margin: 30px auto !important;
+}
+
+td {
+  width: calc(100%/3);
+}

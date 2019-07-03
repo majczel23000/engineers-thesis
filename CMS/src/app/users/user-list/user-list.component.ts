@@ -4,6 +4,7 @@ import { MatPaginator, MatTableDataSource, MatPaginatorIntl } from '@angular/mat
 import { User } from 'src/app/shared/models/user.model';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-user-list',
@@ -21,7 +22,8 @@ export class UserListComponent implements OnInit {
 
   constructor(private userService: UserService,
               private router: Router,
-              private paginatorIntl: MatPaginatorIntl) { }
+              private paginatorIntl: MatPaginatorIntl,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.getUsers();
@@ -34,23 +36,20 @@ export class UserListComponent implements OnInit {
       finalize(() => {
         this.loadingData = false;
         this.dataSource.paginator = this.paginator;
-        console.log(this.paginator);
       })
     )
     .subscribe(
       (res) => {
-        console.log(res);
         this.dataSource.data = res.data;
       },
       (err) => {
-        console.log(err);
+        this.snackBar.open(err.error.message, 'X', {
+          duration: 5000,
+          horizontalPosition: 'right',
+          panelClass: ['error-snackbar']
+        });
       }
     );
-  }
-
-  goToUserDetails(row): void {
-    console.log(row);
-    this.router.na
   }
 
 }

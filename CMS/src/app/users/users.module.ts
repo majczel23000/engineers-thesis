@@ -10,6 +10,7 @@ import { MatInputModule, MatButtonModule, MatCardModule,
   MatToolbarModule, MatCheckboxModule } from '@angular/material';
 import { UserNavigationComponent } from './user-navigation/user-navigation.component';
 import { CdkColumnDef } from '@angular/cdk/table';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [UserListComponent, UserAddComponent, UserDetailsComponent, UserNavigationComponent],
@@ -24,7 +25,8 @@ import { CdkColumnDef } from '@angular/cdk/table';
     ReactiveFormsModule,
     MatInputModule,
     MatToolbarModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    SharedModule
   ],
   providers: [MatPaginatorIntl, CdkColumnDef]
 })

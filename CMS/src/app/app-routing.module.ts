@@ -20,6 +20,10 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent
+  },
+  {
+    path: 'roles',
+    loadChildren: './roles/roles.module#RolesModule'
   }
 ];
 

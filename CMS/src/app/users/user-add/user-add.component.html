@@ -1,5 +1,6 @@
+<app-current-path [currentPathItems]="['users', 'register']"></app-current-path>
 <app-user-navigation></app-user-navigation>
-<mat-card class="user-add-card pb-5 mt-4">
+<mat-card class="user-add-card pb-2 mt-4">
 
   <mat-card-header>
     <mat-card-title>
@@ -8,7 +9,7 @@
   </mat-card-header>
 
   <mat-card-content>
-    <form class="example-form" [formGroup]="addUserFormGroup">
+    <form class="example-form" [formGroup]="addUserFormGroup" (ngSubmit)="addUser()">
 
       <mat-form-field class="example-full-width mb-4">
         <input matInput placeholder="Email" name="email" formControlName="email" [errorStateMatcher]="matcher">
@@ -52,11 +53,11 @@
         <mat-checkbox color="primary" #checkbox class="role-list-item"*ngFor="let role of roles" (change)="onCheckboxChange(role.code, checkbox)">{{role.name}}</mat-checkbox>
       </div>
 
+      <mat-card-actions>
+        <button mat-raised-button class="user-add-btn" color="primary">Register</button>
+      </mat-card-actions>
+
     </form>
   </mat-card-content>
-
-  <mat-card-actions>
-    <button mat-raised-button class="user-add-btn" (click)="addUser()" color="primary">Register</button>
-  </mat-card-actions>
 
 </mat-card>

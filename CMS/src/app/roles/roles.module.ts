@@ -1,16 +1,31 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RolesRoutingModule } from './roles-routing.module';
 import { RoleDetailsComponent } from './role-details/role-details.component';
-import { RoleAddComponent } from './role-add/role-add.component';
 import { RoleListComponent } from './role-list/role-list.component';
+import { MatInputModule, MatButtonModule, MatCardModule,
+  MatTableModule, MatPaginatorModule, MatPaginatorIntl,
+  MatToolbarModule, MatCheckboxModule } from '@angular/material';
+import { CdkColumnDef } from '@angular/cdk/table';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
-  declarations: [RoleDetailsComponent, RoleAddComponent, RoleListComponent],
+  declarations: [RoleDetailsComponent, RoleListComponent],
   imports: [
     CommonModule,
-    RolesRoutingModule
-  ]
+    RolesRoutingModule,
+    MatButtonModule,
+    MatCardModule,
+    MatTableModule,
+    MatPaginatorModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatToolbarModule,
+    MatCheckboxModule,
+    SharedModule
+  ],
+  providers: [MatPaginatorIntl, CdkColumnDef]
 })
 export class RolesModule { }

@@ -20,7 +20,7 @@ exports.getRoleById = (req, res) => {
         if (err) {
             res.send(err);
         } else if (role) {
-            res.status(200).json(successResponse(200, messages.role.success.fetched, role));
+            res.status(200).json(successResponse(200, messages.roles.success.fetched, role));
         } else {
             res.status(404).json(errorResponse(404, messages.roles.errors.idNotFound));
         }  

@@ -1,3 +1,61 @@
-<p>
-  role-details works!
-</p>
+<app-current-path *ngIf="role" [currentPathItems]="['roles', role.name]"></app-current-path>
+
+<mat-toolbar color="primary" class="role-navigation-container mat-elevation-z4">
+  <mat-toolbar-row class="role-navigation-row">
+    <button mat-raised-button color="basic" [routerLink]="['/roles']" class="role-btn">Roles list</button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-card class="role-details-card pb-5 mt-4">
+
+  <mat-card-header>
+    <mat-card-title>
+      <h1 class="role-details-title">Role: {{role?.code}}</h1>
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form class="role-details-form" [formGroup]="editRoleFormGroup" *ngIf="role" (ngSubmit)="editRole()">
+
+      <table class="role-details-table">
+        <tr class="role-details-row">
+          <td class="role-details-item">Code:</td>
+          <td class="role-details-item" style="text-align: left">{{role?.code}}</td>
+        </tr>
+        <tr class="role-details-row">
+          <td class="role-details-item">Name:</td>
+          <td class="role-details-item">
+            <mat-form-field>
+              <input matInput value="{{role?.name}}" name="name" formControlName="name" [errorStateMatcher]="matcher">
+              <mat-error *ngIf="control.name.hasError('required')">
+                Name is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr class="role-details-row">
+          <td class="role-details-item">Description:</td>
+          <td class="role-details-item">
+            <mat-form-field>
+              <input matInput value="{{role?.description}}" name="description" formControlName="description" [errorStateMatcher]="matcher">
+              <mat-error *ngIf="control.description.hasError('required')">
+                Description is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr class="role-details-row">
+          <td class="role-details-item">Created at:</td>
+          <td class="role-details-item" style="text-align: left">{{role?.createdAt}}</td>
+        </tr>
+      </table>
+
+      <mat-card-actions class="role-edit-actions">
+        <button mat-raised-button class="role-edit-btn" color="primary">Save changes</button>
+        <a mat-raised-button class="role-edit-btn" (click)="clearChanges()" color="accent">Clear changes</a>
+      </mat-card-actions>
+
+    </form>
+  </mat-card-content>
+
+</mat-card>

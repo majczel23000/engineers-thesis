@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { UserListModel } from 'src/app/shared/models/UserList.model';
 import { User } from '../../shared/models/user.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { AddUserModel } from '../../shared/models/AddUser.model';
 import { UserResponseModel } from '../../shared/models/UserResponse.model';
-import { RoleResponseModel } from '../../shared/models/RoleResponse.model';
+import { RoleListResponseModel } from '../../shared/models/RoleListResponse.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,10 +29,10 @@ export class UserService {
   }
 
   updateUser(_id: string, body) {
-    return this.httpClient.put(`${this.apiUrl}/users/${_id}`, body);
+    return this.httpClient.put<UserResponseModel>(`${this.apiUrl}/users/${_id}`, body);
   }
 
   getAllRoles() {
-    return this.httpClient.get<RoleResponseModel>(`${this.apiUrl}/roles`);
+    return this.httpClient.get<RoleListResponseModel>(`${this.apiUrl}/roles`);
   }
 }

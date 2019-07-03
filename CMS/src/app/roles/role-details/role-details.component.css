@@ -1,0 +1,65 @@
+::ng-deep .mat-card-header {
+  display: flex;
+  justify-content: center;
+}
+
+::ng-deep .mat-card-header-text {
+  margin: 0 !important;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.role-details-card {
+  margin: 0 auto;
+  width: 90%;
+  padding: 20px 30px;
+}
+
+.role-details-title {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+}
+
+.role-details-row {
+  border: 1px solid #f6f6f6;
+}
+
+.role-details-row:hover {
+  background: #f6f6f6;
+  border: 1px solid #e6e6e6;
+}
+
+.role-details-item {
+  text-align: center;
+  padding: 20px;
+  font-size: 1rem;
+  border-right: 1px solid #f6f6f6;
+  width: 50%;
+  word-break: break-word;
+}
+
+.role-edit-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.role-edit-btn {
+  border-radius: 0px;
+}
+
+.role-btn {
+  margin: 0 20px !important;
+  border-radius: 0px;
+}
+
+.role-navigation-container {
+  margin: 0 auto;
+  width: 90%;
+}
+
+.role-navigation-row {
+  display: flex;
+  justify-content: center;
+}

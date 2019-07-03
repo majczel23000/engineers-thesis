@@ -30,7 +30,7 @@ export class LoginComponent {
 
   matcher = new MyErrorStateMatcher();
 
-  constructor(private loginService: LoginService, 
+  constructor(private loginService: LoginService,
               private router: Router,
               private snackBar: MatSnackBar) { }
 

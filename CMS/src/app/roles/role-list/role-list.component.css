@@ -1,0 +1,13 @@
+.roles-table-row:hover {
+  background: #f6f6f6;
+  cursor: pointer;
+}
+
+.roles-table {
+  width: 90%;
+  margin: 30px auto !important;
+}
+
+td {
+  width: 50%;
+}

@@ -4,5 +4,5 @@ export interface RoleResponseModel {
     code: number;
     status: boolean;
     message: string;
-    data: RoleModel[];
+    data: RoleModel;
 }

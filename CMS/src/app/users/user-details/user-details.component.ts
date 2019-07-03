@@ -5,7 +5,7 @@ import { User } from '../../shared/models/user.model';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { RoleModel } from '../../shared/models/Role.model';
-import {MatCheckbox} from "@angular/material";
+import { MatCheckbox, MatSnackBar } from '@angular/material';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -36,7 +36,7 @@ export class UserDetailsComponent implements OnInit {
 
   constructor(private userService: UserService,
               private activatedRoute: ActivatedRoute,
-              private router: Router) { }
+              private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.getAllRoles();
@@ -100,15 +100,26 @@ export class UserDetailsComponent implements OnInit {
   }
 
   editUser(): void {
-    const userData = this.prepareDataToSend();
-    this.userService.updateUser(this.userId, userData).subscribe(
-      res => {
-        console.log(res);
-      },
-      err => {
-        console.log(err);
-      }
-    );
+    if (this.editUserFormGroup.valid) {
+      const userData = this.prepareDataToSend();
+      this.userService.updateUser(this.userId, userData).subscribe(
+        res => {
+          this.snackBar.open(res.message, 'X', {
+            duration: 5000,
+            horizontalPosition: 'right',
+            panelClass: ['success-snackbar']
+          });
+          this.user = res.data;
+        },
+        err => {
+          this.snackBar.open(err.error.message, 'X', {
+            duration: 5000,
+            horizontalPosition: 'right',
+            panelClass: ['error-snackbar']
+          });
+        }
+      );
+    }
   }
 
   clearChanges(): void {

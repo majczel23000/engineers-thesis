@@ -1,5 +1,6 @@
+<app-current-path *ngIf="user" [currentPathItems]="['users', user.email]"></app-current-path>
 <app-user-navigation></app-user-navigation>
-<mat-card class="user-details-card pb-5 mt-4">
+<mat-card class="user-details-card pb-2 mt-4">
 
   <mat-card-header>
     <mat-card-title>
@@ -8,7 +9,7 @@
   </mat-card-header>
 
   <mat-card-content>
-    <form class="user-details-form" [formGroup]="editUserFormGroup" *ngIf="user">
+    <form class="user-details-form" [formGroup]="editUserFormGroup" *ngIf="user" (ngSubmit)="editUser()">
 
       <table class="user-details-table">
         <tr class="user-details-row">
@@ -41,7 +42,10 @@
           <td class="user-details-item">Password:</td>
           <td class="user-details-item">
             <mat-form-field>
-              <input matInput name="password" formControlName="password" [errorStateMatcher]="matcher">
+              <input matInput name="password" type="password" formControlName="password" [errorStateMatcher]="matcher">
+              <mat-error *ngIf="!control.password.hasError('required') && control.password.hasError('minlength')">
+                Password must have at least 6 characters
+              </mat-error>
               <mat-error *ngIf="control.password.hasError('required')">
                 Password is <strong>required</strong>
               </mat-error>
@@ -58,13 +62,13 @@
           </td>
         </tr>
       </table>
-
+      <mat-card-actions class="user-edit-actions">
+        <button mat-raised-button class="user-edit-btn" color="primary">Save changes</button>
+        <button mat-raised-button class="user-edit-btn" (click)="clearChanges()" color="accent">Clear changes</button>
+      </mat-card-actions>
     </form>
   </mat-card-content>
 
-  <mat-card-actions class="user-edit-actions">
-    <button mat-raised-button class="user-edit-btn" (click)="editUser()" color="primary">Save changes</button>
-    <button mat-raised-button class="user-edit-btn" (click)="clearChanges()" color="accent">Clear changes</button>
-  </mat-card-actions>
+
 
 </mat-card>
