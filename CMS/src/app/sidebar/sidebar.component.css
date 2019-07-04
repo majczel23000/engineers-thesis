@@ -90,3 +90,7 @@ a .material-icons{
 .sidenav-content {
   padding: 20px;
 }
+
+.header-toolbar {
+  min-height: 64px !important;
+}
