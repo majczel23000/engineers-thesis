@@ -8,7 +8,6 @@ import { RoleModel } from '../../shared/models/Role.model';
 import { MatCheckbox, MatSnackBar } from '@angular/material';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogConfirmComponent } from '../../shared/components/dialog-confirm/dialog-confirm.component';
-import { DialogDataModel } from '../../shared/models/DialogData.model';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -40,7 +39,8 @@ export class UserDetailsComponent implements OnInit {
   constructor(private userService: UserService,
               private activatedRoute: ActivatedRoute,
               private snackBar: MatSnackBar,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog,
+              private router: Router) { }
 
   ngOnInit() {
     this.getAllRoles();
@@ -139,19 +139,39 @@ export class UserDetailsComponent implements OnInit {
   }
 
   changeStatus(): void {
+    if (this.user.status !== 'DELETED') {
+      const dialogRef = this.dialog.open(DialogConfirmComponent, {
+        width: '40%',
+        data: {
+          title: 'Change status',
+          description: 'Are you sure you want to change status of this user?',
+          action: 'CHANGE_STATUS',
+          status: this.user.status,
+          _id: this.userId
+        }
+      });
+      dialogRef.afterClosed().subscribe( result => {
+        if (result) {
+          this.getUserById();
+        }
+      });
+    }
+  }
+
+  removeUser(): void {
     const dialogRef = this.dialog.open(DialogConfirmComponent, {
       width: '40%',
       data: {
-        title: 'Change status',
-        description: 'Are you sure you want to change status of this user?',
-        action: 'CHANGE_STATUS',
-        status: this.user.status,
+        title: 'Remove user',
+        description: 'Are you sure you want to remove this user?',
+        action: 'REMOVE_USER',
+        status: 'DELETED',
         _id: this.userId
       }
     });
     dialogRef.afterClosed().subscribe( result => {
       if (result) {
-        this.getUserById();
+        this.router.navigate(['/users']);
       }
     });
   }

@@ -26,7 +26,7 @@
         <tr class="user-details-row">
           <td class="user-details-item">Last Name:</td>
           <td class="user-details-item">
-            <mat-form-field>
+            <mat-form-field class="user-details-form-field">
               <input matInput value="{{user?.lastName}}" name="lastName" formControlName="lastName" [errorStateMatcher]="matcher">
               <mat-error *ngIf="control.lastName.hasError('required')">
                 Last Name is <strong>required</strong>
@@ -48,7 +48,8 @@
         </tr>
         <tr class="user-details-row">
           <td class="user-details-item">Status:</td>
-          <td class="user-details-item user-details-status" (click)="changeStatus()" [ngStyle]="{ 'background': user.status === 'INACTIVE' ? '#ff0033' : '#28a745' }">{{user?.status}}</td>
+          <td class="user-details-item user-details-status" (click)="changeStatus()"
+              [ngStyle]="{ 'background': user.status === 'INACTIVE' ? '#828282' : user.status === 'ACTIVE' ? '#28a745' : 'blue' }">{{user?.status}}</td>
         </tr>
         <tr class="user-details-row">
           <td class="user-details-item">Password:</td>
@@ -77,6 +78,7 @@
       <mat-card-actions class="user-edit-actions">
         <button mat-raised-button class="user-edit-btn" color="primary">Save changes</button>
         <button mat-raised-button class="user-edit-btn" (click)="clearChanges()" color="accent">Clear changes</button>
+        <button mat-raised-button class="user-edit-btn" color="warn" (click)="removeUser()">Remove user</button>
       </mat-card-actions>
     </form>
   </mat-card-content>

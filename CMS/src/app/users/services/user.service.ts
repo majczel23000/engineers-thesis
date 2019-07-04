@@ -43,4 +43,8 @@ export class UserService {
   deactivateUser(_id: string) {
     return this.httpClient.post<UserResponseModel>(`${this.apiUrl}/users/${_id}/deactivate`, {});
   }
+
+  removeUser(_id: string) {
+    return this.httpClient.delete(`${this.apiUrl}/users/${_id}`);
+  }
 }

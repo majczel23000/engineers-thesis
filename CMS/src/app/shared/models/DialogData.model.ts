@@ -4,4 +4,5 @@ export interface DialogDataModel {
   action: string;
   status: string;
   _id: string;
+  code: string;
 }

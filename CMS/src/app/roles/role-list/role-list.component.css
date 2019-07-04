@@ -9,5 +9,5 @@
 }
 
 td {
-  width: 50%;
+  width: calc(100%/3);
 }

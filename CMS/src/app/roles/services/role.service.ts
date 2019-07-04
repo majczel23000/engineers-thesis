@@ -25,4 +25,12 @@ export class RoleService {
   updateRole(_id: string, body) {
     return this.httpClient.put<UpdateResponseModel>(`${this.apiUrl}/roles/${_id}`, body);
   }
+
+  activateRole(_id: string, code: string) {
+    return this.httpClient.post<RoleResponseModel>(`${this.apiUrl}/roles/${_id}/activate`, {code: code});
+  }
+
+  deactivateRole(_id: string, code: string) {
+    return this.httpClient.post<RoleResponseModel>(`${this.apiUrl}/roles/${_id}/deactivate`, {code: code});
+  }
 }

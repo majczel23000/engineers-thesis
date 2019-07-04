@@ -9,6 +9,7 @@ import { MatInputModule, MatButtonModule, MatCardModule,
   MatToolbarModule, MatCheckboxModule } from '@angular/material';
 import { CdkColumnDef } from '@angular/cdk/table';
 import { SharedModule } from '../shared/shared.module';
+import { DialogConfirmComponent } from '../shared/components/dialog-confirm/dialog-confirm.component';
 
 @NgModule({
   declarations: [RoleDetailsComponent, RoleListComponent],
@@ -26,6 +27,7 @@ import { SharedModule } from '../shared/shared.module';
     MatCheckboxModule,
     SharedModule
   ],
-  providers: [MatPaginatorIntl, CdkColumnDef]
+  providers: [MatPaginatorIntl, CdkColumnDef],
+  entryComponents: [DialogConfirmComponent]
 })
 export class RolesModule { }

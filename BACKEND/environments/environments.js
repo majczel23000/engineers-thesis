@@ -2,7 +2,10 @@ module.exports = {
     messages: {
         global: {
             errors: {
-                permission: "You don't have permission to perform this action"
+                permission: "You don't have permission to perform this action",
+                userInactive: "You don't have permission to perform this action, because your account is INACTIVE",
+                userDeleted: "You don't have permission to perform this action, because your account was DELETED",
+                roleInactive: "This function is disabled. If you have proper role you can activate it in roles module."
             }
         },
         users: {
@@ -14,7 +17,9 @@ module.exports = {
                 emailExists: "User with specified email already exists",
                 idNotFound: "User with specified id not found",
                 emailNotFound: "User with specified email not found",
-                wrongPassword: "Wrong password"
+                wrongPassword: "Wrong password",
+                inactive: "Can't login to inactive user",
+                deleted: "Can't login to deleted user"
             },
             success: {
                 created: "User successfully created",
@@ -37,6 +42,8 @@ module.exports = {
                 roleFetched: "Role successfully fetched",
                 updated: "Role successfully updated",
                 removed: "Role successfully removed",
+                activated: "Role successfully activated",
+                deactivated: "Role successfully deactivated"
             }
         }
     },

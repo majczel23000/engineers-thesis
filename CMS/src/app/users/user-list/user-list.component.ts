@@ -15,7 +15,7 @@ export class UserListComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  displayedColumns: string[] = ['firstName', 'lastName', 'email'];
+  displayedColumns: string[] = ['firstName', 'lastName', 'email', 'status'];
   dataSource = new MatTableDataSource<User>();
   loadingData = true;
   users: User[];
@@ -41,6 +41,7 @@ export class UserListComponent implements OnInit {
     .subscribe(
       (res) => {
         this.dataSource.data = res.data;
+        console.log(this.dataSource.data);
       },
       (err) => {
         this.snackBar.open(err.error.message, 'X', {

@@ -11,10 +11,10 @@ import { MatInputModule, MatButtonModule, MatCardModule,
 import { UserNavigationComponent } from './user-navigation/user-navigation.component';
 import { CdkColumnDef } from '@angular/cdk/table';
 import { SharedModule } from '../shared/shared.module';
-import {DialogConfirmComponent} from '../shared/components/dialog-confirm/dialog-confirm.component';
+import { DialogConfirmComponent } from '../shared/components/dialog-confirm/dialog-confirm.component';
 
 @NgModule({
-  declarations: [UserListComponent, UserAddComponent, UserDetailsComponent, UserNavigationComponent],
+  declarations: [UserListComponent, UserAddComponent, UserDetailsComponent, UserNavigationComponent ],
   imports: [
     CommonModule,
     UsersRoutingModule,

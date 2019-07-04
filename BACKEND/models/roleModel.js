@@ -16,6 +16,10 @@ const RoleSchema = new Schema({
     createdAt: {
         type: Date,
         default: new Date
+    },
+    status: {
+        type: String,
+        required: true
     }
 })
 

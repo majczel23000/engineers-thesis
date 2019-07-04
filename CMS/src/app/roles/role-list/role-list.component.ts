@@ -14,7 +14,7 @@ export class RoleListComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  displayedColumns: string[] = ['code', 'name'];
+  displayedColumns: string[] = ['code', 'name', 'status'];
   dataSource = new MatTableDataSource<RoleModel>();
   loadingData = true;
   roles: RoleModel[];

@@ -56,7 +56,7 @@ exports.createUser = (req, res) => {
 
 // GET-ALL: Return all user nodes
 exports.getAllUsers = (req, res) => {
-    User.find({}, 'firstName lastName email', (err, users) => {
+    User.find({ status: { $in: ['ACTIVE', 'INACTIVE', 'DELETED'] } }, 'firstName lastName email status', (err, users) => {
         if (err) {
             res.send(err);
         } else {
@@ -115,7 +115,7 @@ exports.updateUser = (req, res) => {
 
 // REMOVE: Remove user from database
 exports.deleteUser = (req, res) => {
-    User.findByIdAndRemove(req.params.id, (err, user) => {
+    User.findByIdAndUpdate(req.params.id, { status: 'DELETED'}, { new: true }, (err, user) => {
         if (err) {
             res.send(err);
         } else if (user) {
@@ -137,9 +137,15 @@ exports.login = (req, res) => {
             } else if(!bcrypt.compareSync(req.body.password, user.password)){
                 res.status(402).json(errorResponse(402, messages.users.errors.wrongPassword));
             } else {
-               let payload = { subject: user };
-               let token = jwt.sign(payload, 'secretKey');
-               res.status(200).json(successResponse(200, messages.users.success.loggedIn, {token: token, user}));
+                if (user.status == 'INACTIVE') {
+                    res.status(402).json(errorResponse(402, messages.users.errors.inactive));
+                } else if (user.status == 'DELETED') {
+                    res.status(402).json(errorResponse(402, messages.users.errors.deleted));
+                } else {
+                    let payload = { subject: user };
+                    let token = jwt.sign(payload, 'secretKey');
+                    res.status(200).json(successResponse(200, messages.users.success.loggedIn, {token: token, user}));
+                }
            }
         }
     });

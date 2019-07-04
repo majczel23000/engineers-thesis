@@ -33,6 +33,7 @@
             </mat-form-field>
           </td>
         </tr>
+
         <tr class="role-details-row">
           <td class="role-details-item">Description:</td>
           <td class="role-details-item">
@@ -44,6 +45,13 @@
             </mat-form-field>
           </td>
         </tr>
+
+        <tr class="role-details-row">
+          <td class="role-details-item">Status:</td>
+          <td class="role-details-item role-details-status" (click)="changeStatus()"
+              [ngStyle]="{ 'background': role.status === 'INACTIVE' ? '#828282' : '#28a745' }">{{role?.status}}</td>
+        </tr>
+
         <tr class="role-details-row">
           <td class="role-details-item">Created at:</td>
           <td class="role-details-item" style="text-align: left">{{role?.createdAt}}</td>

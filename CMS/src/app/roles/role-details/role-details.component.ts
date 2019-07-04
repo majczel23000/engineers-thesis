@@ -5,6 +5,9 @@ import { RoleModel } from '../../shared/models/Role.model';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogConfirmComponent } from '../../shared/components/dialog-confirm/dialog-confirm.component';
+
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -33,6 +36,7 @@ export class RoleDetailsComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
               private roleService: RoleService,
+              public dialog: MatDialog,
               private snackBar: MatSnackBar) { }
 
   ngOnInit() {
@@ -77,6 +81,27 @@ export class RoleDetailsComponent implements OnInit {
         });
       }
     );
+  }
+
+  changeStatus(): void {
+    if (!this.role.code.includes('ROLES')) {
+      const dialogRef = this.dialog.open(DialogConfirmComponent, {
+        width: '40%',
+        data: {
+          title: 'Change status',
+          description: 'Are you sure you want to change status of this role?',
+          action: 'CHANGE_ROLE_STATUS',
+          status: this.role.status,
+          _id: this.roleId,
+          code: this.role.code
+        }
+      });
+      dialogRef.afterClosed().subscribe( result => {
+        if (result) {
+          this.getRoleById();
+        }
+      });
+    }
   }
 
 }

@@ -29,7 +29,7 @@ exports.getRoleById = (req, res) => {
 
 // UPDATE: Update role and return updated role node
 exports.updateRole = (req, res) => {
-    req.body.updatedAt = new Date;
+    req.body.updatedAt = new Date();
     Role.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, role) => {
         if (err) {
             res.send(err);
@@ -40,3 +40,35 @@ exports.updateRole = (req, res) => {
         }
     })
 };
+
+exports.activate = (req, res) => {
+    if (req.body.code.includes('ROLES')) {
+        res.status(401).json(errorResponse(401, messages.global.errors.permission));
+    } else {
+        Role.findByIdAndUpdate(req.params.id, { status: 'ACTIVE', updatedAt: new Date() }, { new: true }, (err, role) => {
+            if (err) {
+                res.send(err);
+            } else if (role) {
+                res.status(200).json(successResponse(200, messages.roles.success.activated));
+            } else {
+                res.status(404).json(errorResponse(404, messages.roles.errors.idNotFound));
+            }
+        })
+    }
+}
+
+exports.deactivate = (req, res) => {
+    if (req.body.code.includes('ROLES')) {
+        res.status(401).json(errorResponse(401, messages.global.errors.permission));
+    } else {
+        Role.findByIdAndUpdate(req.params.id, { status: 'INACTIVE', updatedAt: new Date() }, { new: true }, (err, user) => {
+            if (err) {
+                res.send(err);
+            } else if (user) {
+                res.status(200).json(successResponse(200, messages.roles.success.deactivated));
+            } else {
+                res.status(404).json(errorResponse(404, messages.roles.errors.idNotFound));
+            }
+        })
+    }
+}
