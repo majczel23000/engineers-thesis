@@ -5,9 +5,16 @@
 
 .users-table {
   width: 90%;
-  margin: 30px auto !important;
+  margin: 10px auto 30px auto !important;
 }
 
 td {
   width: calc(100%/4);
+}
+
+.users-filter {
+  width: 90%;
+  margin: 20px auto 0 auto;
+  display: block;
+  padding-bottom: 0px;
 }

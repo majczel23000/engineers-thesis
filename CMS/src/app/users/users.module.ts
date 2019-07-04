@@ -7,7 +7,7 @@ import { UserAddComponent } from './user-add/user-add.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { MatInputModule, MatButtonModule, MatCardModule,
   MatTableModule, MatPaginatorModule, MatPaginatorIntl,
-  MatToolbarModule, MatCheckboxModule } from '@angular/material';
+  MatToolbarModule, MatCheckboxModule, MatSortModule } from '@angular/material';
 import { UserNavigationComponent } from './user-navigation/user-navigation.component';
 import { CdkColumnDef } from '@angular/cdk/table';
 import { SharedModule } from '../shared/shared.module';
@@ -27,7 +27,8 @@ import { DialogConfirmComponent } from '../shared/components/dialog-confirm/dial
     MatInputModule,
     MatToolbarModule,
     MatCheckboxModule,
-    SharedModule
+    SharedModule,
+    MatSortModule
   ],
   providers: [MatPaginatorIntl, CdkColumnDef],
   entryComponents: [DialogConfirmComponent]

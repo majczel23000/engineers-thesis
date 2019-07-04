@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { RoleService } from '../services/role.service';
-import { MatPaginator, MatTableDataSource, MatPaginatorIntl } from '@angular/material';
+import { MatPaginator, MatTableDataSource, MatPaginatorIntl, MatSort } from '@angular/material';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { RoleModel } from '../../shared/models/Role.model';
@@ -13,6 +13,7 @@ import { RoleModel } from '../../shared/models/Role.model';
 export class RoleListComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   displayedColumns: string[] = ['code', 'name', 'status'];
   dataSource = new MatTableDataSource<RoleModel>();
@@ -33,6 +34,9 @@ export class RoleListComponent implements OnInit {
         finalize( () => {
           this.loadingData = false;
           this.dataSource.paginator = this.paginator;
+          setTimeout(() => {
+            this.dataSource.sort = this.sort;
+          });
         })
       )
       .subscribe(
@@ -44,6 +48,13 @@ export class RoleListComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
 }

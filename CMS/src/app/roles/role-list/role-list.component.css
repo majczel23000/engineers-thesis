@@ -11,3 +11,10 @@
 td {
   width: calc(100%/3);
 }
+
+.roles-filter {
+  width: 90%;
+  margin: 20px auto 0 auto;
+  display: block;
+  padding-bottom: 0px;
+}

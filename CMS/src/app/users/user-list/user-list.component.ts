@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../services/user.service';
-import { MatPaginator, MatTableDataSource, MatPaginatorIntl } from '@angular/material';
+import { MatPaginator, MatTableDataSource, MatPaginatorIntl, MatSort } from '@angular/material';
 import { User } from 'src/app/shared/models/user.model';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
@@ -14,6 +14,7 @@ import { MatSnackBar } from '@angular/material';
 export class UserListComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   displayedColumns: string[] = ['firstName', 'lastName', 'email', 'status'];
   dataSource = new MatTableDataSource<User>();
@@ -36,6 +37,9 @@ export class UserListComponent implements OnInit {
       finalize(() => {
         this.loadingData = false;
         this.dataSource.paginator = this.paginator;
+        setTimeout(() => {
+          this.dataSource.sort = this.sort;
+        });
       })
     )
     .subscribe(
@@ -51,6 +55,13 @@ export class UserListComponent implements OnInit {
         });
       }
     );
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
 }

@@ -6,7 +6,7 @@ import { RoleDetailsComponent } from './role-details/role-details.component';
 import { RoleListComponent } from './role-list/role-list.component';
 import { MatInputModule, MatButtonModule, MatCardModule,
   MatTableModule, MatPaginatorModule, MatPaginatorIntl,
-  MatToolbarModule, MatCheckboxModule } from '@angular/material';
+  MatToolbarModule, MatCheckboxModule, MatSortModule } from '@angular/material';
 import { CdkColumnDef } from '@angular/cdk/table';
 import { SharedModule } from '../shared/shared.module';
 import { DialogConfirmComponent } from '../shared/components/dialog-confirm/dialog-confirm.component';
@@ -25,7 +25,8 @@ import { DialogConfirmComponent } from '../shared/components/dialog-confirm/dial
     MatInputModule,
     MatToolbarModule,
     MatCheckboxModule,
-    SharedModule
+    SharedModule,
+    MatSortModule
   ],
   providers: [MatPaginatorIntl, CdkColumnDef],
   entryComponents: [DialogConfirmComponent]
