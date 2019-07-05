@@ -113,7 +113,7 @@ exports.updateUser = (req, res) => {
     });
 };
 
-// REMOVE: Remove user from database
+// REMOVE: Remove user from database (change status flag to deleted)
 exports.deleteUser = (req, res) => {
     User.findByIdAndUpdate(req.params.id, { status: 'DELETED'}, { new: true }, (err, user) => {
         if (err) {
@@ -151,6 +151,8 @@ exports.login = (req, res) => {
     });
 }
 
+
+// ACTIVATE: Activate user in database
 exports.activate = (req, res) => {
     User.findByIdAndUpdate(req.params.id, { status: 'ACTIVE', updatedAt: new Date() }, { new: true }, (err, user) => {
         if (err) {
@@ -163,6 +165,7 @@ exports.activate = (req, res) => {
     })
 }
 
+// DEACTIVATE: Deactivate user in database
 exports.deactivate = (req, res) => {
     User.findByIdAndUpdate(req.params.id, { status: 'INACTIVE', updatedAt: new Date() }, { new: true }, (err, user) => {
         if (err) {

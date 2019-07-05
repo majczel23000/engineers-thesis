@@ -3,6 +3,7 @@ let jwt = require('jsonwebtoken');
 
 module.exports = {
     verifyToken: function(req, res, next) {
+
         if(!req.headers.authorization) {
             return res.status(401).json(errorResponse(401, 'Unauthorized request'));
         }
@@ -14,7 +15,7 @@ module.exports = {
         if(!payload) {
             return res.status(401).json(errorResponse(401, 'Unauthorized request'));    
         }
-        req.user = payload.subject
+        req.user = payload.subject;
         next()
     }
 }

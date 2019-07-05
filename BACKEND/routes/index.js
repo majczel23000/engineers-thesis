@@ -1,5 +1,6 @@
 import user from '../controllers/userController';
 import role from '../controllers/roleController';
+import statistics from '../controllers/statisticsController';
 let verifyToken = require('../middlewares/verifyToken').verifyToken;
 let checkRoleAndStatus = require('../middlewares/checkRole').checkRoleAndStatus;
 let roles = require('../environments/environments').roles;
@@ -28,4 +29,7 @@ export default (app) => {
         .post(verifyToken, checkRoleAndStatus(roles.users.update), role.activate);
     app.route('/roles/:id/deactivate')
         .post(verifyToken, checkRoleAndStatus(roles.users.update), role.deactivate);
+
+    app.route('/statistics')
+        .get(verifyToken, statistics.statistics);
 };

@@ -6,6 +6,7 @@ import { environment } from '../../../environments/environment';
 import { AddUserModel } from '../../shared/models/AddUser.model';
 import { UserResponseModel } from '../../shared/models/UserResponse.model';
 import { RoleListResponseModel } from '../../shared/models/RoleListResponse.model';
+import { StatisticsResponseModel } from '../../shared/models/StatisticsResponse.model';
 
 @Injectable({
   providedIn: 'root'
@@ -46,5 +47,9 @@ export class UserService {
 
   removeUser(_id: string) {
     return this.httpClient.delete(`${this.apiUrl}/users/${_id}`);
+  }
+
+  statistics() {
+    return this.httpClient.get<StatisticsResponseModel>(`${this.apiUrl}/statistics`);
   }
 }

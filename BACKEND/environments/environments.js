@@ -45,6 +45,11 @@ module.exports = {
                 activated: "Role successfully activated",
                 deactivated: "Role successfully deactivated"
             }
+        },
+        statistics: {
+            success: {
+                fetched: "Statistics successfully fetched"
+            }
         }
     },
     roles: {
