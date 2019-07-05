@@ -1,11 +1,13 @@
 import user from '../controllers/userController';
 import role from '../controllers/roleController';
 import statistics from '../controllers/statisticsController';
+import faq from '../controllers/faqController';
 let verifyToken = require('../middlewares/verifyToken').verifyToken;
 let checkRoleAndStatus = require('../middlewares/checkRole').checkRoleAndStatus;
 let roles = require('../environments/environments').roles;
 
 export default (app) => {
+    // === USERS ===
     app.route('/users')
         .get(verifyToken, checkRoleAndStatus(roles.users.getAll), user.getAllUsers)
         .post(verifyToken, checkRoleAndStatus(roles.users.create), user.createUser);
@@ -20,6 +22,7 @@ export default (app) => {
     app.route('/users/login')
         .post(user.login);
 
+    // === ROLES ===
     app.route('/roles')
         .get(verifyToken, checkRoleAndStatus(roles.roles.getAll), role.getAllRoles);
     app.route('/roles/:id')
@@ -30,6 +33,14 @@ export default (app) => {
     app.route('/roles/:id/deactivate')
         .post(verifyToken, checkRoleAndStatus(roles.users.update), role.deactivate);
 
+    // === STATISTICS ===
     app.route('/statistics')
         .get(verifyToken, statistics.statistics);
+
+    // === FAQS ===
+    app.route('/faq')
+        .post(faq.createFaq)
+        .get(faq.getAllFaqs);
+    app.route('/faq/:id')
+        .get(faq.getFaqById);
 };

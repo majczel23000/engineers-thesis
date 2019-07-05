@@ -12,7 +12,12 @@ module.exports = {
             { code: 'USERS/DELETE', name: 'Delete user', description: 'Delete user', createdAt: date, status: 'ACTIVE' },
             { code: 'ROLES/GET_ALL', name: 'Get all roles', description: 'Get all roles', createdAt: date, status: 'ACTIVE' },
             { code: 'ROLES/GET_ID', name: 'Get specified roles', description: 'Get specified role', createdAt: date, status: 'ACTIVE' },
-            { code: 'ROLES/UPDATE', name: 'Update role', description: 'Update role', createdAt: date, status: 'ACTIVE' }
+            { code: 'ROLES/UPDATE', name: 'Update role', description: 'Update role', createdAt: date, status: 'ACTIVE' },
+            { code: 'FAQ/GET_ALL', name: 'Get all faqs', description: 'Get all faqs', createdAt: date, status: 'ACTIVE'},
+            { code: 'FAQ/GET_ID', name: 'Get specified faq', description: 'Get specified faq', createdAt: date, status: 'ACTIVE' },
+            { code: 'FAQ/CREATE', name: 'Create faq', description: 'Create faq', createdAt: date, status: 'ACTIVE' },
+            { code: 'FAQ/UPDATE', name: 'Update faq', description: 'Update faq', createdAt: date, status: 'ACTIVE' },
+            { code: 'FAQ/DELETE', name: 'Delete faq', description: 'Delete faq', createdAt: date, status: 'ACTIVE' }
         ];
         MongoClient.connect('mongodb://localhost:27017/', function(err, db) {
             if(err)

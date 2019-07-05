@@ -50,6 +50,19 @@ module.exports = {
             success: {
                 fetched: "Statistics successfully fetched"
             }
+        },
+        faqs: {
+            errors: {
+                codeLength: "Field Code must have at least 5 characters",
+                codeRegexp: "Field Code contains wrong characters",
+                nameLength: "Field Name must have at least 5 characters",
+                nameRegexp: "Field Code contains wrong characters",
+                idNotFound: "Faq with specified id not found",
+            },
+            success: {
+                created: "Faq successfully created",
+                fetched: "Faq successfully fetched"
+            }
         }
     },
     roles: {

@@ -33,6 +33,6 @@ const UserSchema = new Schema({
         type: String,
         required: true
     }
-})
+});
 
 export default mongoose.model('User', UserSchema);
