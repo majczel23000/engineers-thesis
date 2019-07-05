@@ -38,7 +38,7 @@ exports.createFaq = (req, res) => {
             res.status(200).json(successResponse(200, messages.faqs.success.created, faq));
         }
     })
-}
+};
 
 // GET ALL: Return all faqs nodes
 exports.getAllFaqs = (req, res) => {
@@ -49,7 +49,7 @@ exports.getAllFaqs = (req, res) => {
             res.status(200).json(successResponse(200, messages.faqs.success.fetched, faqs));
         }
     })
-}
+};
 
 // GET ID: Return faq with specified id
 exports.getFaqById = (req, res) => {
@@ -62,4 +62,87 @@ exports.getFaqById = (req, res) => {
             res.status(404).json(errorResponse(404, messages.faqs.errors.idNotFound));
         }
     })
+};
+
+// REMOVE: Remove faq (change status flag to deleted)
+exports.deleteFaq = (req, res) => {
+    Faq.findByIdAndUpdate(req.params.id, { status: 'DELETED' }, { new: true }, (err, faq) => {
+        if (err) {
+            res.send(err);
+        } else if (faq) {
+            res.status(200).json(successResponse(200, messages.faqs.success.removed, faq));
+        } else {
+            res.status(404).json(errorResponse(404, messages.faqs.errors.idNotFound));
+        }
+    })
+};
+
+// ACTIVATE: Activate faq in database
+exports.activate = (req, res) => {
+    Faq.findByIdAndUpdate(req.params.id, { status: 'ACTIVE', updatedAt: new Date() }, { new: true }, (err, faq) => {
+        if (err) {
+            res.send(err);
+        } else if (faq) {
+            res.status(200).json(successResponse(200, messages.faqs.success.activated, faq));
+        } else {
+            res.status(404).json(errorResponse(404, messages.faqs.errors.idNotFound));
+        }
+    })
+};
+
+// DEACTIVATE: Deactivate faq in database
+exports.deactivate = (req, res) => {
+    Faq.findByIdAndUpdate(req.params.id, { status: 'INACTIVE', updatedAt: new Date() }, { new: true }, (err, faq) => {
+        if (err) {
+            res.send(err);
+        } else if (faq) {
+            res.status(200).json(successResponse(200, messages.faqs.success.deactivated, faq));
+        } else {
+            res.status(404).json(errorResponse(404, messages.faqs.errors.idNotFound));
+        }
+    })
+};
+
+// UPDATE: Update faq and return updated faq node
+exports.updateFaq = (req, res) => {
+    if (req.body.code)
+        delete req.body.code;
+    if (req.body.createdAt)
+        delete req.body.createdAt;
+    if (req.body.updatedAt)
+        delete req.body.updatedAt;
+    if (req.body.status)
+        delete req.body.status;
+    let checkElementsCorrection = true;
+    if (req.body.elements && req.body.elements.length) {
+        for (let i = 0; i < req.body.elements.length; i++) {
+            if (req.body.elements[i].hasOwnProperty('question') && req.body.elements[i].hasOwnProperty('answear')) {
+                if (!req.body.elements[i].question) {
+                    checkElementsCorrection = false;
+                    break;
+                } else if (!req.body.elements[i].answear) {
+                    checkElementsCorrection = false;
+                    break;
+                }
+            } else {
+                checkElementsCorrection = false;
+                break;
+            }
+        }
+    } else {
+        delete req.body.elements;
+    }
+    if (checkElementsCorrection) {
+        Faq.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, faq) => {
+            if (err) {
+                res.send(err);
+            } else if (faq){
+                res.status(200).json(successResponse(200, messages.faqs.success.updated, faq));
+            } else {
+                res.status(404).json(errorResponse(404, messages.faqs.errors.idNotFound));
+            }
+        })
+    } else {
+        res.status(406).json(errorResponse(406, "Array of elements is incorrect"));
+    }
 }

@@ -42,5 +42,11 @@ export default (app) => {
         .post(faq.createFaq)
         .get(faq.getAllFaqs);
     app.route('/faq/:id')
-        .get(faq.getFaqById);
+        .get(faq.getFaqById)
+        .delete(faq.deleteFaq)
+        .put(faq.updateFaq);
+    app.route('/faq/:id/activate')
+        .post(faq.activate);
+    app.route('/faq/:id/deactivate')
+        .post(faq.deactivate);
 };

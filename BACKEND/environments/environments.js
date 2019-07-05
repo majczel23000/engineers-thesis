@@ -61,7 +61,11 @@ module.exports = {
             },
             success: {
                 created: "Faq successfully created",
-                fetched: "Faq successfully fetched"
+                fetched: "Faq successfully fetched",
+                updated: "Faq successfully updated",
+                removed: "Faq successfully removed",
+                activated: "Faq successfully activated",
+                deactivated: "Faq successfully deactivated"
             }
         }
     },
