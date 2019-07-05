@@ -152,6 +152,19 @@ export class DialogConfirmComponent {
             }
           );
         }
+        break;
+      }
+      case 'REMOVE_FAQ': {
+        this.data.status = 'REMOVED';
+        this.faqService.removeFaq(this.data._id).subscribe(
+          res => {
+            console.log(res);
+          },
+          err => {
+            console.log(err);
+          }
+        );
+        break;
       }
     }
   }

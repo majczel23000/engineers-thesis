@@ -58,20 +58,40 @@ export class FaqDetailsComponent implements OnInit {
   }
 
   changeStatus(): void {
+    if (this.faq.status !== 'DELETED') {
+      const dialogRef = this.dialog.open(DialogConfirmComponent, {
+        width: '40%',
+        data: {
+          title: 'Change status',
+          description: 'Are you sure you want to change status of this faq?',
+          action: 'CHANGE_FAQ_STATUS',
+          status: this.faq.status,
+          _id: this.faqId,
+          code: this.faq.code
+        }
+      });
+      dialogRef.afterClosed().subscribe( result => {
+        if (result) {
+          this.getFaqById();
+        }
+      });
+    }
+  }
+
+  removeFaq(): void {
     const dialogRef = this.dialog.open(DialogConfirmComponent, {
       width: '40%',
       data: {
-        title: 'Change status',
-        description: 'Are you sure you want to change status of this faq?',
-        action: 'CHANGE_FAQ_STATUS',
-        status: this.faq.status,
-        _id: this.faqId,
-        code: this.faq.code
+        title: 'Remove faq',
+        description: 'Are you sure you want to remove this faq?',
+        action: 'REMOVE_FAQ',
+        status: 'DELETED',
+        _id: this.faqId
       }
     });
     dialogRef.afterClosed().subscribe( result => {
       if (result) {
-        this.getFaqById();
+        this.router.navigate(['/faqs']);
       }
     });
   }

@@ -33,4 +33,8 @@ export class FaqService {
   deactivateFaq(_id: string) {
     return this.httpClient.post<FaqResponseModel>(`${this.apiUrl}/faq/${_id}/deactivate`, {});
   }
+
+  removeFaq(_id: string) {
+    return this.httpClient.delete(`${this.apiUrl}/faq/${_id}`);
+  }
 }
