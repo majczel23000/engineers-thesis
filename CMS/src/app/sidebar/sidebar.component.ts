@@ -23,6 +23,11 @@ export class SidebarComponent {
       routerLink: '/roles',
       text: 'Roles',
       icon: 'accessibility_new'
+    },
+    {
+      routerLink: '/faqs',
+      text: 'Faqs',
+      icon: 'question_answer'
     }
   ]
 

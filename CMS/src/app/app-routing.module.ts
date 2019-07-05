@@ -24,6 +24,10 @@ const routes: Routes = [
   {
     path: 'roles',
     loadChildren: './roles/roles.module#RolesModule'
+  },
+  {
+    path: 'faqs',
+    loadChildren: './faqs/faqs.module#FaqsModule'
   }
 ];
 
