@@ -25,4 +25,12 @@ export class FaqService {
   getFaqById(_id: string) {
     return this.httpClient.get<FaqResponseModel>(`${this.apiUrl}/faq/${_id}`);
   }
+
+  activateFaq(_id: string) {
+    return this.httpClient.post<FaqResponseModel>(`${this.apiUrl}/faq/${_id}/activate`, {});
+  }
+
+  deactivateFaq(_id: string) {
+    return this.httpClient.post<FaqResponseModel>(`${this.apiUrl}/faq/${_id}/deactivate`, {});
+  }
 }

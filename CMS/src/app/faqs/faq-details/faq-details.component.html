@@ -1,3 +1,72 @@
-<p>
-  faq-details works!
-</p>
+<app-current-path *ngIf="faq" [currentPathItems]="['faqs', faq.name]"></app-current-path>
+<app-faq-navigation></app-faq-navigation>
+<mat-card class="faq-details-card pb-2 mt-4">
+
+  <mat-card-header>
+    <mat-card-title>
+      <h1 class="faq-details-title">Faq: {{faq?.code}}</h1>
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form class="faq-details-form" [formGroup]="editFaqFormGroup" *ngIf="faq" (ngSubmit)="editFaq()">
+
+      <table class="faq-details-table">
+
+        <tr class="faq-details-row">
+          <td class="faq-details-item">Code:</td>
+          <td class="faq-details-item" style="text-align: left">{{faq?.code}}</td>
+        </tr>
+
+        <tr class="faq-details-row">
+          <td class="faq-details-item">Name:</td>
+          <td class="faq-details-item">
+            <mat-form-field class="faq-details-form-field">
+              <input matInput value="{{faq?.name}}" name="name" formControlName="name" [errorStateMatcher]="matcher">
+              <mat-error *ngIf="!control.name.hasError('required') && control.name.hasError('minlength')">
+                Name must have at least 5 characters
+              </mat-error>
+              <mat-error *ngIf="control.name.hasError('required')">
+                Name is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </td>
+        </tr>
+
+        <tr class="faq-details-row">
+          <td class="faq-details-item">Description:</td>
+          <td class="faq-details-item">
+            <mat-form-field class="faq-details-form-field">
+              <input matInput value="{{faq?.description}}" name="description" formControlName="description">
+            </mat-form-field>
+          </td>
+        </tr>
+
+        <tr class="faq-details-row">
+          <td class="faq-details-item">Created at:</td>
+          <td class="faq-details-item" style="text-align: left">{{faq?.createdAt}}</td>
+        </tr>
+
+        <tr class="faq-details-row">
+          <td class="faq-details-item">Updated at:</td>
+          <td class="faq-details-item" style="text-align: left">{{faq?.updatedAt}}</td>
+        </tr>
+
+        <tr class="faq-details-row">
+          <td class="faq-details-item">Status:</td>
+          <td class="faq-details-item faq-details-status" (click)="changeStatus()"
+              [ngStyle]="{ 'background': faq.status === 'INACTIVE' ? '#828282' : faq.status === 'ACTIVE' ? '#28a745' : 'blue' }">{{faq?.status}}</td>
+        </tr>
+
+      </table>
+      <mat-card-actions class="faq-edit-actions">
+        <button mat-raised-button class="faq-edit-btn" color="primary">Save changes</button>
+        <a mat-raised-button class="faq-edit-btn" (click)="clearChanges()" color="accent">Clear changes</a>
+        <a mat-raised-button class="faq-edit-btn" color="warn" (click)="removeFaq()">Remove faq</a>
+      </mat-card-actions>
+    </form>
+  </mat-card-content>
+
+
+
+</mat-card>
