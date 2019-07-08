@@ -4,9 +4,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { DialogConfirmComponent } from '../../shared/components/dialog-confirm/dialog-confirm.component';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
 import { FaqModel } from '../../shared/models/faq/Faq.model';
-import {MyErrorStateMatcher} from "../../users/user-details/user-details.component";
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-faq-details',
@@ -25,6 +31,8 @@ export class FaqDetailsComponent implements OnInit {
   }
 
   matcher = new MyErrorStateMatcher();
+
+  faqElementsVisibility = false;
 
   constructor(private faqService: FaqService,
               private activatedRoute: ActivatedRoute,
@@ -94,6 +102,51 @@ export class FaqDetailsComponent implements OnInit {
         this.router.navigate(['/faqs']);
       }
     });
+  }
+
+  addFaqElement(): void {
+    console.log(this.faq.elements);
+    this.faq.elements.push({
+      question: 'question',
+      answear: 'answear'
+    });
+  }
+
+  removeFaqElement(index: number): void {
+    this.faq.elements.splice(index, 1);
+  }
+
+  editFaq(): void {
+    if (this.editFaqFormGroup.valid) {
+      const faqData = this.prepareDataToSend();
+      this.faqService.editFaq(this.faqId, faqData).subscribe(
+        res => {
+          this.snackBar.open(res.message, 'X', {
+            duration: 5000,
+            horizontalPosition: 'right',
+            panelClass: ['success-snackbar']
+          });
+          this.faq = res.data;
+        },
+        err => {
+          this.snackBar.open(err.error.message, 'X', {
+            duration: 5000,
+            horizontalPosition: 'right',
+            panelClass: ['error-snackbar']
+          });
+        }
+      );
+    }
+  }
+
+  prepareDataToSend(): FaqModel{
+    const faqData: FaqModel = this.editFaqFormGroup.value;
+    if (!this.faq.elements.length) {
+      faqData.elements = [];
+    } else {
+      faqData.elements = this.faq.elements;
+    }
+    return faqData;
   }
 
 }

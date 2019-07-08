@@ -109,12 +109,11 @@ exports.updateFaq = (req, res) => {
         delete req.body.code;
     if (req.body.createdAt)
         delete req.body.createdAt;
-    if (req.body.updatedAt)
-        delete req.body.updatedAt;
+    req.body.updatedAt = new Date();
     if (req.body.status)
         delete req.body.status;
     let checkElementsCorrection = true;
-    if (req.body.elements && req.body.elements.length) {
+    if (req.body.elements) {
         for (let i = 0; i < req.body.elements.length; i++) {
             if (req.body.elements[i].hasOwnProperty('question') && req.body.elements[i].hasOwnProperty('answear')) {
                 if (!req.body.elements[i].question) {

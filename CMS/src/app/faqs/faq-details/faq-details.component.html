@@ -58,6 +58,46 @@
               [ngStyle]="{ 'background': faq.status === 'INACTIVE' ? '#828282' : faq.status === 'ACTIVE' ? '#28a745' : 'blue' }">{{faq?.status}}</td>
         </tr>
 
+        <tr class="faq-details-row">
+          <td class="faq-details-item faq-elements-title">Elements</td>
+          <td class="faq-details-item">
+            <a mat-raised-button class="faq-edit-btn" color="primary" (click)="addFaqElement()" *ngIf="faqElementsVisibility">Add element</a>
+            <a mat-raised-button class="faq-edit-btn" color="primary" (click)="faqElementsVisibility = !faqElementsVisibility">
+              <ng-container *ngIf="!faqElementsVisibility">Show</ng-container>
+              <ng-container *ngIf="faqElementsVisibility">Hide</ng-container>
+            </a>
+          </td>
+        </tr>
+
+      </table>
+
+      <table>
+        <ng-container *ngIf="faqElementsVisibility && !faq.elements.length">
+          <tr class="faq-details-row">
+            <td class="faq-details-item-none">
+              This faq have no elements
+            </td>
+          </tr>
+        </ng-container>
+        <ng-container *ngIf="faqElementsVisibility">
+          <tr *ngFor="let faqElement of faq.elements; let i = index" class="faq-details-row">
+            <td class="faq-details-item-element">
+              <mat-form-field class="faq-details-form-field" [ngClass]="{'mat-form-field-invalid ng-dirty ng-invalid ng-touched' : !faqElement.question.length}">
+                <textarea #question matInput value="{{faqElement?.question}}" name="question" placeholder="Question {{i+1}}"
+                          (change)="faqElement.question = question.value"></textarea>
+              </mat-form-field>
+            </td>
+            <td class="faq-details-item-element">
+              <mat-form-field class="faq-details-form-field" [ngClass]="{'mat-form-field-invalid ng-dirty ng-invalid ng-touched' : !faqElement.question.length}">
+                <textarea #answear matInput value="{{faqElement?.answear}}" name="answear" placeholder="Answear {{i+1}}"
+                          (change)="faqElement.answear = answear.value"></textarea>
+              </mat-form-field>
+            </td>
+            <td class="faq-details-item-delete">
+              <a mat-raised-button class="faq-edit-btn" color="warn" (click)="removeFaqElement(i)"><i class="material-icons">delete</i></a>
+            </td>
+          </tr>
+        </ng-container>
       </table>
       <mat-card-actions class="faq-edit-actions">
         <button mat-raised-button class="faq-edit-btn" color="primary">Save changes</button>

@@ -37,4 +37,8 @@ export class FaqService {
   removeFaq(_id: string) {
     return this.httpClient.delete(`${this.apiUrl}/faq/${_id}`);
   }
+
+  editFaq(_id: string, faqData) {
+    return this.httpClient.put<FaqResponseModel>(`${this.apiUrl}/faq/${_id}`, faqData);
+  }
 }
