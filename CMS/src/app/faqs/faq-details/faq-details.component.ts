@@ -6,6 +6,7 @@ import { DialogConfirmComponent } from '../../shared/components/dialog-confirm/d
 import { ErrorStateMatcher } from '@angular/material/core';
 import { FormGroup, FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
 import { FaqModel } from '../../shared/models/faq/Faq.model';
+import {FaqElementModel} from "../../shared/models/faq/FaqElement.model";
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -34,6 +35,8 @@ export class FaqDetailsComponent implements OnInit {
 
   faqElementsVisibility = false;
 
+  faqElements: FaqElementModel[] = [];
+
   constructor(private faqService: FaqService,
               private activatedRoute: ActivatedRoute,
               private snackBar: MatSnackBar,
@@ -49,6 +52,7 @@ export class FaqDetailsComponent implements OnInit {
     this.faqService.getFaqById(this.faqId).subscribe(
       res => {
         this.faq = res.data;
+        this.cloneElements();
         this.editFaqFormGroup = new FormGroup({
           name: new FormControl(this.faq.name, [ Validators.required, Validators.minLength(5)]),
           description: new FormControl(this.faq.description)
@@ -60,9 +64,19 @@ export class FaqDetailsComponent implements OnInit {
     );
   }
 
+  cloneElements(): void {
+    this.faqElements = [];
+    for (let i = 0; i < this.faq.elements.length; i++) {
+      this.faqElements[i] = this.faq.elements[i];
+    }
+  }
+
   clearChanges(): void {
+    console.log('elements: ', this.faqElements);
+    console.log('faq: ', this.faq.elements);
     this.editFaqFormGroup.controls.name.setValue(this.faq.name);
     this.editFaqFormGroup.controls.description.setValue(this.faq.description);
+    this.cloneElements();
   }
 
   changeStatus(): void {
@@ -105,15 +119,14 @@ export class FaqDetailsComponent implements OnInit {
   }
 
   addFaqElement(): void {
-    console.log(this.faq.elements);
-    this.faq.elements.push({
+    this.faqElements.push({
       question: 'question',
       answear: 'answear'
     });
   }
 
   removeFaqElement(index: number): void {
-    this.faq.elements.splice(index, 1);
+    this.faqElements.splice(index, 1);
   }
 
   editFaq(): void {
@@ -141,10 +154,10 @@ export class FaqDetailsComponent implements OnInit {
 
   prepareDataToSend(): FaqModel{
     const faqData: FaqModel = this.editFaqFormGroup.value;
-    if (!this.faq.elements.length) {
+    if (!this.faqElements.length) {
       faqData.elements = [];
     } else {
-      faqData.elements = this.faq.elements;
+      faqData.elements = this.faqElements;
     }
     return faqData;
   }

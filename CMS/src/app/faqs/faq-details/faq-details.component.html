@@ -72,7 +72,7 @@
       </table>
 
       <table>
-        <ng-container *ngIf="faqElementsVisibility && !faq.elements.length">
+        <ng-container *ngIf="faqElementsVisibility && !faqElements.length">
           <tr class="faq-details-row">
             <td class="faq-details-item-none">
               This faq have no elements
@@ -80,7 +80,7 @@
           </tr>
         </ng-container>
         <ng-container *ngIf="faqElementsVisibility">
-          <tr *ngFor="let faqElement of faq.elements; let i = index" class="faq-details-row">
+          <tr *ngFor="let faqElement of faqElements; let i = index" class="faq-details-row">
             <td class="faq-details-item-element">
               <mat-form-field class="faq-details-form-field" [ngClass]="{'mat-form-field-invalid ng-dirty ng-invalid ng-touched' : !faqElement.question.length}">
                 <textarea #question matInput value="{{faqElement?.question}}" name="question" placeholder="Question {{i+1}}"
