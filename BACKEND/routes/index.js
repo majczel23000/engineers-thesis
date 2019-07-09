@@ -2,6 +2,7 @@ import user from '../controllers/userController';
 import role from '../controllers/roleController';
 import statistics from '../controllers/statisticsController';
 import faq from '../controllers/faqController';
+import menu from '../controllers/menuController';
 let verifyToken = require('../middlewares/verifyToken').verifyToken;
 let checkRoleAndStatus = require('../middlewares/checkRole').checkRoleAndStatus;
 let roles = require('../environments/environments').roles;
@@ -49,4 +50,10 @@ export default (app) => {
         .post(faq.activate);
     app.route('/faq/:id/deactivate')
         .post(faq.deactivate);
+
+    // === MENUS ===
+    app.route('/menu')
+        .post(menu.createMenu);
+    app.route('/menu/:id')
+        .put(menu.updateMenu);
 };

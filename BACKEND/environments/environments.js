@@ -5,7 +5,8 @@ module.exports = {
                 permission: "You don't have permission to perform this action",
                 userInactive: "You don't have permission to perform this action, because your account is INACTIVE",
                 userDeleted: "You don't have permission to perform this action, because your account was DELETED",
-                roleInactive: "This function is disabled. If you have proper role you can activate it in roles module."
+                roleInactive: "This function is disabled. If you have proper role you can activate it in roles module.",
+                incorrectArrayElements: "Array of elements is incorrect"
             }
         },
         users: {
@@ -66,6 +67,23 @@ module.exports = {
                 removed: "Faq successfully removed",
                 activated: "Faq successfully activated",
                 deactivated: "Faq successfully deactivated"
+            }
+        },
+        menus: {
+            errors: {
+                codeLength: "Field Code must have at least 5 characters",
+                codeRegexp: "Field Code contains wrong characters",
+                nameLength: "Field Name must have at least 5 characters",
+                nameRegexp: "Field Code contains wrong characters",
+                idNotFound: "Menu with specified id not found",
+            },
+            success: {
+                created: "Menu successfully created",
+                fetched: "Menu successfully fetched",
+                updated: "Menu successfully updated",
+                removed: "Menu successfully removed",
+                activated: "Menu successfully activated",
+                deactivated: "Menu successfully deactivated"
             }
         }
     },

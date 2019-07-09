@@ -29,7 +29,7 @@ export class SidebarComponent {
       text: 'Faqs',
       icon: 'question_answer'
     }
-  ]
+  ];
 
   constructor(public loginService: LoginService) {
   }

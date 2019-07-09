@@ -17,5 +17,21 @@ module.exports = {
             }
         }
         return result;
+    },
+    validateMenuElements: function(elements) {
+        if (elements) {
+            for (let i = 0; i < elements.length; i++) {
+                if (elements[i].hasOwnProperty('url') && elements[i].hasOwnProperty('text')) {
+                    if (!elements[i].url || !elements[i].text) {
+                        return false;
+                    } else if (elements[i].hasOwnProperty('children') && elements[i].children) {
+                        return module.exports.validateMenuElements(elements[i].children);
+                    }
+                } else {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

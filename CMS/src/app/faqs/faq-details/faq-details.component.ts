@@ -6,7 +6,7 @@ import { DialogConfirmComponent } from '../../shared/components/dialog-confirm/d
 import { ErrorStateMatcher } from '@angular/material/core';
 import { FormGroup, FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
 import { FaqModel } from '../../shared/models/faq/Faq.model';
-import {FaqElementModel} from "../../shared/models/faq/FaqElement.model";
+import { FaqElementModel } from '../../shared/models/faq/FaqElement.model';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -152,7 +152,7 @@ export class FaqDetailsComponent implements OnInit {
     }
   }
 
-  prepareDataToSend(): FaqModel{
+  prepareDataToSend(): FaqModel {
     const faqData: FaqModel = this.editFaqFormGroup.value;
     if (!this.faqElements.length) {
       faqData.elements = [];
