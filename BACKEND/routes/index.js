@@ -53,7 +53,14 @@ export default (app) => {
 
     // === MENUS ===
     app.route('/menu')
-        .post(menu.createMenu);
+        .post(menu.createMenu)
+        .get(menu.getAllMenus);
     app.route('/menu/:id')
-        .put(menu.updateMenu);
+        .put(menu.updateMenu)
+        .get(menu.getMenuById)
+        .delete(menu.deleteMenu);
+    app.route('/menu/:id/activate')
+        .post(menu.activate);
+    app.route('/menu/:id/deactivate')
+        .post(menu.deactivate);
 };

@@ -28,6 +28,11 @@ export class SidebarComponent {
       routerLink: '/faqs',
       text: 'Faqs',
       icon: 'question_answer'
+    },
+    {
+      routerLink: '/menus',
+      text: 'Menus',
+      icon: 'menu'
     }
   ];
 

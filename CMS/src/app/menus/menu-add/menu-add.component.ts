@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
+import { Component } from '@angular/core';
+import { ErrorStateMatcher } from '@angular/material';
+import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar} from '@angular/material';
-import { FaqService } from '../services/faq.service';
+import { MenuService } from '../services/menu.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -13,17 +13,17 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 }
 
 @Component({
-  selector: 'app-faq-add',
-  templateUrl: './faq-add.component.html',
-  styleUrls: ['./faq-add.component.css']
+  selector: 'app-menu-add',
+  templateUrl: './menu-add.component.html',
+  styleUrls: ['./menu-add.component.css']
 })
-export class FaqAddComponent implements OnInit {
+export class MenuAddComponent {
 
   get control() {
-    return this.addFaqFormGroup.controls;
+    return this.addMenuFormGroup.controls;
   }
 
-  addFaqFormGroup = new FormGroup({
+  addMenuFormGroup = new FormGroup({
     code: new FormControl('', [ Validators.required, Validators.minLength(5) ]),
     name: new FormControl('', [ Validators.required, Validators.minLength(5) ]),
     description: new FormControl('')
@@ -33,17 +33,14 @@ export class FaqAddComponent implements OnInit {
 
   constructor(private router: Router,
               private snackBar: MatSnackBar,
-              private faqService: FaqService) { }
+              private menuService: MenuService) { }
 
-  ngOnInit() {
-  }
-
-  addFaq(): void {
-    if (this.addFaqFormGroup.valid) {
-      this.faqService.addFaq(this.addFaqFormGroup.value).subscribe(
+  addMenu(): void {
+    if (this.addMenuFormGroup.valid) {
+      this.menuService.addMenu(this.addMenuFormGroup.value).subscribe(
         res => {
           console.log(res);
-          this.router.navigate(['/faqs']);
+          this.router.navigate(['/menus']);
           this.snackBar.open(res.message, 'X', {
             duration: 5000,
             horizontalPosition: 'right',

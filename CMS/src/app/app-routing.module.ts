@@ -28,6 +28,10 @@ const routes: Routes = [
   {
     path: 'faqs',
     loadChildren: './faqs/faqs.module#FaqsModule'
+  },
+  {
+    path: 'menus',
+    loadChildren: './menus/menus.module#MenusModule'
   }
 ];
 

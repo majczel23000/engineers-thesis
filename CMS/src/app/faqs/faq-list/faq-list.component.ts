@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FaqService } from '../services/faq.service';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
