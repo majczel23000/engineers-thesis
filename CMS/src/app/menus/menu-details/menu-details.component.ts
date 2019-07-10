@@ -37,6 +37,9 @@ export class MenuDetailsComponent implements OnInit {
 
   menuElements: MenuElementModel[] = [];
 
+  maxMenuLevel = 0;
+  maxLevels = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
   constructor(private activatedRoute: ActivatedRoute,
               private snackBar: MatSnackBar,
               public dialog: MatDialog,
@@ -57,6 +60,8 @@ export class MenuDetailsComponent implements OnInit {
           name: new FormControl(this.menu.name, [ Validators.required, Validators.minLength(5)]),
           description: new FormControl(this.menu.description)
         });
+        this.displayEveryElementsArray(this.menuElements, true, 0);
+        this.maxMenuLevel = Math.max.apply(Math, this.maxLevels);
       },
       err => {
         console.log(err);
@@ -138,4 +143,18 @@ export class MenuDetailsComponent implements OnInit {
     }
   }
 
+  displayEveryElementsArray(elements: MenuElementModel[], status: boolean, k: number): void {
+    for (let i = 0; i < elements.length; i++) {
+      if (elements[i].children && elements[i].children.length) {
+        if (status) {
+          this.maxLevels[i] += 1;
+          this.displayEveryElementsArray(elements[i].children, false, i);
+        } else {
+          this.maxLevels[k] += 1;
+          this.displayEveryElementsArray(elements[i].children, false, k);
+        }
+      }
+    }
+
+  }
 }

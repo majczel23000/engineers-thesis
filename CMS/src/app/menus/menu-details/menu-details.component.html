@@ -72,6 +72,7 @@
       </table>
 
       <table>
+
         <ng-container *ngIf="menuElementsVisibility && !menuElements.length">
           <tr class="menu-details-row">
             <td class="menu-details-item-none">
@@ -79,25 +80,32 @@
             </td>
           </tr>
         </ng-container>
+
         <ng-container *ngIf="menuElementsVisibility">
-          <tr *ngFor="let menuElement of menuElements; let i = index" class="menu-details-row">
-            <td class="menu-details-item-element">
-              <mat-form-field class="menu-details-form-field" [ngClass]="{'mat-form-field-invalid ng-dirty ng-invalid ng-touched' : !menuElement.url.length}">
-                <textarea #url matInput value="{{menuElement?.url}}" name="url" placeholder="Url {{i+1}}"
-                          (change)="menuElement.url = url.value"></textarea>
-              </mat-form-field>
-            </td>
-            <td class="menu-details-item-element">
-              <mat-form-field class="menu-details-form-field" [ngClass]="{'mat-form-field-invalid ng-dirty ng-invalid ng-touched' : !menuElement.text.length}">
-                <textarea #text matInput value="{{menuElement?.text}}" name="text" placeholder="Text {{i+1}}"
-                          (change)="menuElement.text = text.value"></textarea>
-              </mat-form-field>
-            </td>
-            <td class="menu-details-item-delete">
-              <a mat-raised-button class="menu-edit-btn" color="warn" (click)="removeMenuElement(i)"><i class="material-icons">delete</i></a>
-            </td>
-          </tr>
+          <ng-container *ngFor="let menuElement of menuElements; let i = index">
+
+            <tr class="menu-details-row">
+              <td class="menu-details-item-element">
+                <mat-form-field class="menu-details-form-field" [ngClass]="{'mat-form-field-invalid ng-dirty ng-invalid ng-touched' : !menuElement.url.length}">
+                  <textarea #url matInput value="{{menuElement?.url}}" name="url" placeholder="Url {{i+1}}"
+                            (change)="menuElement.url = url.value"></textarea>
+                </mat-form-field>
+              </td>
+              <td class="menu-details-item-element">
+                <mat-form-field class="menu-details-form-field" [ngClass]="{'mat-form-field-invalid ng-dirty ng-invalid ng-touched' : !menuElement.text.length}">
+                  <textarea #text matInput value="{{menuElement?.text}}" name="text" placeholder="Text {{i+1}}"
+                            (change)="menuElement.text = text.value"></textarea>
+                </mat-form-field>
+              </td>
+              <td class="menu-details-item-delete">
+                <a mat-raised-button class="menu-edit-btn" color="warn" (click)="removeMenuElement(i)"><i class="material-icons">delete</i></a>
+                <a mat-raised-button class="menu-edit-btn" color="primary"><i class="material-icons" (click)="submenuLevels[0] = !submenuLevels[0]">subdirectory_arrow_right</i></a>
+              </td>
+            </tr>
+
+          </ng-container>
         </ng-container>
+
       </table>
       <mat-card-actions class="menu-edit-actions">
         <button mat-raised-button class="menu-edit-btn" color="primary">Save changes</button>
