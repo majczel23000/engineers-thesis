@@ -71,7 +71,7 @@
 
       </table>
 
-      <table>
+      <table cdkDropList (cdkDropListDropped)="drop($event)">
         <ng-container *ngIf="faqElementsVisibility && !faqElements.length">
           <tr class="faq-details-row">
             <td class="faq-details-item-none">
@@ -80,23 +80,25 @@
           </tr>
         </ng-container>
         <ng-container *ngIf="faqElementsVisibility">
-          <tr *ngFor="let faqElement of faqElements; let i = index" class="faq-details-row">
-            <td class="faq-details-item-element">
-              <mat-form-field class="faq-details-form-field" [ngClass]="{'mat-form-field-invalid ng-dirty ng-invalid ng-touched' : !faqElement.question.length}">
-                <textarea #question matInput value="{{faqElement?.question}}" name="question" placeholder="Question {{i+1}}"
-                          (change)="faqElement.question = question.value"></textarea>
-              </mat-form-field>
-            </td>
-            <td class="faq-details-item-element">
-              <mat-form-field class="faq-details-form-field" [ngClass]="{'mat-form-field-invalid ng-dirty ng-invalid ng-touched' : !faqElement.question.length}">
-                <textarea #answear matInput value="{{faqElement?.answear}}" name="answear" placeholder="Answear {{i+1}}"
-                          (change)="faqElement.answear = answear.value"></textarea>
-              </mat-form-field>
-            </td>
-            <td class="faq-details-item-delete">
-              <a mat-raised-button class="faq-edit-btn" color="warn" (click)="removeFaqElement(i)"><i class="material-icons">delete</i></a>
-            </td>
-          </tr>
+
+            <tr *ngFor="let faqElement of faqElements; let i = index" class="faq-details-row" cdkDrag cdkDragLockAxis="y">
+              <td class="faq-details-item-element">
+                <mat-form-field class="faq-details-form-field" [ngClass]="{'mat-form-field-invalid ng-dirty ng-invalid ng-touched' : !faqElement.question.length}">
+                  <textarea #question matInput value="{{faqElement?.question}}" name="question" placeholder="Question {{i+1}}"
+                            (change)="faqElement.question = question.value"></textarea>
+                </mat-form-field>
+              </td>
+              <td class="faq-details-item-element">
+                <mat-form-field class="faq-details-form-field" [ngClass]="{'mat-form-field-invalid ng-dirty ng-invalid ng-touched' : !faqElement.question.length}">
+                  <textarea #answear matInput value="{{faqElement?.answear}}" name="answear" placeholder="Answear {{i+1}}"
+                            (change)="faqElement.answear = answear.value"></textarea>
+                </mat-form-field>
+              </td>
+              <td class="faq-details-item-delete">
+                <a mat-raised-button class="faq-edit-btn" color="warn" (click)="removeFaqElement(i)"><i class="material-icons">delete</i></a>
+              </td>
+            </tr>
+
         </ng-container>
       </table>
       <mat-card-actions class="faq-edit-actions">

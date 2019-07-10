@@ -7,6 +7,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { FormGroup, FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
 import { FaqModel } from '../../shared/models/faq/Faq.model';
 import { FaqElementModel } from '../../shared/models/faq/FaqElement.model';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -160,6 +161,10 @@ export class FaqDetailsComponent implements OnInit {
       faqData.elements = this.faqElements;
     }
     return faqData;
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.faqElements, event.previousIndex, event.currentIndex);
   }
 
 }

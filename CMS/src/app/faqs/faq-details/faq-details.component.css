@@ -25,11 +25,13 @@ mat-form-field {
 
 .faq-details-row {
   border: 1px solid #f6f6f6;
+  background: white;
 }
 
 .faq-details-row:hover {
   background: #f6f6f6;
   border: 1px solid #e6e6e6;
+  cursor: move;
 }
 
 .faq-details-item {
