@@ -97,3 +97,11 @@ a.menu-edit-btn:hover {
   padding: 20px;
   font-size: 1rem;
 }
+
+.second {
+  background: #ddd;
+}
+
+.third {
+  background: #bbb;
+}

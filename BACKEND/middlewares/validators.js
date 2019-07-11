@@ -24,7 +24,7 @@ module.exports = {
                 if (elements[i].hasOwnProperty('url') && elements[i].hasOwnProperty('text')) {
                     if (!elements[i].url || !elements[i].text) {
                         return false;
-                    } else if (elements[i].hasOwnProperty('children') && elements[i].children) {
+                    } else if (elements[i].hasOwnProperty('children') && elements[i].children.length) {
                         return module.exports.validateMenuElements(elements[i].children);
                     }
                 } else {

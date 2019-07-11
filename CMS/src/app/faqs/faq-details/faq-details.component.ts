@@ -61,6 +61,7 @@ export class FaqDetailsComponent implements OnInit {
       },
       err => {
         console.log(err);
+        this.router.navigate(['/error']);
       }
     );
   }

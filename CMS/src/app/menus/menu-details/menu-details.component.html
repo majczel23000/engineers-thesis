@@ -98,10 +98,59 @@
                 </mat-form-field>
               </td>
               <td class="menu-details-item-delete">
-                <a mat-raised-button class="menu-edit-btn" color="warn" (click)="removeMenuElement(i)"><i class="material-icons">delete</i></a>
-                <a mat-raised-button class="menu-edit-btn" color="primary"><i class="material-icons" (click)="submenuLevels[0] = !submenuLevels[0]">subdirectory_arrow_right</i></a>
+                <a mat-raised-button class="menu-edit-btn" color="warn" (click)="removeMenuElement(0, i, 0, 0)"><i class="material-icons">delete</i></a>
+                <a mat-raised-button class="menu-edit-btn" color="primary" (click)="addMenuElement(menuElement)"><i class="material-icons">add</i></a>
               </td>
             </tr>
+
+            <ng-container *ngIf="menuElement.children && menuElement.children.length">
+              <ng-container *ngFor="let subEl1 of menuElement.children; let j = index">
+
+                <tr class="menu-details-row second">
+                  <td class="menu-details-item-element">
+                    <mat-form-field class="menu-details-form-field" [ngClass]="{'mat-form-field-invalid ng-dirty ng-invalid ng-touched' : !subEl1.url.length}">
+                  <textarea #url matInput value="{{subEl1?.url}}" name="url" placeholder="Url {{i+1}}.{{j+1}}"
+                            (change)="subEl1.url = url.value"></textarea>
+                    </mat-form-field>
+                  </td>
+                  <td class="menu-details-item-element">
+                    <mat-form-field class="menu-details-form-field" [ngClass]="{'mat-form-field-invalid ng-dirty ng-invalid ng-touched' : !subEl1.text.length}">
+                  <textarea #text matInput value="{{subEl1?.text}}" name="text" placeholder="Text {{i+1}}.{{j+1}}"
+                            (change)="subEl1.text = text.value"></textarea>
+                    </mat-form-field>
+                  </td>
+                  <td class="menu-details-item-delete">
+                    <a mat-raised-button class="menu-edit-btn" color="warn" (click)="removeMenuElement(1, i, j, 0)"><i class="material-icons">delete</i></a>
+                    <a mat-raised-button class="menu-edit-btn" color="primary" (click)="addMenuElement(subEl1)"><i class="material-icons">add</i></a>
+                  </td>
+                </tr>
+
+                <ng-container *ngIf="subEl1.children && subEl1.children.length">
+                  <ng-container *ngFor="let subEl2 of subEl1.children; let k = index">
+
+                    <tr class="menu-details-row third">
+                      <td class="menu-details-item-element">
+                        <mat-form-field class="menu-details-form-field" [ngClass]="{'mat-form-field-invalid ng-dirty ng-invalid ng-touched' : !subEl2.url.length}">
+                          <textarea #url matInput value="{{subEl2?.url}}" name="url" placeholder="Url {{i+1}}.{{j+1}}.{{k+1}}"
+                            (change)="subEl2.url = url.value"></textarea>
+                        </mat-form-field>
+                      </td>
+                      <td class="menu-details-item-element">
+                        <mat-form-field class="menu-details-form-field" [ngClass]="{'mat-form-field-invalid ng-dirty ng-invalid ng-touched' : !subEl2.text.length}">
+                          <textarea #text matInput value="{{subEl2?.text}}" name="text" placeholder="Text {{i+1}}.{{j+1}}.{{k+1}}"
+                            (change)="subEl2.text = text.value"></textarea>
+                        </mat-form-field>
+                      </td>
+                      <td class="menu-details-item-delete">
+                        <a mat-raised-button class="menu-edit-btn" color="warn" (click)="removeMenuElement(2, i, j, k)"><i class="material-icons">delete</i></a>
+                      </td>
+                    </tr>
+
+                  </ng-container>
+                </ng-container>
+
+              </ng-container>
+            </ng-container>
 
           </ng-container>
         </ng-container>

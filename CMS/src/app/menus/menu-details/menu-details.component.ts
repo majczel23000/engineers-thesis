@@ -37,9 +37,6 @@ export class MenuDetailsComponent implements OnInit {
 
   menuElements: MenuElementModel[] = [];
 
-  maxMenuLevel = 0;
-  maxLevels = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-
   constructor(private activatedRoute: ActivatedRoute,
               private snackBar: MatSnackBar,
               public dialog: MatDialog,
@@ -60,20 +57,16 @@ export class MenuDetailsComponent implements OnInit {
           name: new FormControl(this.menu.name, [ Validators.required, Validators.minLength(5)]),
           description: new FormControl(this.menu.description)
         });
-        this.displayEveryElementsArray(this.menuElements, true, 0);
-        this.maxMenuLevel = Math.max.apply(Math, this.maxLevels);
       },
       err => {
         console.log(err);
+        this.router.navigate(['/error']);
       }
     );
   }
 
   cloneElements(): void {
-    this.menuElements = [];
-    for (let i = 0; i < this.menu.elements.length; i++) {
-      this.menuElements[i] = this.menu.elements[i];
-    }
+    this.menuElements = JSON.parse(JSON.stringify(this.menu.elements));
   }
 
   clearChanges(): void {
@@ -123,7 +116,8 @@ export class MenuDetailsComponent implements OnInit {
 
   editMenu(): void {
     if (this.editMenuFormGroup.valid) {
-      this.menuService.editMenu(this.menuId, this.editMenuFormGroup.value).subscribe(
+      const menuData = this.prepareDataToSend();
+      this.menuService.editMenu(this.menuId, menuData).subscribe(
         res => {
           this.snackBar.open(res.message, 'X', {
             duration: 5000,
@@ -143,18 +137,39 @@ export class MenuDetailsComponent implements OnInit {
     }
   }
 
-  displayEveryElementsArray(elements: MenuElementModel[], status: boolean, k: number): void {
-    for (let i = 0; i < elements.length; i++) {
-      if (elements[i].children && elements[i].children.length) {
-        if (status) {
-          this.maxLevels[i] += 1;
-          this.displayEveryElementsArray(elements[i].children, false, i);
-        } else {
-          this.maxLevels[k] += 1;
-          this.displayEveryElementsArray(elements[i].children, false, k);
-        }
-      }
+  addMenuElement(element?: MenuElementModel): void {
+    if (!element) {
+      this.menuElements.push({
+        text: 'Link Text',
+        url: 'Link url',
+        children: []
+      });
+    } else {
+      element.children.push({
+        text: 'Link Text',
+        url: 'Link url',
+        children: []
+      });
     }
+  }
 
+  removeMenuElement(level: number, i: number, j: number, k: number): void {
+    if (!level) {
+      this.menuElements.splice(i, 1);
+    } else if (level === 1) {
+      this.menuElements[i].children.splice(j, 1);
+    } else {
+      this.menuElements[i].children[j].children.splice(k, 1);
+    }
+  }
+
+  prepareDataToSend(): MenuModel {
+    const menuData: MenuModel = this.editMenuFormGroup.value;
+    if (!this.menuElements.length) {
+      menuData.elements = [];
+    } else {
+      menuData.elements = this.menuElements;
+    }
+    return menuData;
   }
 }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './main/login/login.component';
 import { DashboardComponent } from './main/dashboard/dashboard.component';
+import { ErrorPageComponent } from './shared/components/error-page/error-page.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'menus',
     loadChildren: './menus/menus.module#MenusModule'
+  },
+  {
+    path: 'error',
+    component: ErrorPageComponent
   }
 ];
 

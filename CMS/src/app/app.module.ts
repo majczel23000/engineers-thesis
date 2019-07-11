@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainModule } from './main/main.module';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -26,7 +26,8 @@ import { TokenInterceptorService } from './shared/interceptors/token-interceptor
     MatIconModule,
     MatListModule,
     MatSnackBarModule,
-    HttpClientModule
+    HttpClientModule,
+    SharedModule
   ],
   providers: [
     {

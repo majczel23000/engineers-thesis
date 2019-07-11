@@ -13,11 +13,16 @@ module.exports = {
             { code: 'ROLES/GET_ALL', name: 'Get all roles', description: 'Get all roles', createdAt: date, status: 'ACTIVE' },
             { code: 'ROLES/GET_ID', name: 'Get specified roles', description: 'Get specified role', createdAt: date, status: 'ACTIVE' },
             { code: 'ROLES/UPDATE', name: 'Update role', description: 'Update role', createdAt: date, status: 'ACTIVE' },
-            { code: 'FAQ/GET_ALL', name: 'Get all faqs', description: 'Get all faqs', createdAt: date, status: 'ACTIVE'},
-            { code: 'FAQ/GET_ID', name: 'Get specified faq', description: 'Get specified faq', createdAt: date, status: 'ACTIVE' },
-            { code: 'FAQ/CREATE', name: 'Create faq', description: 'Create faq', createdAt: date, status: 'ACTIVE' },
-            { code: 'FAQ/UPDATE', name: 'Update faq', description: 'Update faq', createdAt: date, status: 'ACTIVE' },
-            { code: 'FAQ/DELETE', name: 'Delete faq', description: 'Delete faq', createdAt: date, status: 'ACTIVE' }
+            { code: 'FAQS/GET_ALL', name: 'Get all faqs', description: 'Get all faqs', createdAt: date, status: 'ACTIVE'},
+            { code: 'FAQS/GET_ID', name: 'Get specified faq', description: 'Get specified faq', createdAt: date, status: 'ACTIVE' },
+            { code: 'FAQS/CREATE', name: 'Create faq', description: 'Create faq', createdAt: date, status: 'ACTIVE' },
+            { code: 'FAQS/UPDATE', name: 'Update faq', description: 'Update faq', createdAt: date, status: 'ACTIVE' },
+            { code: 'FAQS/DELETE', name: 'Delete faq', description: 'Delete faq', createdAt: date, status: 'ACTIVE' },
+            { code: 'MENUS/GET_ALL', name: 'Get all menus', description: 'Get all menus', createdAt: date, status: 'ACTIVE'},
+            { code: 'MENUS/GET_ID', name: 'Get specified menu', description: 'Get specified menu', createdAt: date, status: 'ACTIVE' },
+            { code: 'MENUS/CREATE', name: 'Create menu', description: 'Create menu', createdAt: date, status: 'ACTIVE' },
+            { code: 'MENUS/UPDATE', name: 'Update menu', description: 'Update menu', createdAt: date, status: 'ACTIVE' },
+            { code: 'MENUS/DELETE', name: 'Delete menu', description: 'Delete menu', createdAt: date, status: 'ACTIVE' }
         ];
         MongoClient.connect('mongodb://localhost:27017/', function(err, db) {
             if(err)

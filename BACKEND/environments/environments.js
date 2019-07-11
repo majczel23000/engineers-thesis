@@ -101,6 +101,20 @@ module.exports = {
             create: "ROLES/CREATE",
             update: "ROLES/UPDATE",
             delete: "ROLES/DELETE"
+        },
+        faqs: {
+            getAll: "FAQS/GET_ALL",
+            getId: "FAQS/GET_ID",
+            create: "FAQS/CREATE",
+            update: "FAQS/UPDATE",
+            delete: "FAQS/DELETE"
+        },
+        menus: {
+            getAll: "MENUS/GET_ALL",
+            getId: "MENUS/GET_ID",
+            create: "MENUS/CREATE",
+            update: "MENUS/UPDATE",
+            delete: "MENUS/DELETE"
         }
     }
 }

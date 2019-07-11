@@ -53,6 +53,7 @@ export class UserListComponent implements OnInit {
           horizontalPosition: 'right',
           panelClass: ['error-snackbar']
         });
+        this.router.navigate(['/error']);
       }
     );
   }

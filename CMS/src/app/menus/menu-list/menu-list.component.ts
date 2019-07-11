@@ -52,6 +52,8 @@ export class MenuListComponent implements OnInit {
             horizontalPosition: 'right',
             panelClass: ['error-snackbar']
           });
+          this.router.navigate(['/error']);
+          this.router.navigate(['/error']);
         }
       );
   }

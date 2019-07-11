@@ -115,7 +115,6 @@ exports.updateMenu = (req, res) => {
     req.body.updatedAt = new Date();
     if (req.body.status)
         delete req.body.status;
-    console.log(req.body.elements);
     if (!req.body.elements) {
         delete req.body.elements;
     }

@@ -40,27 +40,27 @@ export default (app) => {
 
     // === FAQS ===
     app.route('/faq')
-        .post(faq.createFaq)
-        .get(faq.getAllFaqs);
+        .post(verifyToken, checkRoleAndStatus(roles.faqs.create), faq.createFaq)
+        .get(verifyToken, checkRoleAndStatus(roles.faqs.getAll), faq.getAllFaqs);
     app.route('/faq/:id')
-        .get(faq.getFaqById)
-        .delete(faq.deleteFaq)
-        .put(faq.updateFaq);
+        .get(verifyToken, checkRoleAndStatus(roles.faqs.getId), faq.getFaqById)
+        .delete(verifyToken, checkRoleAndStatus(roles.faqs.delete), faq.deleteFaq)
+        .put(verifyToken, checkRoleAndStatus(roles.faqs.update), faq.updateFaq);
     app.route('/faq/:id/activate')
-        .post(faq.activate);
+        .post(verifyToken, checkRoleAndStatus(roles.faqs.update), faq.activate);
     app.route('/faq/:id/deactivate')
-        .post(faq.deactivate);
+        .post(verifyToken, checkRoleAndStatus(roles.faqs.update), faq.deactivate);
 
     // === MENUS ===
     app.route('/menu')
-        .post(menu.createMenu)
-        .get(menu.getAllMenus);
+        .post(verifyToken, checkRoleAndStatus(roles.menus.create), menu.createMenu)
+        .get(verifyToken, checkRoleAndStatus(roles.menus.getAll), menu.getAllMenus);
     app.route('/menu/:id')
-        .put(menu.updateMenu)
-        .get(menu.getMenuById)
-        .delete(menu.deleteMenu);
+        .put(verifyToken, checkRoleAndStatus(roles.menus.update), menu.updateMenu)
+        .get(verifyToken, checkRoleAndStatus(roles.menus.getId), menu.getMenuById)
+        .delete(verifyToken, checkRoleAndStatus(roles.menus.delete), menu.deleteMenu);
     app.route('/menu/:id/activate')
-        .post(menu.activate);
+        .post(verifyToken, checkRoleAndStatus(roles.menus.update), menu.activate);
     app.route('/menu/:id/deactivate')
-        .post(menu.deactivate);
+        .post(verifyToken, checkRoleAndStatus(roles.menus.update), menu.deactivate);
 };

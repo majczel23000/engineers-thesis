@@ -52,6 +52,7 @@ export class FaqListComponent implements OnInit {
               horizontalPosition: 'right',
               panelClass: ['error-snackbar']
             });
+            this.router.navigate(['/error']);
           }
         );
   }
