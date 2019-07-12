@@ -7,6 +7,7 @@ import { FormGroup, FormControl, Validators, FormGroupDirective, NgForm } from '
 import { MenuService } from '../services/menu.service';
 import { MenuModel } from '../../shared/models/menu/Menu.model';
 import { MenuElementModel } from '../../shared/models/menu/MenuElement.model';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -171,5 +172,9 @@ export class MenuDetailsComponent implements OnInit {
       menuData.elements = this.menuElements;
     }
     return menuData;
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.menuElements, event.previousIndex, event.currentIndex);
   }
 }

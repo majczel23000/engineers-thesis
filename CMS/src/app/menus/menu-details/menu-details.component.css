@@ -98,10 +98,14 @@ a.menu-edit-btn:hover {
   font-size: 1rem;
 }
 
+.first {
+  background: #fafcff;
+}
+
 .second {
-  background: #ddd;
+  background: #cfe2ff;
 }
 
 .third {
-  background: #bbb;
+  background: #b8d4ff;
 }

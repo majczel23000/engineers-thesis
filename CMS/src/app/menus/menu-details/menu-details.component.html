@@ -71,7 +71,7 @@
 
       </table>
 
-      <table>
+      <table cdkDropList (cdkDropListDropped)="drop($event)">
 
         <ng-container *ngIf="menuElementsVisibility && !menuElements.length">
           <tr class="menu-details-row">
@@ -84,7 +84,7 @@
         <ng-container *ngIf="menuElementsVisibility">
           <ng-container *ngFor="let menuElement of menuElements; let i = index">
 
-            <tr class="menu-details-row">
+            <tr class="menu-details-row first" cdkDrag cdkDragLockAxis="y">
               <td class="menu-details-item-element">
                 <mat-form-field class="menu-details-form-field" [ngClass]="{'mat-form-field-invalid ng-dirty ng-invalid ng-touched' : !menuElement.url.length}">
                   <textarea #url matInput value="{{menuElement?.url}}" name="url" placeholder="Url {{i+1}}"
@@ -106,7 +106,7 @@
             <ng-container *ngIf="menuElement.children && menuElement.children.length">
               <ng-container *ngFor="let subEl1 of menuElement.children; let j = index">
 
-                <tr class="menu-details-row second">
+                <tr class="menu-details-row second" cdkDrag cdkDragLockAxis="y">
                   <td class="menu-details-item-element">
                     <mat-form-field class="menu-details-form-field" [ngClass]="{'mat-form-field-invalid ng-dirty ng-invalid ng-touched' : !subEl1.url.length}">
                   <textarea #url matInput value="{{subEl1?.url}}" name="url" placeholder="Url {{i+1}}.{{j+1}}"
@@ -128,7 +128,7 @@
                 <ng-container *ngIf="subEl1.children && subEl1.children.length">
                   <ng-container *ngFor="let subEl2 of subEl1.children; let k = index">
 
-                    <tr class="menu-details-row third">
+                    <tr class="menu-details-row third" cdkDrag cdkDragLockAxis="y">
                       <td class="menu-details-item-element">
                         <mat-form-field class="menu-details-form-field" [ngClass]="{'mat-form-field-invalid ng-dirty ng-invalid ng-touched' : !subEl2.url.length}">
                           <textarea #url matInput value="{{subEl2?.url}}" name="url" placeholder="Url {{i+1}}.{{j+1}}.{{k+1}}"
