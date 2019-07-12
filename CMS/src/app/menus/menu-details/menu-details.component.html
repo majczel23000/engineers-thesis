@@ -71,7 +71,7 @@
 
       </table>
 
-      <table cdkDropList (cdkDropListDropped)="drop($event)">
+      <table>
 
         <ng-container *ngIf="menuElementsVisibility && !menuElements.length">
           <tr class="menu-details-row">
@@ -84,7 +84,7 @@
         <ng-container *ngIf="menuElementsVisibility">
           <ng-container *ngFor="let menuElement of menuElements; let i = index">
 
-            <tr class="menu-details-row first" cdkDrag cdkDragLockAxis="y">
+            <tr class="menu-details-row first" >
               <td class="menu-details-item-element">
                 <mat-form-field class="menu-details-form-field" [ngClass]="{'mat-form-field-invalid ng-dirty ng-invalid ng-touched' : !menuElement.url.length}">
                   <textarea #url matInput value="{{menuElement?.url}}" name="url" placeholder="Url {{i+1}}"
@@ -100,13 +100,15 @@
               <td class="menu-details-item-delete">
                 <a mat-raised-button class="menu-edit-btn" color="warn" (click)="removeMenuElement(0, i, 0, 0)"><i class="material-icons">delete</i></a>
                 <a mat-raised-button class="menu-edit-btn" color="primary" (click)="addMenuElement(menuElement)"><i class="material-icons">add</i></a>
+                <a mat-raised-button class="menu-edit-btn" color="basic" *ngIf="i !== 0" (click)="moveElementUp(0, menuElement, i, 0, 0)"><i class="material-icons">keyboard_arrow_up</i></a>
+                <a mat-raised-button class="menu-edit-btn" color="basic" *ngIf="i+1 < menuElements.length" (click)="moveElementDown(0, menuElement, i, 0, 0)"><i class="material-icons">keyboard_arrow_down</i></a>
               </td>
             </tr>
 
             <ng-container *ngIf="menuElement.children && menuElement.children.length">
               <ng-container *ngFor="let subEl1 of menuElement.children; let j = index">
 
-                <tr class="menu-details-row second" cdkDrag cdkDragLockAxis="y">
+                <tr class="menu-details-row second">
                   <td class="menu-details-item-element">
                     <mat-form-field class="menu-details-form-field" [ngClass]="{'mat-form-field-invalid ng-dirty ng-invalid ng-touched' : !subEl1.url.length}">
                   <textarea #url matInput value="{{subEl1?.url}}" name="url" placeholder="Url {{i+1}}.{{j+1}}"
@@ -122,13 +124,15 @@
                   <td class="menu-details-item-delete">
                     <a mat-raised-button class="menu-edit-btn" color="warn" (click)="removeMenuElement(1, i, j, 0)"><i class="material-icons">delete</i></a>
                     <a mat-raised-button class="menu-edit-btn" color="primary" (click)="addMenuElement(subEl1)"><i class="material-icons">add</i></a>
+                    <a mat-raised-button class="menu-edit-btn" color="basic" *ngIf="j !== 0" (click)="moveElementUp(1, subEl1, i, j, 0)"><i class="material-icons">keyboard_arrow_up</i></a>
+                    <a mat-raised-button class="menu-edit-btn" color="basic" *ngIf="j+1 < menuElement.children.length" (click)="moveElementDown(1, subEl1, i, j, 0)"><i class="material-icons">keyboard_arrow_down</i></a>
                   </td>
                 </tr>
 
                 <ng-container *ngIf="subEl1.children && subEl1.children.length">
                   <ng-container *ngFor="let subEl2 of subEl1.children; let k = index">
 
-                    <tr class="menu-details-row third" cdkDrag cdkDragLockAxis="y">
+                    <tr class="menu-details-row third">
                       <td class="menu-details-item-element">
                         <mat-form-field class="menu-details-form-field" [ngClass]="{'mat-form-field-invalid ng-dirty ng-invalid ng-touched' : !subEl2.url.length}">
                           <textarea #url matInput value="{{subEl2?.url}}" name="url" placeholder="Url {{i+1}}.{{j+1}}.{{k+1}}"
@@ -143,6 +147,8 @@
                       </td>
                       <td class="menu-details-item-delete">
                         <a mat-raised-button class="menu-edit-btn" color="warn" (click)="removeMenuElement(2, i, j, k)"><i class="material-icons">delete</i></a>
+                        <a mat-raised-button class="menu-edit-btn" color="basic" *ngIf="k !== 0" (click)="moveElementUp(2, subEl2, i, j, k)"><i class="material-icons">keyboard_arrow_up</i></a>
+                        <a mat-raised-button class="menu-edit-btn" color="basic" *ngIf="k+1 < subEl1.children.length" (click)="moveElementDown(2, subEl2, i, j, k)"><i class="material-icons">keyboard_arrow_down</i></a>
                       </td>
                     </tr>
 

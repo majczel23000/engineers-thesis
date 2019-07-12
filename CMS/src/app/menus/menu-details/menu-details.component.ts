@@ -174,7 +174,35 @@ export class MenuDetailsComponent implements OnInit {
     return menuData;
   }
 
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.menuElements, event.previousIndex, event.currentIndex);
+  moveElementDown(level: number, element: MenuElementModel, i: number, j: number, k: number): void {
+    if (!level) {
+      const temp = element;
+      this.menuElements[i] = this.menuElements[i + 1];
+      this.menuElements[i + 1] = temp;
+    } else if (level === 1) {
+      const temp = element;
+      this.menuElements[i].children[j] = this.menuElements[i].children[j + 1];
+      this.menuElements[i].children[j + 1] = temp;
+    } else {
+      const temp = element;
+      this.menuElements[i].children[j].children[k] = this.menuElements[i].children[j].children[k + 1];
+      this.menuElements[i].children[j].children[k + 1] = temp;
+    }
+  }
+
+  moveElementUp(level: number, element: MenuElementModel, i: number, j: number, k: number): void {
+    if (!level) {
+      const temp = element;
+      this.menuElements[i] = this.menuElements[i - 1];
+      this.menuElements[i - 1] = temp;
+    } else if (level === 1) {
+      const temp = element;
+      this.menuElements[i].children[j] = this.menuElements[i].children[j - 1];
+      this.menuElements[i].children[j - 1] = temp;
+    } else {
+      const temp = element;
+      this.menuElements[i].children[j].children[k] = this.menuElements[i].children[j].children[k - 1];
+      this.menuElements[i].children[j].children[k - 1] = temp;
+    }
   }
 }

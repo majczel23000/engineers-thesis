@@ -12,7 +12,6 @@ import { MatInputModule, MatButtonModule, MatCardModule,
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CdkColumnDef } from '@angular/cdk/table';
 import { DialogConfirmComponent } from '../shared/components/dialog-confirm/dialog-confirm.component';
-import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [MenuAddComponent, MenuDetailsComponent, MenuListComponent, MenuNavigationComponent],
@@ -29,8 +28,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatToolbarModule,
     MatCheckboxModule,
     SharedModule,
-    MatSortModule,
-    DragDropModule
+    MatSortModule
   ],
   providers: [MatPaginatorIntl, CdkColumnDef],
   entryComponents: [DialogConfirmComponent]
