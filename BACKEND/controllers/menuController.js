@@ -4,9 +4,10 @@ let successResponse = require('../models/successResponseModel').success;
 let messages = require('../environments/environments').messages;
 let validateFields = require('../middlewares/validators').validateFields;
 let validateMenuElements = require('../middlewares/validators').validateMenuElements;
+let checkMenuCode = require('../middlewares/validators').checkMenuCode;
 
 // CREATE: Create new MENU and return new MENU node
-exports.createMenu = (req, res) => {
+exports.createMenu = async (req, res) => {
     if (req.body.elements)
         delete req.body.elements;
     req.body.status = "INACTIVE";
@@ -30,17 +31,22 @@ exports.createMenu = (req, res) => {
         return;
     }
 
-    const date = new Date();
-    req.body.createdAt = date;
-    req.body.updatedAt = date;
-    const newMenu = new Menu(req.body);
-    newMenu.save((err, menu) => {
-        if (err) {
-            res.send(err);
-        } else {
-            res.status(200).json(successResponse(200, messages.menus.success.created, menu));
-        }
-    })
+    const menuCode = await checkMenuCode(req.body.code);
+    if (menuCode) {
+        res.status(404).json(errorResponse(409, messages.menus.errors.codeExists));
+    } else {
+        const date = new Date();
+        req.body.createdAt = date;
+        req.body.updatedAt = date;
+        const newMenu = new Menu(req.body);
+        newMenu.save((err, menu) => {
+            if (err) {
+                res.send(err);
+            } else {
+                res.status(200).json(successResponse(200, messages.menus.success.created, menu));
+            }
+        })
+    }
 };
 
 // GET ALL: Return all menus nodes

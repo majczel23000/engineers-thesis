@@ -3,9 +3,10 @@ let errorResponse = require('../models/errorResponseModel').error;
 let successResponse = require('../models/successResponseModel').success;
 let messages = require('../environments/environments').messages;
 let validateFields = require('../middlewares/validators').validateFields;
+let checkFaqCode = require('../middlewares/validators').checkFaqCode;
 
 // CREATE: Create new FAQ and return new FAQ node
-exports.createFaq = (req, res) => {
+exports.createFaq = async (req, res) => {
     req.body.status = "INACTIVE";
     const validateFieldsResult = validateFields(Faq.schema.obj, req.body);
     if (!validateFieldsResult.status) {
@@ -27,17 +28,22 @@ exports.createFaq = (req, res) => {
         return;
     }
 
-    const date = new Date();
-    req.body.createdAt = date;
-    req.body.updatedAt = date;
-    const newFaq = new Faq(req.body);
-    newFaq.save((err, faq) => {
-        if (err) {
-            res.send(err);
-        } else {
-            res.status(200).json(successResponse(200, messages.faqs.success.created, faq));
-        }
-    })
+    const faqCode = await checkFaqCode(req.body.code);
+    if (faqCode) {
+        res.status(404).json(errorResponse(409, messages.faqs.errors.codeExists));
+    } else {
+        const date = new Date();
+        req.body.createdAt = date;
+        req.body.updatedAt = date;
+        const newFaq = new Faq(req.body);
+        newFaq.save((err, faq) => {
+            if (err) {
+                res.send(err);
+            } else {
+                res.status(200).json(successResponse(200, messages.faqs.success.created, faq));
+            }
+        })
+    }
 };
 
 // GET ALL: Return all faqs nodes

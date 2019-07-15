@@ -59,6 +59,7 @@ module.exports = {
                 nameLength: "Field Name must have at least 5 characters",
                 nameRegexp: "Field Code contains wrong characters",
                 idNotFound: "Faq with specified id not found",
+                codeExists: "Faq with specified code already exists"
             },
             success: {
                 created: "Faq successfully created",
@@ -76,6 +77,7 @@ module.exports = {
                 nameLength: "Field Name must have at least 5 characters",
                 nameRegexp: "Field Code contains wrong characters",
                 idNotFound: "Menu with specified id not found",
+                codeExists: "Menu with specified code already exists"
             },
             success: {
                 created: "Menu successfully created",

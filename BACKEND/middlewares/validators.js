@@ -1,3 +1,6 @@
+import Faq from '../models/faqModel';
+import Menu from '../models/menuModel';
+
 module.exports = {
     validateEmail: function(email) {
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -33,5 +36,19 @@ module.exports = {
             }
         }
         return true;
+    },
+    checkFaqCode: async function(code) {
+        try {
+            return Faq.findOne({ code: code })
+        } catch(error) {
+            throw new Error(error)
+        }
+    },
+    checkMenuCode: async function(code) {
+        try {
+            return Menu.findOne({ code: code })
+        } catch(error) {
+            throw new Error(error)
+        }
     }
 }
