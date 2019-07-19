@@ -30,6 +30,8 @@ export class UserDetailsComponent implements OnInit {
 
   editUserFormGroup: FormGroup;
 
+  windowWidth: number;
+
   get control() {
     return this.editUserFormGroup.controls;
   }
@@ -175,6 +177,11 @@ export class UserDetailsComponent implements OnInit {
         this.router.navigate(['/users']);
       }
     });
+  }
+
+  onResize(event): void {
+    console.log(event.target.innerWidth);
+    this.windowWidth = event.target.innerWidth;
   }
 
 }

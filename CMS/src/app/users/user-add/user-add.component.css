@@ -38,3 +38,9 @@ mat-form-field {
 .role-list-item {
   flex: 1 0 50%;
 }
+
+@media only screen and (max-width: 650px) {
+  .role-list-item {
+    flex: 1 0 100%;
+  }
+}

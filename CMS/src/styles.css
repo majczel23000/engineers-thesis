@@ -36,3 +36,11 @@ table {
 .mat-simple-snackbar-action {
     color: #f6f6f6 !important;
 }
+
+@media only screen and (max-width: 650px) {
+  .mobile-display-none {
+    display: none;
+  }
+}
+
+
