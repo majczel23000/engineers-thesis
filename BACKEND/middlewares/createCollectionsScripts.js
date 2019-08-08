@@ -22,7 +22,12 @@ module.exports = {
             { code: 'MENUS/GET_ID', name: 'Get specified menu', description: 'Get specified menu', createdAt: date, status: 'ACTIVE' },
             { code: 'MENUS/CREATE', name: 'Create menu', description: 'Create menu', createdAt: date, status: 'ACTIVE' },
             { code: 'MENUS/UPDATE', name: 'Update menu', description: 'Update menu', createdAt: date, status: 'ACTIVE' },
-            { code: 'MENUS/DELETE', name: 'Delete menu', description: 'Delete menu', createdAt: date, status: 'ACTIVE' }
+            { code: 'MENUS/DELETE', name: 'Delete menu', description: 'Delete menu', createdAt: date, status: 'ACTIVE' },
+            { code: 'PAGES/GET_ALL', name: 'Get all pages', description: 'Get all pages', createdAt: date, status: 'ACTIVE'},
+            { code: 'PAGES/GET_ID', name: 'Get specified page', description: 'Get specified page', createdAt: date, status: 'ACTIVE' },
+            { code: 'PAGES/CREATE', name: 'Create page', description: 'Create page', createdAt: date, status: 'ACTIVE' },
+            { code: 'PAGES/UPDATE', name: 'Update page', description: 'Update page', createdAt: date, status: 'ACTIVE' },
+            { code: 'PAGES/DELETE', name: 'Delete page', description: 'Delete page', createdAt: date, status: 'ACTIVE' }
         ];
         MongoClient.connect('mongodb://localhost:27017/', function(err, db) {
             if(err)

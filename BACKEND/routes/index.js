@@ -3,6 +3,7 @@ import role from '../controllers/roleController';
 import statistics from '../controllers/statisticsController';
 import faq from '../controllers/faqController';
 import menu from '../controllers/menuController';
+import page from '../controllers/pageController';
 let verifyToken = require('../middlewares/verifyToken').verifyToken;
 let checkRoleAndStatus = require('../middlewares/checkRole').checkRoleAndStatus;
 let roles = require('../environments/environments').roles;
@@ -63,4 +64,17 @@ export default (app) => {
         .post(verifyToken, checkRoleAndStatus(roles.menus.update), menu.activate);
     app.route('/menu/:id/deactivate')
         .post(verifyToken, checkRoleAndStatus(roles.menus.update), menu.deactivate);
+
+    // === PAGES ===
+    app.route('/page')
+        .post(page.createPage)
+        .get(page.getAllPages);
+    app.route('/page/:id')
+        .get(page.getPageById)
+        .delete(page.deletePage)
+        .put(page.updatePage);
+    app.route('/page/:id/activate')
+        .post(page.activate);
+    app.route('/page/:id/deactivate')
+        .post(page.deactivate);
 };

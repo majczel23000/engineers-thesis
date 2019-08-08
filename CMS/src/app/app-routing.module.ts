@@ -35,6 +35,10 @@ const routes: Routes = [
     loadChildren: './menus/menus.module#MenusModule'
   },
   {
+    path: 'pages',
+    loadChildren: './pages/pages.module#PagesModule'
+  },
+  {
     path: 'error',
     component: ErrorPageComponent
   }

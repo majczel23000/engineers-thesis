@@ -3,7 +3,7 @@ import { ErrorStateMatcher } from '@angular/material';
 import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar} from '@angular/material';
-import { MenuService } from '../services/menu.service';
+import { PageService } from '../services/page.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -13,17 +13,17 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 }
 
 @Component({
-  selector: 'app-menu-add',
-  templateUrl: './menu-add.component.html',
-  styleUrls: ['./menu-add.component.css']
+  selector: 'app-page-add',
+  templateUrl: './page-add.component.html',
+  styleUrls: ['./page-add.component.css']
 })
-export class MenuAddComponent {
+export class PageAddComponent {
 
   get control() {
-    return this.addMenuFormGroup.controls;
+    return this.addPageFormGroup.controls;
   }
 
-  addMenuFormGroup = new FormGroup({
+  addPageFormGroup = new FormGroup({
     code: new FormControl('', [ Validators.required, Validators.minLength(5) ]),
     name: new FormControl('', [ Validators.required, Validators.minLength(5) ]),
     description: new FormControl('')
@@ -33,14 +33,14 @@ export class MenuAddComponent {
 
   constructor(private router: Router,
               private snackBar: MatSnackBar,
-              private menuService: MenuService) { }
+              private pageService: PageService) { }
 
-  addMenu(): void {
-    if (this.addMenuFormGroup.valid) {
-      this.menuService.addMenu(this.addMenuFormGroup.value).subscribe(
+  addPage(): void {
+    if (this.addPageFormGroup.valid) {
+      this.pageService.addPage(this.addPageFormGroup.value).subscribe(
         res => {
           console.log(res);
-          this.router.navigate(['/menus']);
+          this.router.navigate(['/pages']);
           this.snackBar.open(res.message, 'X', {
             duration: 5000,
             horizontalPosition: 'right',

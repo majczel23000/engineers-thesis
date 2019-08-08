@@ -87,6 +87,27 @@ module.exports = {
                 activated: "Menu successfully activated",
                 deactivated: "Menu successfully deactivated"
             }
+        },
+        pages: {
+            errors: {
+                codeLength: "Field Code must have at least 5 characters",
+                codeRegexp: "Field Code contains wrong characters",
+                nameLength: "Field Name must have at least 5 characters",
+                nameRegexp: "Field Name contains wrong characters",
+                idNotFound: "Page with specified id not found",
+                codeExists: "Page with specified code already exists",
+                incorrectMetaTags: "Meta Tags have incorrect values",
+                incorrectStyles: "Styles have incorrect values",
+                incorrectContents: "Contents have incorrect values"
+            },
+            success: {
+                created: "Page successfully created",
+                fetched: "Page successfully fetched",
+                updated: "Page successfully updated",
+                removed: "Page successfully removed",
+                activated: "Page successfully activated",
+                deactivated: "Page successfully deactivated"
+            }
         }
     },
     roles: {

@@ -1,5 +1,6 @@
 import Faq from '../models/faqModel';
 import Menu from '../models/menuModel';
+import Page from '../models/pageModel';
 
 module.exports = {
     validateEmail: function(email) {
@@ -37,6 +38,44 @@ module.exports = {
         }
         return true;
     },
+    validateNameAndCode: function(name, code, messages) {
+        if (code.length < 5)
+            return messages.codeLength;
+        if (!(/^[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð_,.'-]+$/u.test(code)))
+            return messages.codeRegexp;
+        if (name.length < 5)
+            return messages.nameLength;
+        if (!(/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u.test(name)))
+            return messages.nameRegexp;
+        return '';
+    },
+    validatePageFields: function(metaTags, styles, contents, messages) {
+        if (metaTags) {
+            for (let i = 0; i < metaTags.length; i++) {
+                if (metaTags[i].hasOwnProperty('name') && metaTags[i].hasOwnProperty('content')) {
+                    if (!metaTags[i].name || !metaTags[i].content)
+                        return messages.incorrectMetaTags;
+                }
+            }
+        }
+        if (styles) {
+            for (let i = 0; i < styles.length; i++) {
+                if (styles[i].hasOwnProperty('property') && styles[i].hasOwnProperty('value')) {
+                    if (!styles[i].property || !styles[i].value)
+                        return messages.incorrectStyles;
+                }
+            }
+        }
+        if (contents) {
+            for (let i = 0; i < contents.length; i++) {
+                if (contents[i].hasOwnProperty('content') && contents[i].hasOwnProperty('selector')) {
+                    if (!contents[i].content || !contents[i].selector)
+                        return messages.incorrectContents;
+                }
+            }
+        }
+        return '';
+    },
     checkFaqCode: async function(code) {
         try {
             return Faq.findOne({ code: code })
@@ -47,6 +86,13 @@ module.exports = {
     checkMenuCode: async function(code) {
         try {
             return Menu.findOne({ code: code })
+        } catch(error) {
+            throw new Error(error)
+        }
+    },
+    checkPageCode: async function(code) {
+        try {
+            return Page.findOne({ code: code })
         } catch(error) {
             throw new Error(error)
         }

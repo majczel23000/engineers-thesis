@@ -33,6 +33,11 @@ export class SidebarComponent {
       routerLink: '/menus',
       text: 'Menus',
       icon: 'menu'
+    },
+    {
+      routerLink: '/pages',
+      text: 'Pages',
+      icon: 'pages'
     }
   ];
 

@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material';
 import { RoleService } from '../../../roles/services/role.service';
 import { FaqService } from '../../../faqs/services/faq.service';
 import { MenuService } from '../../../menus/services/menu.service';
+import { PageService} from '../../../pages/services/page.service';
 
 @Component({
   selector: 'app-dialog-confirm',
@@ -20,7 +21,8 @@ export class DialogConfirmComponent {
               private snackBar: MatSnackBar,
               private roleService: RoleService,
               private faqService: FaqService,
-              private menuService: MenuService) { }
+              private menuService: MenuService,
+              private pageService: PageService) { }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -209,6 +211,56 @@ export class DialogConfirmComponent {
       case 'REMOVE_MENU': {
         this.data.status = 'REMOVED';
         this.menuService.removeMenu(this.data._id).subscribe(
+          res => {
+            console.log(res);
+          },
+          err => {
+            console.log(err);
+          }
+        );
+        break;
+      }
+      case 'CHANGE_PAGE_STATUS': {
+        if (this.data.status === 'INACTIVE') {
+          this.pageService.activatePage(this.data._id).subscribe(
+            res => {
+              this.snackBar.open(res.message, 'X', {
+                duration: 5000,
+                horizontalPosition: 'right',
+                panelClass: ['success-snackbar']
+              });
+            },
+            err => {
+              this.snackBar.open(err.error.message, 'X', {
+                duration: 5000,
+                horizontalPosition: 'right',
+                panelClass: ['error-snackbar']
+              });
+            }
+          );
+        } else {
+          this.pageService.deactivatePage(this.data._id).subscribe(
+            res => {
+              this.snackBar.open(res.message, 'X', {
+                duration: 5000,
+                horizontalPosition: 'right',
+                panelClass: ['success-snackbar']
+              });
+            },
+            err => {
+              this.snackBar.open(err.error.message, 'X', {
+                duration: 5000,
+                horizontalPosition: 'right',
+                panelClass: ['error-snackbar']
+              });
+            }
+          );
+        }
+        break;
+      }
+      case 'REMOVE_PAGE': {
+        this.data.status = 'REMOVED';
+        this.pageService.removePage(this.data._id).subscribe(
           res => {
             console.log(res);
           },
