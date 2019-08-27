@@ -38,6 +38,11 @@ export class SidebarComponent {
       routerLink: '/pages',
       text: 'Pages',
       icon: 'pages'
+    },
+    {
+      routerLink: '/images',
+      text: 'Images',
+      icon: 'image'
     }
   ];
 

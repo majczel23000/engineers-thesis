@@ -17,8 +17,8 @@ mongoose.connect('mongodb://localhost:27017/cms', { useNewUrlParser: true }, fun
 createCollectionsScripts.createRoles();
 
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: "50mb"}));
+app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
 
 // catch 400
 app.use((err, req, res, next) => {

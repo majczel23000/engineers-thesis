@@ -4,6 +4,7 @@ import statistics from '../controllers/statisticsController';
 import faq from '../controllers/faqController';
 import menu from '../controllers/menuController';
 import page from '../controllers/pageController';
+import image from '../controllers/imageController';
 let verifyToken = require('../middlewares/verifyToken').verifyToken;
 let checkRoleAndStatus = require('../middlewares/checkRole').checkRoleAndStatus;
 let roles = require('../environments/environments').roles;
@@ -77,4 +78,16 @@ export default (app) => {
         .post(page.activate);
     app.route('/page/:id/deactivate')
         .post(page.deactivate);
+
+    // === IMAGES ===
+    app.route('/image')
+        .post(image.addImage)
+        .get(image.getAllImages);
+    app.route('/image/:id')
+        .get(image.getImageById)
+        .delete(image.deleteImage);
+    app.route('/image/:id/activate')
+        .post(image.activate);
+    app.route('/image/:id/deactivate')
+        .post(image.deactivate);
 };

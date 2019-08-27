@@ -1,41 +1,39 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import { ImageService } from '../services/image.service';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
 import { MatPaginator, MatTableDataSource, MatPaginatorIntl, MatSort } from '@angular/material';
-import { PageModel } from '../../shared/models/page/Page.model';
-import { PageService } from '../services/page.service';
-import { DomSanitizer } from '@angular/platform-browser';
+import { ImageModel } from '../../shared/models/image/Image.model';
 
 @Component({
-  selector: 'app-page-list',
-  templateUrl: './page-list.component.html',
-  styleUrls: ['./page-list.component.css']
+  selector: 'app-image-list',
+  templateUrl: './image-list.component.html',
+  styleUrls: ['./image-list.component.css']
 })
-export class PageListComponent implements OnInit {
+export class ImageListComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  displayedColumns: string[] = ['code', 'name', 'status'];
-  dataSource = new MatTableDataSource<PageModel>();
+  displayedColumns: string[] = ['code', 'name', 'status', 'image'];
+  dataSource = new MatTableDataSource<ImageModel>();
   loadingData = true;
-  pages: PageModel[];
-  imagePath;
+  images: ImageModel[];
 
   constructor(private router: Router,
               private paginatorIntl: MatPaginatorIntl,
               private snackBar: MatSnackBar,
-              private pageService: PageService,
-              private _sanitizer: DomSanitizer) { }
+              private imageService: ImageService) { }
+
 
   ngOnInit() {
-    this.getPages();
-    this.paginatorIntl.itemsPerPageLabel = 'Pages per page';
+    this.getImages();
+    this.paginatorIntl.itemsPerPageLabel = 'Images per page';
   }
 
-  getPages(): void {
-    this.pageService.getAllPages()
+  getImages(): void {
+    this.imageService.getAllImages()
       .pipe(
         finalize( () => {
           this.loadingData = false;
@@ -56,7 +54,6 @@ export class PageListComponent implements OnInit {
             panelClass: ['error-snackbar']
           });
           this.router.navigate(['/error']);
-          this.router.navigate(['/error']);
         }
       );
   }
@@ -67,18 +64,4 @@ export class PageListComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-
-  onFileSelected(event): void {
-    const reader = new FileReader();
-
-    if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        console.log(reader.result);
-        this.imagePath = this._sanitizer.bypassSecurityTrustResourceUrl(reader.result as string);
-      };
-    }
-  }
-
 }

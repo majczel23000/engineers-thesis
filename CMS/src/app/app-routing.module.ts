@@ -39,6 +39,10 @@ const routes: Routes = [
     loadChildren: './pages/pages.module#PagesModule'
   },
   {
+    path: 'images',
+    loadChildren: './images/images.module#ImagesModule'
+  },
+  {
     path: 'error',
     component: ErrorPageComponent
   }

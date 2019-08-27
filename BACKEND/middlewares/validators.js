@@ -1,6 +1,7 @@
 import Faq from '../models/faqModel';
 import Menu from '../models/menuModel';
 import Page from '../models/pageModel';
+import Image from '../models/imageModel';
 
 module.exports = {
     validateEmail: function(email) {
@@ -93,6 +94,13 @@ module.exports = {
     checkPageCode: async function(code) {
         try {
             return Page.findOne({ code: code })
+        } catch(error) {
+            throw new Error(error)
+        }
+    },
+    checkImageCode: async function(code) {
+        try {
+            return Image.findOne({ code: code })
         } catch(error) {
             throw new Error(error)
         }

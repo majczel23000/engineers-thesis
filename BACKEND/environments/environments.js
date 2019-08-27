@@ -108,7 +108,25 @@ module.exports = {
                 activated: "Page successfully activated",
                 deactivated: "Page successfully deactivated"
             }
-        }
+        },
+        images: {
+            errors: {
+                codeLength: "Field Code must have at least 5 characters",
+                codeRegexp: "Field Code contains wrong characters",
+                nameLength: "Field Name must have at least 5 characters",
+                nameRegexp: "Field Code contains wrong characters",
+                idNotFound: "Image with specified id not found",
+                codeExists: "Image with specified code already exists"
+            },
+            success: {
+                created: "Image successfully created",
+                fetched: "Image successfully fetched",
+                updated: "Image successfully updated",
+                removed: "Image successfully removed",
+                activated: "Image successfully activated",
+                deactivated: "Image successfully deactivated"
+            }
+        },
     },
     roles: {
         users: {

@@ -1,0 +1,14 @@
+.image-btn {
+  margin: 0 20px !important;
+  border-radius: 0px;
+}
+
+.image-navigation-container {
+  margin: 0 auto;
+  width: 90%;
+}
+
+.image-navigation-row {
+  display: flex;
+  justify-content: center;
+}
