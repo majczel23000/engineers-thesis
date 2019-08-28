@@ -32,7 +32,7 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="images-table-row" [routerLink]="['/images/faq', row._id]"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="images-table-row" [routerLink]="['/images/image', row._id]"></tr>
   </table>
 
   <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons></mat-paginator>

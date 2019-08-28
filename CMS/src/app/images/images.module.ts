@@ -12,9 +12,10 @@ import { MatInputModule, MatButtonModule, MatCardModule,
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CdkColumnDef } from '@angular/cdk/table';
 import { DialogConfirmComponent } from '../shared/components/dialog-confirm/dialog-confirm.component';
+import { ImageDetailsComponent } from './image-details/image-details.component';
 
 @NgModule({
-  declarations: [ImageAddComponent, ImageListComponent, ImageNavigationComponent],
+  declarations: [ImageAddComponent, ImageListComponent, ImageNavigationComponent, ImageDetailsComponent],
   imports: [
     CommonModule,
     ImagesRoutingModule,
