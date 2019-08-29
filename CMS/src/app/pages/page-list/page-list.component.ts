@@ -21,7 +21,6 @@ export class PageListComponent implements OnInit {
   dataSource = new MatTableDataSource<PageModel>();
   loadingData = true;
   pages: PageModel[];
-  imagePath;
 
   constructor(private router: Router,
               private paginatorIntl: MatPaginatorIntl,
@@ -65,19 +64,6 @@ export class PageListComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
-    }
-  }
-
-  onFileSelected(event): void {
-    const reader = new FileReader();
-
-    if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        console.log(reader.result);
-        this.imagePath = this._sanitizer.bypassSecurityTrustResourceUrl(reader.result as string);
-      };
     }
   }
 

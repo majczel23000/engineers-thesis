@@ -31,7 +31,6 @@ mat-form-field {
 .image-details-row:hover {
   background: #f6f6f6;
   border: 1px solid #e6e6e6;
-  cursor: move;
 }
 
 .image-details-item {

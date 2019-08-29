@@ -33,6 +33,8 @@ export class ImageAddComponent {
 
   matcher = new MyErrorStateMatcher();
 
+  selectedImage: string;
+
   constructor(private router: Router,
               private snackBar: MatSnackBar,
               private imageService: ImageService) { }
@@ -72,6 +74,7 @@ export class ImageAddComponent {
 
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
+      this.selectedImage = file.name;
       reader.readAsDataURL(file);
       reader.onload = () => {
         this.image = reader.result as string;

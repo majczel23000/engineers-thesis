@@ -68,13 +68,11 @@ exports.getImageById = (req, res) => {
 };
 
 exports.deleteImage = (req, res) => {
-    Image.findByIdAndUpdate(req.params.id, { status: 'DELETED' }, { new: true }, (err, image) => {
+    Image.findOneAndRemove(req.params.id, (err) => {
         if (err) {
             res.send(err);
-        } else if (image) {
-            res.status(200).json(successResponse(200, messages.images.success.removed, image));
         } else {
-            res.status(404).json(errorResponse(404, messages.images.errors.idNotFound));
+            res.status(200).json(successResponse(200, messages.images.success.removed));
         }
     })
 };

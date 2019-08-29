@@ -6,7 +6,8 @@ import { MatSnackBar } from '@angular/material';
 import { RoleService } from '../../../roles/services/role.service';
 import { FaqService } from '../../../faqs/services/faq.service';
 import { MenuService } from '../../../menus/services/menu.service';
-import { PageService} from '../../../pages/services/page.service';
+import { PageService } from '../../../pages/services/page.service';
+import { ImageService } from '../../../images/services/image.service';
 
 @Component({
   selector: 'app-dialog-confirm',
@@ -22,7 +23,8 @@ export class DialogConfirmComponent {
               private roleService: RoleService,
               private faqService: FaqService,
               private menuService: MenuService,
-              private pageService: PageService) { }
+              private pageService: PageService,
+              private imageService: ImageService) { }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -261,6 +263,56 @@ export class DialogConfirmComponent {
       case 'REMOVE_PAGE': {
         this.data.status = 'REMOVED';
         this.pageService.removePage(this.data._id).subscribe(
+          res => {
+            console.log(res);
+          },
+          err => {
+            console.log(err);
+          }
+        );
+        break;
+      }
+      case 'CHANGE_IMAGE_STATUS': {
+        if (this.data.status === 'INACTIVE') {
+          this.imageService.activateImage(this.data._id).subscribe(
+            res => {
+              this.snackBar.open(res.message, 'X', {
+                duration: 5000,
+                horizontalPosition: 'right',
+                panelClass: ['success-snackbar']
+              });
+            },
+            err => {
+              this.snackBar.open(err.error.message, 'X', {
+                duration: 5000,
+                horizontalPosition: 'right',
+                panelClass: ['error-snackbar']
+              });
+            }
+          );
+        } else {
+          this.imageService.deactivateImage(this.data._id).subscribe(
+            res => {
+              this.snackBar.open(res.message, 'X', {
+                duration: 5000,
+                horizontalPosition: 'right',
+                panelClass: ['success-snackbar']
+              });
+            },
+            err => {
+              this.snackBar.open(err.error.message, 'X', {
+                duration: 5000,
+                horizontalPosition: 'right',
+                panelClass: ['error-snackbar']
+              });
+            }
+          );
+        }
+        break;
+      }
+      case 'REMOVE_IMAGE': {
+        this.data.status = 'REMOVED';
+        this.imageService.removeImage(this.data._id).subscribe(
           res => {
             console.log(res);
           },

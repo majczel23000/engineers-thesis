@@ -23,4 +23,14 @@ mat-form-field {
 
 .image-add-btn {
   width: 100%;
+  margin: 0px !important;
+}
+
+.add-img-btn {
+  width: 50%;
+  margin-bottom: 20px !important;
+}
+
+.img-name {
+  margin-left: 20px;
 }
