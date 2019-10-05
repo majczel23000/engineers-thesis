@@ -43,6 +43,7 @@ table {
   .mobile-display-none {
     display: none;
   }
+  .cdk-overlay-pane {
+    width: 100% !important;
 }
-
-
+}

@@ -109,3 +109,44 @@ a.menu-edit-btn:hover {
 .third {
   background: #b8d4ff;
 }
+
+@media only screen and (max-width: 600px) {
+  .menu-details-row {
+    display: flex;  
+    flex-direction: column;
+    border: none;
+    border-bottom: 1px solid #f6f6f6;
+  }
+  .menu-details-row:hover {
+    border: none;
+    border-bottom: 1px solid #f6f6f6;
+  }
+  .menu-details-item {
+    width: 100%;
+    border: none;
+  }
+  .role-list {
+    flex-direction: column;
+    align-items: center;
+  }
+  .menu-details-card {
+    padding: 2rem 0;
+  }
+  .mat-card-actions {
+    padding: 0 2rem;
+  }
+  .menu-edit-actions {
+    flex-wrap: wrap;
+  }
+  .menu-edit-btn {
+    flex: 100%;
+    width: 80%;
+  }
+  .menu-details-item-element, .menu-details-item-delete {
+    width: 100%;
+    padding-bottom: 0;
+  }
+  .menu-details-item-delete {
+    padding: 0;
+  }
+}

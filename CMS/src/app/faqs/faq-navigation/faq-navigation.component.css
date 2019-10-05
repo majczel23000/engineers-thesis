@@ -12,3 +12,18 @@
   display: flex;
   justify-content: center;
 }
+
+@media only screen and (max-width: 650px) {
+  .faq-navigation-container {
+    height: auto;
+    padding: 20px 20px 0px 20px;
+  }
+  .faq-btn {
+    flex: 1 0 100%;
+    margin-bottom: 20px !important;
+  }
+  .faq-navigation-row {
+    flex-wrap: wrap;
+    height: auto;
+  }
+}

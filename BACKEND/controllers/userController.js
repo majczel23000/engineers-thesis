@@ -56,7 +56,7 @@ exports.createUser = (req, res) => {
 
 // GET-ALL: Return all user nodes
 exports.getAllUsers = (req, res) => {
-    User.find({ status: { $in: ['ACTIVE', 'INACTIVE', 'DELETED'] } }, 'firstName lastName email status', (err, users) => {
+    User.find({ status: { $in: ['ACTIVE', 'INACTIVE', 'DELETED'] }}, 'firstName lastName email status', (err, users) => {
         if (err) {
             res.send(err);
         } else {

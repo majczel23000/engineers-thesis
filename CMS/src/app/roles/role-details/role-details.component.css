@@ -20,6 +20,7 @@ mat-form-field {
 .role-details-title {
   font-size: 1.5rem;
   margin-bottom: 30px;
+  word-break: break-all;
 }
 
 .role-details-row {
@@ -75,4 +76,52 @@ a.role-edit-btn:hover {
 
 .role-details-status:hover {
   cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+  .role-details-row {
+    display: flex;  
+    flex-direction: column;
+    border: none;
+    border-bottom: 1px solid #f6f6f6;
+  }
+  .role-details-row:hover {
+    border: none;
+    border-bottom: 1px solid #f6f6f6;
+  }
+  .role-details-item {
+    width: 100%;
+    border: none;
+  }
+  .role-details-card {
+    padding: 2rem 0;
+  }
+  .mat-card-actions {
+    padding: 2rem 2rem 0 2rem;
+  }
+  .role-details-title {
+    margin: 0 1rem;
+  }
+  .role-edit-actions {
+    flex-wrap: wrap;
+  }
+  .role-edit-btn {
+    flex: 100%;
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .role-navigation-container {
+    height: auto;
+    padding: 20px 20px 0px 20px;
+  }
+  .role-btn {
+    flex: 1 0 100%;
+    margin-bottom: 20px !important;
+  }
+  .role-navigation-row {
+    flex-wrap: wrap;
+    height: auto;
+  }
 }

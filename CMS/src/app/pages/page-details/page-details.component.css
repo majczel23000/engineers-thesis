@@ -98,3 +98,43 @@ a.page-edit-btn:hover {
   font-size: 1rem;
 }
 
+@media only screen and (max-width: 600px) {
+  .page-details-row {
+    display: flex;  
+    flex-direction: column;
+    border: none;
+    border-bottom: 1px solid #f6f6f6;
+  }
+  .page-details-row:hover {
+    border: none;
+    border-bottom: 1px solid #f6f6f6;
+  }
+  .page-details-item {
+    width: 100%;
+    border: none;
+  }
+  .role-list {
+    flex-direction: column;
+    align-items: center;
+  }
+  .page-details-card {
+    padding: 2rem 0;
+  }
+  .mat-card-actions {
+    padding: 0 2rem;
+  }
+  .page-edit-actions {
+    flex-wrap: wrap;
+  }
+  .page-edit-btn {
+    flex: 100%;
+    width: 80%;
+  }
+  .page-details-item-element, .page-details-item-delete {
+    width: 100%;
+    padding-bottom: 0;
+  }
+  .page-details-item-delete {
+    padding: 0;
+  }
+}

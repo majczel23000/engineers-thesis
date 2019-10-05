@@ -12,3 +12,18 @@
   display: flex;
   justify-content: center;
 }
+
+@media only screen and (max-width: 650px) {
+  .page-navigation-container {
+    height: auto;
+    padding: 20px 20px 0px 20px;
+  }
+  .page-btn {
+    flex: 1 0 100%;
+    margin-bottom: 20px !important;
+  }
+  .page-navigation-row {
+    flex-wrap: wrap;
+    height: auto;
+  }
+}

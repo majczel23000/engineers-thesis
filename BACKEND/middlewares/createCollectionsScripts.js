@@ -27,7 +27,12 @@ module.exports = {
             { code: 'PAGES/GET_ID', name: 'Get specified page', description: 'Get specified page', createdAt: date, status: 'ACTIVE' },
             { code: 'PAGES/CREATE', name: 'Create page', description: 'Create page', createdAt: date, status: 'ACTIVE' },
             { code: 'PAGES/UPDATE', name: 'Update page', description: 'Update page', createdAt: date, status: 'ACTIVE' },
-            { code: 'PAGES/DELETE', name: 'Delete page', description: 'Delete page', createdAt: date, status: 'ACTIVE' }
+            { code: 'PAGES/DELETE', name: 'Delete page', description: 'Delete page', createdAt: date, status: 'ACTIVE' },
+            { code: 'IMAGES/GET_ALL', name: 'Get all images', description: 'Get all image', createdAt: date, status: 'ACTIVE'},
+            { code: 'IMAGES/GET_ID', name: 'Get specified images', description: 'Get specified image', createdAt: date, status: 'ACTIVE' },
+            { code: 'IMAGES/CREATE', name: 'Create image', description: 'Create image', createdAt: date, status: 'ACTIVE' },
+            { code: 'IMAGES/UPDATE', name: 'Update image', description: 'Update image', createdAt: date, status: 'ACTIVE' },
+            { code: 'IMAGES/DELETE', name: 'Delete image', description: 'Delete image', createdAt: date, status: 'ACTIVE' }
         ];
         MongoClient.connect('mongodb://localhost:27017/', function(err, db) {
             if(err)
