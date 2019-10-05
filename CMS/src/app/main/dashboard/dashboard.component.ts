@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../users/services/user.service';
+import { LoginService } from '../../shared/services/login.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,24 +8,31 @@ import { UserService } from '../../users/services/user.service';
 })
 export class DashboardComponent implements OnInit {
 
-  private breakpoint = 2;
-  private rowHeight = '50%';
+  constructor(private loginService: LoginService) { }
 
-  constructor(private userService: UserService) { }
+  private user;
+  private modules = {
+    'USERS': false,
+    'ROLES': false,
+    'FAQS': false,
+    'MENUS': false,
+    'IMAGES': false,
+    'PAGES': false
+  }
 
   ngOnInit() {
-    this.breakpoint = (window.innerWidth <= 600) ? 1 : 2;
-    this.rowHeight = (window.innerWidth <= 600) ? '35%' : '50%';
-    this.getStats();
+    this.user = this.loginService.getUser();
+    for (let i = 0; i < this.user.roles.length; i++) {
+      for (let key in this.modules) {
+        if (this.modules.hasOwnProperty(key)) {
+          if (this.user.roles[i].includes(key)) {
+            this.modules[key] = true;
+          }
+        }
+      }
+    }
+    console.log(this.modules); 
   }
 
-  onResize(event) {
-    this.breakpoint = (event.target.innerWidth <= 600) ? 1 : 2;
-    this.rowHeight = (event.target.innerWidth <= 600) ? '35%' : '50%';
-  }
-
-  getStats(): void {
-    
-  }
 
 }

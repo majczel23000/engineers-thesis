@@ -1,1 +1,14 @@
+<mat-card class="dashboard-card">
+  <div class="title-box text-center">
+    <h1 class="heading">Welcome to CMS</h1>
+    <p class="subheading">powerfull tool for creating various elements</p>
+  </div>
 
+  <div class="content-box text-center">
+    <p class="content-description">Here are modules that you have access to (specific actions depends on your roles):</p>
+    <span class="roles-item" *ngFor="let item of modules | keyvalue">
+      <ng-container *ngIf="item.value">{{item.key}} </ng-container>
+    </span>
+  </div>
+  
+</mat-card>

@@ -5,7 +5,7 @@ import { MainRoutingModule } from './main-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule, MatCardModule, MatButtonModule, MatGridListModule } from '@angular/material';
+import { MatInputModule, MatCardModule, MatButtonModule, MatGridListModule, MatListModule } from '@angular/material';
 import { TokenInterceptorService } from '../shared/interceptors/token-interceptor.service';
 
 @NgModule({
@@ -19,7 +19,8 @@ import { TokenInterceptorService } from '../shared/interceptors/token-intercepto
     MatCardModule,
     MatButtonModule,
     HttpClientModule,
-    MatGridListModule
+    MatGridListModule,
+    MatListModule
   ],
   providers: [
     {
