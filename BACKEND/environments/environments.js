@@ -47,11 +47,6 @@ module.exports = {
                 deactivated: "Role successfully deactivated"
             }
         },
-        statistics: {
-            success: {
-                fetched: "Statistics successfully fetched"
-            }
-        },
         faqs: {
             errors: {
                 codeLength: "Field Code must have at least 5 characters",

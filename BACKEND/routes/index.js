@@ -1,6 +1,5 @@
 import user from '../controllers/userController';
 import role from '../controllers/roleController';
-import statistics from '../controllers/statisticsController';
 import faq from '../controllers/faqController';
 import menu from '../controllers/menuController';
 import page from '../controllers/pageController';
@@ -36,9 +35,6 @@ export default (app) => {
     app.route('/roles/:id/deactivate')
         .post(verifyToken, checkRoleAndStatus(roles.users.update), role.deactivate);
 
-    // === STATISTICS ===
-    app.route('/statistics')
-        .get(verifyToken, statistics.statistics);
 
     // === FAQS ===
     app.route('/faq')

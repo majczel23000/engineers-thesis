@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../users/services/user.service';
-import { StatisticsModel } from '../../shared/models/Statistics.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,7 +10,6 @@ export class DashboardComponent implements OnInit {
 
   private breakpoint = 2;
   private rowHeight = '50%';
-  statistics: StatisticsModel;
 
   constructor(private userService: UserService) { }
 
@@ -27,14 +25,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getStats(): void {
-    this.userService.statistics().subscribe(
-      res => {
-        this.statistics = res.data;
-      },
-      err => {
-        console.log(err);
-      }
-    );
+    
   }
 
 }
