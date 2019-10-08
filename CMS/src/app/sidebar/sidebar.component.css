@@ -13,10 +13,22 @@
     display: block;
 }
 
-.header-app-name-container{
+.header-app-name-container, .header-app-name-container-mobile{
   display: flex;
   justify-content: center;
   width: 100%;
+}
+
+@media only screen and (min-width: 600px) {
+  .header-app-name-container-mobile {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .header-app-name-container {
+    display: none;
+  }
 }
 
 h1.header-app-name, h1.header-app-name-mobile {
@@ -33,7 +45,7 @@ h3.header-app-author-logout {
   font-size: 1rem;
   margin-left: 15px;
   color: #d6d6d6;
-
+  font-weight: 100;
 }
 
 .main-sidenav-container {
@@ -89,6 +101,7 @@ a .material-icons{
 
 .sidenav-content {
   padding: 20px;
+  font-family: 'OpenSans' !important;
 }
 
 .header-toolbar {
@@ -111,4 +124,8 @@ a .material-icons{
   h1.header-app-name-mobile {
     display: none;
   }
+}
+
+::ng-deep .cdk-overlay-pane {
+  justify-content: flex-end !important;
 }

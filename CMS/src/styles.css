@@ -1,11 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import '~@fortawesome/fontawesome-free/css/all.css';
 
-html, body{
-    margin: 0;
-    padding: 0;
+html, body {
+  margin: 0;
+  padding: 0;
 }
 
 .users-card {
@@ -45,5 +44,5 @@ table {
   }
   .cdk-overlay-pane {
     width: 100% !important;
-}
+  }
 }

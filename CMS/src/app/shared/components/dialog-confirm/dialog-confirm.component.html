@@ -1,8 +1,16 @@
-<h1 mat-dialog-title>{{data.title}}</h1>
+<h1 mat-dialog-title class="dialog-title">{{data.title}}</h1>
 <div mat-dialog-content>
-  <p>{{data.description}}</p>
+  <p class="dialog-description">{{data.description}}</p>
 </div>
 <div mat-dialog-actions class="mat-dialog-actions">
-  <button mat-button (click)="onNoClick()">No</button>
-  <button mat-button (click)="onYesClick()" [mat-dialog-close]="data.status" cdkFocusInitial>Yes</button>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <button mat-button (click)="onNoClick()" class="dialog-reject">No</button>
+      </div>
+      <div class="col-md-6">
+        <button mat-button (click)="onYesClick()" [mat-dialog-close]="data.status" cdkFocusInitial class="dialog-confirm">Yes</button>
+      </div>
+    </div>
+  </div>
 </div>
