@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { AbstractControl, FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { MatCheckbox, MatSnackBar} from '@angular/material';
@@ -25,7 +25,7 @@ export class UserAddComponent implements OnInit {
 
   checkedCheckboxes = [];
 
-  get control() {
+  get control(): { [key: string]: AbstractControl }  {
     return this.addUserFormGroup.controls;
   }
 

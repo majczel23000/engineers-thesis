@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { AbstractControl, FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { MatSnackBar} from '@angular/material';
@@ -19,7 +19,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class FaqAddComponent implements OnInit {
 
-  get control() {
+  get control(): { [key: string]: AbstractControl }  {
     return this.addFaqFormGroup.controls;
   }
 

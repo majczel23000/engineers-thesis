@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { DialogConfirmComponent } from '../../shared/components/dialog-confirm/dialog-confirm.component';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { FormGroup, FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
+import { AbstractControl, FormGroup, FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
 import { PageService } from '../services/page.service';
 import { PageModel } from '../../shared/models/page/Page.model';
 import { PageStyleModel } from '../../shared/models/page/PageStyle.model';
@@ -29,7 +29,7 @@ export class PageDetailsComponent implements OnInit {
 
   editPageFormGroup: FormGroup;
 
-  get control() {
+  get control(): { [key: string]: AbstractControl }  {
     return this.editPageFormGroup.controls;
   }
 

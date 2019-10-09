@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { DialogConfirmComponent } from '../../shared/components/dialog-confirm/dialog-confirm.component';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { FormGroup, FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
+import { AbstractControl, FormGroup, FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
 import { FaqModel } from '../../shared/models/faq/Faq.model';
 import { FaqElementModel } from '../../shared/models/faq/FaqElement.model';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -28,7 +28,7 @@ export class FaqDetailsComponent implements OnInit {
 
   editFaqFormGroup: FormGroup;
 
-  get control() {
+  get control(): { [key: string]: AbstractControl }  {
     return this.editFaqFormGroup.controls;
   }
 

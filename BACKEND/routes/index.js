@@ -35,7 +35,6 @@ export default (app) => {
     app.route('/roles/:id/deactivate')
         .post(verifyToken, checkRoleAndStatus(roles.users.update), role.deactivate);
 
-
     // === FAQS ===
     app.route('/faq')
         .post(verifyToken, checkRoleAndStatus(roles.faqs.create), faq.createFaq)
@@ -64,26 +63,26 @@ export default (app) => {
 
     // === PAGES ===
     app.route('/page')
-        .post(page.createPage)
-        .get(page.getAllPages);
+        .post(verifyToken, checkRoleAndStatus(roles.pages.create), page.createPage)
+        .get(verifyToken, checkRoleAndStatus(roles.pages.getAll), page.getAllPages);
     app.route('/page/:id')
-        .get(page.getPageById)
-        .delete(page.deletePage)
-        .put(page.updatePage);
+        .get(verifyToken, checkRoleAndStatus(roles.pages.getId), page.getPageById)
+        .delete(verifyToken, checkRoleAndStatus(roles.pages.delete), page.deletePage)
+        .put(verifyToken, checkRoleAndStatus(roles.pages.update), page.updatePage);
     app.route('/page/:id/activate')
-        .post(page.activate);
+        .post(verifyToken, checkRoleAndStatus(roles.pages.update), page.activate);
     app.route('/page/:id/deactivate')
-        .post(page.deactivate);
+        .post(verifyToken, checkRoleAndStatus(roles.pages.update), page.deactivate);
 
     // === IMAGES ===
     app.route('/image')
-        .post(image.addImage)
-        .get(image.getAllImages);
+        .post(verifyToken, checkRoleAndStatus(roles.images.create), image.addImage)
+        .get(verifyToken, checkRoleAndStatus(roles.images.getAll), image.getAllImages);
     app.route('/image/:id')
-        .get(image.getImageById)
-        .delete(image.deleteImage);
+        .get(verifyToken, checkRoleAndStatus(roles.images.getId), image.getImageById)
+        .delete(verifyToken, checkRoleAndStatus(roles.images.delete), image.deleteImage);
     app.route('/image/:id/activate')
-        .post(image.activate);
+        .post(verifyToken, checkRoleAndStatus(roles.images.update), image.activate);
     app.route('/image/:id/deactivate')
-        .post(image.deactivate);
+        .post(verifyToken, checkRoleAndStatus(roles.images.update), image.deactivate);
 };

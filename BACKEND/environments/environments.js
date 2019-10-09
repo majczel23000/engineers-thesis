@@ -151,6 +151,20 @@ module.exports = {
             create: "MENUS/CREATE",
             update: "MENUS/UPDATE",
             delete: "MENUS/DELETE"
+        },
+        pages: {
+            getAll: "PAGES/GET_ALL",
+            getId: "PAGES/GET_ID",
+            create: "PAGES/CREATE",
+            update: "PAGES/UPDATE",
+            delete: "PAGES/DELETE"
+        },
+        images: {
+            getAll: "IMAGES/GET_ALL",
+            getId: "IMAGES/GET_ID",
+            create: "IMAGES/CREATE",
+            update: "IMAGES/UPDATE",
+            delete: "IMAGES/DELETE"
         }
     }
 }

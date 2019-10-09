@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { RoleService } from '../services/role.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { RoleModel } from '../../shared/models/Role.model';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { AbstractControl, FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogConfirmComponent } from '../../shared/components/dialog-confirm/dialog-confirm.component';
@@ -28,7 +28,7 @@ export class RoleDetailsComponent implements OnInit {
 
   editRoleFormGroup: FormGroup;
 
-  get control() {
+  get control(): { [key: string]: AbstractControl }  {
     return this.editRoleFormGroup.controls;
   }
 

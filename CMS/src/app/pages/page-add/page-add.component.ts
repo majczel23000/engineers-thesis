@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ErrorStateMatcher } from '@angular/material';
-import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar} from '@angular/material';
 import { PageService } from '../services/page.service';
@@ -19,7 +19,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class PageAddComponent {
 
-  get control() {
+  get control(): { [key: string]: AbstractControl }  {
     return this.addPageFormGroup.controls;
   }
 

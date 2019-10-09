@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { DialogConfirmComponent } from '../../shared/components/dialog-confirm/dialog-confirm.component';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { FormGroup, FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
+import { AbstractControl, FormGroup, FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
 import { MenuService } from '../services/menu.service';
 import { MenuModel } from '../../shared/models/menu/Menu.model';
 import { MenuElementModel } from '../../shared/models/menu/MenuElement.model';
@@ -27,7 +27,7 @@ export class MenuDetailsComponent implements OnInit {
 
   editMenuFormGroup: FormGroup;
 
-  get control() {
+  get control(): { [key: string]: AbstractControl }  {
     return this.editMenuFormGroup.controls;
   }
 

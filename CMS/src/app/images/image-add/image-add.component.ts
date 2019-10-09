@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { AbstractControl, FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { MatSnackBar} from '@angular/material';
 import { ImageService } from '../services/image.service';
-import {ImageModel} from "../../shared/models/image/Image.model";
+import { ImageModel } from '../../shared/models/image/Image.model';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -20,7 +20,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class ImageAddComponent {
 
-  get control() {
+  get control(): { [key: string]: AbstractControl }  {
     return this.addImageFormGroup.controls;
   }
 

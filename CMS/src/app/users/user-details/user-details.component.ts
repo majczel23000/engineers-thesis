@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../shared/models/user.model';
-import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { AbstractControl, FormGroup, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { RoleModel } from '../../shared/models/Role.model';
 import { MatCheckbox, MatSnackBar } from '@angular/material';
@@ -32,7 +32,7 @@ export class UserDetailsComponent implements OnInit {
 
   windowWidth: number;
 
-  get control() {
+  get control(): { [key: string]: AbstractControl }  {
     return this.editUserFormGroup.controls;
   }
 
