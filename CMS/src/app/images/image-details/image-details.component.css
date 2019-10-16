@@ -102,3 +102,43 @@ a.image-edit-btn:hover {
 .image-row {
   width: 100%;
 }
+
+@media only screen and (max-width: 600px) {
+  .image-details-row {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    border-bottom: 1px solid #f6f6f6;
+  }
+  .image-details-row:hover {
+    border: none;
+    border-bottom: 1px solid #f6f6f6;
+  }
+  .image-details-item {
+    width: 100%;
+    border: none;
+  }
+  .image-details-card {
+    padding: 2rem 0;
+  }
+  .mat-card-actions {
+    padding: 0 2rem;
+  }
+  .image-edit-actions {
+    flex-wrap: wrap;
+  }
+  .image-edit-btn {
+    flex: 100%;
+    width: 80%;
+  }
+  .image-details-item-element, .image-details-item-delete {
+    width: 100%;
+    padding-bottom: 0;
+  }
+  .image-details-item-delete {
+    padding: 0;
+  }
+  .image-item {
+    padding: 0;
+  }
+}
