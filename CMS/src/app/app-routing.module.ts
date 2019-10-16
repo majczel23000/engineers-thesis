@@ -43,6 +43,10 @@ const routes: Routes = [
     loadChildren: './images/images.module#ImagesModule'
   },
   {
+    path: 'settings',
+    loadChildren: './settings/settings.module#SettingsModule'
+  },
+  {
     path: 'error',
     component: ErrorPageComponent
   }

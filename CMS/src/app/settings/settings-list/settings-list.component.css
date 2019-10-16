@@ -1,0 +1,20 @@
+.settings-table-row:hover {
+  background: #f6f6f6;
+  cursor: pointer;
+}
+
+.settings-table {
+  width: 90%;
+  margin: 10px auto 30px auto !important;
+}
+
+td {
+  width: calc(100%/4);
+}
+
+.settings-filter {
+  width: 90%;
+  margin: 20px auto 0 auto;
+  display: block;
+  padding-bottom: 0px;
+}

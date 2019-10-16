@@ -122,6 +122,27 @@ module.exports = {
                 deactivated: "Image successfully deactivated"
             }
         },
+        settings: {
+            errors: {
+                codeLength: "Field Code must have at least 5 characters",
+                codeRegexp: "Field Code contains wrong characters",
+                nameLength: "Field Name must have at least 5 characters",
+                nameRegexp: "Field Code contains wrong characters",
+                idNotFound: "Setting with specified id not found",
+                codeExists: "Setting with specified code already exists",
+                invalidType: "Field Type have invalid value",
+                invalidBooleanValue: "Invalid value for boolean type",
+                invalidNumberValue: "Invalid value for number type"
+            },
+            success: {
+                created: "Setting successfully created",
+                fetched: "Setting successfully fetched",
+                updated: "Setting successfully updated",
+                removed: "Setting successfully removed",
+                activated: "Setting successfully activated",
+                deactivated: "Setting successfully deactivated"
+            }
+        },
     },
     roles: {
         users: {
@@ -165,6 +186,13 @@ module.exports = {
             create: "IMAGES/CREATE",
             update: "IMAGES/UPDATE",
             delete: "IMAGES/DELETE"
+        },
+        settings: {
+            getAll: "SETTINGS/GET_ALL",
+            getId: "SETTINGS/GET_ID",
+            create: "SETTINGS/CREATE",
+            update: "SETTINGS/UPDATE",
+            delete: "SETTINGS/DELETE"
         }
     }
 }

@@ -1,0 +1,26 @@
+::ng-deep .mat-card-header {
+  display: flex;
+  justify-content: center;
+}
+
+::ng-deep .mat-card-header-text {
+  margin: 0 !important;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.settings-add-card {
+  margin: 0 auto;
+  width: 90%;
+  padding: 20px 30px;
+}
+
+.settings-add-title {
+  font-size: 1.5rem;
+}
+
+.settings-add-btn {
+  width: 100%;
+}

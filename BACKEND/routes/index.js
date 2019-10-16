@@ -4,6 +4,7 @@ import faq from '../controllers/faqController';
 import menu from '../controllers/menuController';
 import page from '../controllers/pageController';
 import image from '../controllers/imageController';
+import settings from '../controllers/settingsController';
 let verifyToken = require('../middlewares/verifyToken').verifyToken;
 let checkRoleAndStatus = require('../middlewares/checkRole').checkRoleAndStatus;
 let roles = require('../environments/environments').roles;
@@ -85,4 +86,16 @@ export default (app) => {
         .post(verifyToken, checkRoleAndStatus(roles.images.update), image.activate);
     app.route('/image/:id/deactivate')
         .post(verifyToken, checkRoleAndStatus(roles.images.update), image.deactivate);
+
+    // === SETTINGS ===
+    app.route('/settings')
+        .post(verifyToken, checkRoleAndStatus(roles.settings.create), settings.createSettings)
+        .get(verifyToken, checkRoleAndStatus(roles.settings.getAll), settings.getAllSettings);
+    app.route('/settings/:id')
+        .get(verifyToken, checkRoleAndStatus(roles.settings.getId), settings.getSettingById)
+        .delete(verifyToken, checkRoleAndStatus(roles.settings.delete), settings.deleteSetting);
+    app.route('/settings/:id/activate')
+        .post(verifyToken, checkRoleAndStatus(roles.settings.update), settings.activate);
+    app.route('/settings/:id/deactivate')
+        .post(verifyToken, checkRoleAndStatus(roles.settings.update), settings.deactivate);
 };

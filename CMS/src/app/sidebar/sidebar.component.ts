@@ -50,7 +50,7 @@ export class SidebarComponent {
       icon: 'view_carousel'
     },
     {
-      settings: '/settings',
+      routerLink: '/settings',
       text: 'Settings',
       icon: 'settings'
     }
