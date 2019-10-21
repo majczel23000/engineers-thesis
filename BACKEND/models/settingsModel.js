@@ -27,6 +27,10 @@ const SettingsSchema = new Schema({
     value: {
         type: String,
         required: true
+    },
+    status: {
+        type: String,
+        required: true
     }
 });
 

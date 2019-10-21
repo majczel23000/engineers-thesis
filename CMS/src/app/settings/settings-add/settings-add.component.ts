@@ -19,6 +19,11 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class SettingsAddComponent implements OnInit {
 
+  settingType = ['Boolean', 'Number', 'String'];
+  typeStringError = false;
+  typeBooleanError = false;
+  typeNumberError = false;
+
   get control(): { [key: string]: AbstractControl }  {
     return this.addSettingFormGroup.controls;
   }
@@ -26,7 +31,9 @@ export class SettingsAddComponent implements OnInit {
   addSettingFormGroup = new FormGroup({
     code: new FormControl('', [ Validators.required, Validators.minLength(5) ]),
     name: new FormControl('', [ Validators.required, Validators.minLength(5) ]),
-    description: new FormControl('')
+    description: new FormControl(''),
+    type: new FormControl('', Validators.required),
+    value: new FormControl('', Validators.required)
   });
 
   matcher = new MyErrorStateMatcher();
@@ -39,6 +46,7 @@ export class SettingsAddComponent implements OnInit {
   }
 
   addSetting(): void {
+    this.validateType();
     if (this.addSettingFormGroup.valid) {
       this.settingsService.addSetting(this.addSettingFormGroup.value).subscribe(
         res => {
@@ -58,6 +66,19 @@ export class SettingsAddComponent implements OnInit {
           });
         }
       );
+    }
+  }
+
+  validateType(): void {
+    if (this.control.type.value === 'Boolean') {
+      if (this.control.value.value !== 'true' && this.control.value.value !== 'false' && this.control.value.value !== '1' && 
+      this.control.value.value !== 1 && this.control.value.value !== '0' && this.control.value.value !== 0) {
+        this.typeBooleanError = true;
+      }
+    } else if (this.control.type.value === 'Number') {
+      if (isNaN(this.control.value.value)) {
+        this.typeNumberError = true;
+      }
     }
   }
 

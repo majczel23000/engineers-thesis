@@ -27,17 +27,17 @@ exports.createSettings = async (req, res) => {
         return;
     }
 
-    if (!['boolean', 'number', 'string'].includes(req.body.type)) {
+    if (!['Boolean', 'Number', 'String'].includes(req.body.type)) {
         res.status(409).send(errorResponse(409, messages.settings.errors.invalidType));
         return;
     }
 
-    if (req.body.type === 'boolean') {
+    if (req.body.type === 'Boolean') {
         if (!['true', 'false', '0', '1'].includes(req.body.value)) {
             res.status(409).send(errorResponse(409, messages.settings.errors.invalidBooleanValue));
             return;
         }
-    } else if (req.body.type === 'number') {
+    } else if (req.body.type === 'Number') {
         if (isNaN(req.body.value)) {
             res.status(409).send(errorResponse(409, messages.settings.errors.invalidNumberValue));
             return;
@@ -119,3 +119,53 @@ exports.deactivate = (req, res) => {
         }
     })
 };
+
+exports.update = (req, res) => {
+    req.body.status = "INACTIVE";
+    const validateFieldsResult = validateFields(Settings.schema.obj, req.body);
+    if (!validateFieldsResult.status) {
+        res.status(409).send(errorResponse(409, validateFieldsResult.message));
+        return;
+    }
+    if (req.body.code.length < 5) {
+        res.status(409).send(errorResponse(409, messages.settings.errors.codeLength));
+        return;
+    } else if (!(/^[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u.test(req.body.code))) {
+        res.status(409).send(errorResponse(409, messages.settings.errors.codeRegexp));
+        return;
+    }
+    if (req.body.name.length < 5) {
+        res.status(409).send(errorResponse(409, messages.settings.errors.codeLength));
+        return;
+    } else if (!(/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u.test(req.body.name))) {
+        res.status(409).send(errorResponse(409, messages.settings.errors.nameRegexp));
+        return;
+    }
+
+    if (!['Boolean', 'Number', 'String'].includes(req.body.type)) {
+        res.status(409).send(errorResponse(409, messages.settings.errors.invalidType));
+        return;
+    }
+
+    if (req.body.type === 'Boolean') {
+        if (!['true', 'false', '0', '1'].includes(req.body.value)) {
+            res.status(409).send(errorResponse(409, messages.settings.errors.invalidBooleanValue));
+            return;
+        }
+    } else if (req.body.type === 'Number') {
+        if (isNaN(req.body.value)) {
+            res.status(409).send(errorResponse(409, messages.settings.errors.invalidNumberValue));
+            return;
+        }
+    }
+
+    Settings.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, setting) => {
+        if (err) {
+            res.send(err);
+        } else if (setting) {
+            res.status(200).json(successResponse(200, messages.settings.success.updated, setting));
+        } else {
+            res.status(409).json(errorResponse(409, validateFieldsResult));
+        }
+    })
+}

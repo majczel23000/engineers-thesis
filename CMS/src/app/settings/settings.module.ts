@@ -8,14 +8,15 @@ import { SettingsNavigationComponent } from './settings-navigation/settings-navi
 import { SharedModule } from '../shared/shared.module';
 import { MatInputModule, MatButtonModule, MatCardModule,
   MatTableModule, MatPaginatorModule, MatPaginatorIntl,
-  MatToolbarModule, MatCheckboxModule, MatSortModule } from '@angular/material';
+  MatToolbarModule, MatCheckboxModule, MatSortModule, MatOptionModule, MatSelectModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CdkColumnDef } from '@angular/cdk/table';
 import { DialogConfirmComponent } from '../shared/components/dialog-confirm/dialog-confirm.component';
+import { SettingDetailsComponent } from './setting-details/setting-details.component';
 
 
 @NgModule({
-  declarations: [SettingsListComponent, SettingsAddComponent, SettingsNavigationComponent],
+  declarations: [SettingsListComponent, SettingsAddComponent, SettingsNavigationComponent, SettingDetailsComponent],
   imports: [
     CommonModule,
     SettingsRoutingModule,
@@ -30,6 +31,8 @@ import { DialogConfirmComponent } from '../shared/components/dialog-confirm/dial
     MatCheckboxModule,
     SharedModule,
     MatSortModule,
+    MatOptionModule, 
+    MatSelectModule
   ],
   providers: [MatPaginatorIntl, CdkColumnDef],
   entryComponents: [DialogConfirmComponent]

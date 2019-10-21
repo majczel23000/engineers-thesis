@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SettingsListComponent } from './settings-list/settings-list.component';
 import { SettingsAddComponent } from './settings-add/settings-add.component';
+import { SettingDetailsComponent } from './setting-details/setting-details.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path: 'add',
     component: SettingsAddComponent
+  },
+  {
+    path: 'setting/:id',
+    component: SettingDetailsComponent
   }
 ];
 
