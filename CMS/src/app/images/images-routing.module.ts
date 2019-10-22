@@ -3,19 +3,23 @@ import { Routes, RouterModule } from '@angular/router';
 import { ImageListComponent } from './image-list/image-list.component';
 import { ImageAddComponent } from './image-add/image-add.component';
 import { ImageDetailsComponent } from './image-details/image-details.component';
+import { AuthGuard } from '../shared/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    component: ImageListComponent
+    component: ImageListComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'add',
-    component: ImageAddComponent
+    component: ImageAddComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'image/:id',
-    component: ImageDetailsComponent
+    component: ImageDetailsComponent,
+    canActivate: [AuthGuard]
   }
 ];
 

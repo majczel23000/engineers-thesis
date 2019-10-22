@@ -3,19 +3,23 @@ import { Routes, RouterModule } from '@angular/router';
 import { SettingsListComponent } from './settings-list/settings-list.component';
 import { SettingsAddComponent } from './settings-add/settings-add.component';
 import { SettingDetailsComponent } from './setting-details/setting-details.component';
+import { AuthGuard } from '../shared/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    component: SettingsListComponent
+    component: SettingsListComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'add',
-    component: SettingsAddComponent
+    component: SettingsAddComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'setting/:id',
-    component: SettingDetailsComponent
+    component: SettingDetailsComponent,
+    canActivate: [AuthGuard]
   }
 ];
 
