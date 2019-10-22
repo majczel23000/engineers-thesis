@@ -10,37 +10,3 @@
 mat-form-field {
     width: 100%;
 }
-
-.user-add-card {
-  margin: 0 auto;
-  width: 90%;
-  padding: 20px 30px;
-}
-
-.user-add-title {
-  font-size: 1.5rem;
-}
-
-.user-add-btn {
-  width: 100%;
-}
-
-.role-list {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.role-list-title {
-  font-size: 1rem;
-  margin-bottom: 15px;
-}
-
-.role-list-item {
-  flex: 1 0 50%;
-}
-
-@media only screen and (max-width: 650px) {
-  .role-list-item {
-    flex: 1 0 100%;
-  }
-}

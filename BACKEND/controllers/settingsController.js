@@ -15,7 +15,7 @@ exports.createSettings = async (req, res) => {
     if (req.body.code.length < 5) {
         res.status(409).send(errorResponse(409, messages.settings.errors.codeLength));
         return;
-    } else if (!(/^[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u.test(req.body.code))) {
+    } else if (!(/^[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð_ ,.'-]+$/u.test(req.body.code))) {
         res.status(409).send(errorResponse(409, messages.settings.errors.codeRegexp));
         return;
     }

@@ -2,25 +2,25 @@
 
 <app-module-navigation [navigation]="roleService.getRolesNavigation()"></app-module-navigation>
 
-<mat-card class="role-details-card pb-5 mt-4">
+<mat-card class="module-details-card pb-5 mt-4">
 
   <mat-card-header>
     <mat-card-title>
-      <h1 class="role-details-title">Role: {{role?.code}}</h1>
+      <h1 class="module-details-title">Role: {{role?.code}}</h1>
     </mat-card-title>
   </mat-card-header>
 
   <mat-card-content>
-    <form class="role-details-form" [formGroup]="editRoleFormGroup" *ngIf="role" (ngSubmit)="editRole()">
+    <form class="module-details-form" [formGroup]="editRoleFormGroup" *ngIf="role" (ngSubmit)="editRole()">
 
-      <table class="role-details-table">
-        <tr class="role-details-row">
-          <td class="role-details-item">Code:</td>
-          <td class="role-details-item" style="text-align: left">{{role?.code}}</td>
+      <table class="module-details-table">
+        <tr class="module-details-row">
+          <td class="module-details-item">Code:</td>
+          <td class="module-details-item" style="text-align: left">{{role?.code}}</td>
         </tr>
-        <tr class="role-details-row">
-          <td class="role-details-item">Name:</td>
-          <td class="role-details-item">
+        <tr class="module-details-row">
+          <td class="module-details-item">Name:</td>
+          <td class="module-details-item">
             <mat-form-field>
               <input matInput value="{{role?.name}}" name="name" formControlName="name" [errorStateMatcher]="matcher">
               <mat-error *ngIf="control.name.hasError('required')">
@@ -30,9 +30,9 @@
           </td>
         </tr>
 
-        <tr class="role-details-row">
-          <td class="role-details-item">Description:</td>
-          <td class="role-details-item">
+        <tr class="module-details-row">
+          <td class="module-details-item">Description:</td>
+          <td class="module-details-item">
             <mat-form-field>
               <input matInput value="{{role?.description}}" name="description" formControlName="description" [errorStateMatcher]="matcher">
               <mat-error *ngIf="control.description.hasError('required')">
@@ -42,21 +42,21 @@
           </td>
         </tr>
 
-        <tr class="role-details-row">
-          <td class="role-details-item">Status:</td>
-          <td class="role-details-item role-details-status" (click)="changeStatus()"
+        <tr class="module-details-row">
+          <td class="module-details-item">Status:</td>
+          <td class="module-details-item module-details-status" (click)="changeStatus()"
               [ngStyle]="{ 'background': role.status === 'INACTIVE' ? '#828282' : '#28a745' }">{{role?.status}}</td>
         </tr>
 
-        <tr class="role-details-row">
-          <td class="role-details-item">Created at:</td>
-          <td class="role-details-item" style="text-align: left">{{role?.createdAt}}</td>
+        <tr class="module-details-row">
+          <td class="module-details-item">Created at:</td>
+          <td class="module-details-item" style="text-align: left">{{role?.createdAt}}</td>
         </tr>
       </table>
 
-      <mat-card-actions class="role-edit-actions">
-        <button mat-raised-button class="role-edit-btn" color="primary">Save changes</button>
-        <a mat-raised-button class="role-edit-btn" (click)="clearChanges()" color="accent">Clear changes</a>
+      <mat-card-actions class="module-edit-actions">
+        <button mat-raised-button class="module-edit-btn" color="primary">Save changes</button>
+        <a mat-raised-button class="module-edit-btn" (click)="clearChanges()" color="accent">Clear changes</a>
       </mat-card-actions>
 
     </form>

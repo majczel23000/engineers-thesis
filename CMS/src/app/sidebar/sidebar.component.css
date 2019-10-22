@@ -102,6 +102,8 @@ a .material-icons{
 .sidenav-content {
   padding: 20px;
   font-family: 'OpenSans' !important;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .header-toolbar {

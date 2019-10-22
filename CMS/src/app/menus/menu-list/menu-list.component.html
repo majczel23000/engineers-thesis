@@ -1,11 +1,11 @@
 <app-current-path [currentPathItems]="['menus']"></app-current-path>
 <app-module-navigation [navigation]="menuService.getMenusNavigation()"></app-module-navigation>
 
-<mat-form-field class="menus-filter">
+<mat-form-field class="module-filter">
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
 </mat-form-field>
 
-<div class="mat-elevation-z4 menus-table">
+<div class="mat-elevation-z4 module-table">
   <table mat-table [dataSource]="dataSource" *ngIf="!loadingData" matSort>
     <ng-container matColumnDef="code">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Code </th>
@@ -27,7 +27,7 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="menus-table-row" [routerLink]="['/menus/menu', row._id]"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="module-table-row" [routerLink]="['/menus/menu', row._id]"></tr>
   </table>
 
   <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons></mat-paginator>

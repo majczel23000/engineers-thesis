@@ -1,10 +1,10 @@
 <app-current-path [currentPathItems]="['images', 'add']"></app-current-path>
 <app-module-navigation [navigation]="imageService.getImagesNavigation()"></app-module-navigation>
-<mat-card class="image-add-card pb-2 mt-4">
+<mat-card class="module-add-card pb-2 mt-4">
 
   <mat-card-header>
     <mat-card-title>
-      <h1 class="image-add-title">Add new image</h1>
+      <h1 class="module-add-title">Add new image</h1>
     </mat-card-title>
   </mat-card-header>
 
@@ -37,7 +37,7 @@
         <button color="primary" class="add-img-btn" type="button" mat-raised-button (click)="imageInput.click()">Choose Image</button>
         <input hidden (change)="onImageSelected($event)" #imageInput type="file" id="file">
         <span class="img-name" *ngIf="selectedImage">{{selectedImage}}</span>
-        <button mat-raised-button class="image-add-btn" color="primary">Add</button>
+        <button mat-raised-button class="module-add-btn" color="primary">Add</button>
       </mat-card-actions>
 
     </form>

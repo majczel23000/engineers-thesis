@@ -45,7 +45,6 @@ export class UserListComponent implements OnInit {
     .subscribe(
       (res) => {
         this.dataSource.data = res.data;
-        console.log(this.dataSource.data);
       },
       (err) => {
         this.snackBar.open(err.error.message, 'X', {

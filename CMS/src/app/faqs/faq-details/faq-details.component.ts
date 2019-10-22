@@ -168,4 +168,16 @@ export class FaqDetailsComponent implements OnInit {
     moveItemInArray(this.faqElements, event.previousIndex, event.currentIndex);
   }
 
+  moveElementDown(faqElement: FaqElementModel, i: number): void {
+    const temp = faqElement;
+    this.faqElements[i] = this.faqElements[i + 1];
+    this.faqElements[i + 1] = temp;
+  }
+
+  moveElementUp(faqElement: FaqElementModel, i: number): void {
+    const temp = faqElement;
+    this.faqElements[i] = this.faqElements[i - 1];
+    this.faqElements[i - 1] = temp;
+  }
+
 }

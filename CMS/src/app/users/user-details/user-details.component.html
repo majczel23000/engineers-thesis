@@ -1,20 +1,20 @@
 <app-current-path *ngIf="user" [currentPathItems]="['users', user.email]"></app-current-path>
 <app-module-navigation [navigation]="userService.getUsersNavigation()"></app-module-navigation>
-<mat-card class="user-details-card pb-2 mt-4">
+<mat-card class="module-details-card pb-2 mt-4">
 
   <mat-card-header>
     <mat-card-title>
-      <h1 class="user-details-title">User: {{user?.firstName}} {{user?.lastName}}</h1>
+      <h1 class="module-details-title">User: {{user?.firstName}} {{user?.lastName}}</h1>
     </mat-card-title>
   </mat-card-header>
 
   <mat-card-content>
-    <form class="user-details-form" [formGroup]="editUserFormGroup" *ngIf="user" (ngSubmit)="editUser()">
+    <form class="module-details-form" [formGroup]="editUserFormGroup" *ngIf="user" (ngSubmit)="editUser()">
 
-      <table class="user-details-table desktop" (window:resize)="onResize($event)">
-        <tr class="user-details-row">
-          <td class="user-details-item">First Name:</td>
-          <td class="user-details-item">
+      <table class="module-details-table desktop">
+        <tr class="module-details-row">
+          <td class="module-details-item">First Name:</td>
+          <td class="module-details-item">
             <mat-form-field>
               <input matInput value="{{user?.firstName}}" name="firstName" formControlName="firstName" [errorStateMatcher]="matcher">
               <mat-error *ngIf="control.firstName.hasError('required')">
@@ -23,10 +23,10 @@
             </mat-form-field>
           </td>
         </tr>
-        <tr class="user-details-row">
-          <td class="user-details-item">Last Name:</td>
-          <td class="user-details-item">
-            <mat-form-field class="user-details-form-field">
+        <tr class="module-details-row">
+          <td class="module-details-item">Last Name:</td>
+          <td class="module-details-item">
+            <mat-form-field class="module-details-form-field">
               <input matInput value="{{user?.lastName}}" name="lastName" formControlName="lastName" [errorStateMatcher]="matcher">
               <mat-error *ngIf="control.lastName.hasError('required')">
                 Last Name is <strong>required</strong>
@@ -34,26 +34,26 @@
             </mat-form-field>
           </td>
         </tr>
-        <tr class="user-details-row">
-          <td class="user-details-item">Email:</td>
-          <td class="user-details-item" style="text-align: left">{{user?.email}}</td>
+        <tr class="module-details-row">
+          <td class="module-details-item">Email:</td>
+          <td class="module-details-item" style="text-align: left">{{user?.email}}</td>
         </tr>
-        <tr class="user-details-row">
-          <td class="user-details-item">Created at:</td>
-          <td class="user-details-item" style="text-align: left">{{user?.createdAt}}</td>
+        <tr class="module-details-row">
+          <td class="module-details-item">Created at:</td>
+          <td class="module-details-item" style="text-align: left">{{user?.createdAt}}</td>
         </tr>
-        <tr class="user-details-row">
-          <td class="user-details-item">Updated at:</td>
-          <td class="user-details-item" style="text-align: left">{{user?.updatedAt}}</td>
+        <tr class="module-details-row">
+          <td class="module-details-item">Updated at:</td>
+          <td class="module-details-item" style="text-align: left">{{user?.updatedAt}}</td>
         </tr>
-        <tr class="user-details-row">
-          <td class="user-details-item">Status:</td>
-          <td class="user-details-item user-details-status" (click)="changeStatus()"
+        <tr class="module-details-row">
+          <td class="module-details-item">Status:</td>
+          <td class="module-details-item module-details-status" (click)="changeStatus()"
               [ngStyle]="{ 'background': user.status === 'INACTIVE' ? '#828282' : user.status === 'ACTIVE' ? '#28a745' : 'blue' }">{{user?.status}}</td>
         </tr>
-        <tr class="user-details-row">
-          <td class="user-details-item">Password:</td>
-          <td class="user-details-item">
+        <tr class="module-details-row">
+          <td class="module-details-item">Password:</td>
+          <td class="module-details-item">
             <mat-form-field>
               <input matInput name="password" type="password" formControlName="password" [errorStateMatcher]="matcher">
               <mat-error *ngIf="!control.password.hasError('required') && control.password.hasError('minlength')">
@@ -65,9 +65,9 @@
             </mat-form-field>
           </td>
         </tr>
-        <tr class="user-details-row">
-          <td class="user-details-item">Roles:</td>
-          <td class="user-details-item" style="text-align: left">
+        <tr class="module-details-row">
+          <td class="module-details-item">Roles:</td>
+          <td class="module-details-item" style="text-align: left">
             <div class="role-list" *ngIf="user?.roles">
               <mat-checkbox [checked]="checkIfUserHasThisRole(role.code)" color="primary" #checkbox class="role-list-item" (change)="onCheckboxChange(role.code, checkbox)"
                             *ngFor="let role of roles" >{{role.name}}</mat-checkbox>
@@ -76,10 +76,10 @@
         </tr>
       </table>
 
-      <mat-card-actions class="user-edit-actions">
-        <button mat-raised-button class="user-edit-btn" color="primary">Save changes</button>
-        <button mat-raised-button class="user-edit-btn" (click)="clearChanges()" color="accent">Clear changes</button>
-        <button mat-raised-button class="user-edit-btn" color="warn" (click)="removeUser()">Remove user</button>
+      <mat-card-actions class="module-edit-actions">
+        <button mat-raised-button class="module-edit-btn" color="primary">Save changes</button>
+        <button mat-raised-button class="module-edit-btn" (click)="clearChanges()" color="accent">Clear changes</button>
+        <button mat-raised-button class="module-edit-btn" color="warn" (click)="removeUser()">Remove user</button>
       </mat-card-actions>
     </form>
   </mat-card-content>

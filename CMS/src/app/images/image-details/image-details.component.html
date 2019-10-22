@@ -1,55 +1,55 @@
 <app-current-path *ngIf="image" [currentPathItems]="['images', image.name]"></app-current-path>
 <app-module-navigation [navigation]="imageService.getImagesNavigation()"></app-module-navigation>
-<mat-card class="image-details-card pb-2 mt-4">
+<mat-card class="module-details-card pb-2 mt-4">
 
   <mat-card-header>
     <mat-card-title>
-      <h1 class="image-details-title">Image: {{image?.code}}</h1>
+      <h1 class="module-details-title">Image: {{image?.code}}</h1>
     </mat-card-title>
   </mat-card-header>
 
   <mat-card-content>
-    <form class="image-details-form" *ngIf="image">
+    <form class="module-details-form" *ngIf="image">
 
-      <table class="image-details-table">
+      <table class="module-details-table">
 
-        <tr class="image-details-row">
-          <td colspan="2" class="image-details-item image-item">
+        <tr class="module-details-row">
+          <td colspan="2" class="module-details-item image-item">
             <img class="image-row" [src]="image.image">
           </td>
         </tr>
 
-        <tr class="image-details-row">
-          <td class="image-details-item">Code:</td>
-          <td class="image-details-item" style="text-align: left">{{image?.code}}</td>
+        <tr class="module-details-row">
+          <td class="module-details-item">Code:</td>
+          <td class="module-details-item" style="text-align: left">{{image?.code}}</td>
         </tr>
 
-        <tr class="image-details-row">
-          <td class="image-details-item">Name:</td>
-          <td class="image-details-item" style="text-align: left">{{image?.name}}</td>
+        <tr class="module-details-row">
+          <td class="module-details-item">Name:</td>
+          <td class="module-details-item" style="text-align: left">{{image?.name}}</td>
         </tr>
 
-        <tr class="image-details-row">
-          <td class="image-details-item">Created at:</td>
-          <td class="image-details-item" style="text-align: left">{{image?.createdAt}}</td>
+        <tr class="module-details-row">
+          <td class="module-details-item">Created at:</td>
+          <td class="module-details-item" style="text-align: left">{{image?.createdAt}}</td>
         </tr>
 
-        <tr class="image-details-row">
-          <td class="image-details-item">Updated at:</td>
-          <td class="image-details-item" style="text-align: left">{{image?.updatedAt}}</td>
+        <tr class="module-details-row">
+          <td class="module-details-item">Updated at:</td>
+          <td class="module-details-item" style="text-align: left">{{image?.updatedAt}}</td>
         </tr>
 
-        <tr class="image-details-row">
-          <td class="image-details-item">Status:</td>
-          <td class="image-details-item image-details-status" (click)="changeStatus()"
+        <tr class="module-details-row">
+          <td class="module-details-item">Status:</td>
+          <td class="module-details-item module-details-status" (click)="changeStatus()"
               [ngStyle]="{ 'background': image.status === 'INACTIVE' ? '#828282' : image.status === 'ACTIVE' ? '#28a745' : 'blue' }">{{image?.status}}</td>
         </tr>
 
       </table>
 
-      <mat-card-actions class="image-edit-actions">
-        <button mat-raised-button class="image-edit-btn" color="primary">Save changes</button>
-        <a mat-raised-button class="image-edit-btn" color="warn" (click)="removeImage()">Remove image</a>
+      <mat-card-actions class="module-edit-actions">
+        <button mat-raised-button class="module-edit-btn" color="primary">Save changes</button>
+        <a mat-raised-button class="module-edit-btn" color="warn" (click)="removeImage()">Remove image</a>
       </mat-card-actions>
     </form>
   </mat-card-content>

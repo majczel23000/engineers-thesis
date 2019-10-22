@@ -10,17 +10,3 @@
 mat-form-field {
   width: 100%;
 }
-
-.page-add-card {
-  margin: 0 auto;
-  width: 90%;
-  padding: 20px 30px;
-}
-
-.page-add-title {
-  font-size: 1.5rem;
-}
-
-.page-add-btn {
-  width: 100%;
-}

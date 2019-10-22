@@ -2,25 +2,25 @@
 
 <app-module-navigation [navigation]="settingsService.getSettingsNavigation()"></app-module-navigation>
 
-<mat-card class="setting-details-card pb-5 mt-4">
+<mat-card class="module-details-card pb-5 mt-4">
 
   <mat-card-header>
     <mat-card-title>
-      <h1 class="setting-details-title">setting: {{setting?.code}}</h1>
+      <h1 class="module-details-title">setting: {{setting?.code}}</h1>
     </mat-card-title>
   </mat-card-header>
 
   <mat-card-content>
-    <form class="setting-details-form" [formGroup]="editSettingFormGroup" *ngIf="setting" (ngSubmit)="editSetting()">
+    <form class="module-details-form" [formGroup]="editSettingFormGroup" *ngIf="setting" (ngSubmit)="editSetting()">
 
-      <table class="setting-details-table">
-        <tr class="setting-details-row">
-          <td class="setting-details-item">Code:</td>
-          <td class="setting-details-item" style="text-align: left">{{setting?.code}}</td>
+      <table class="module-details-table">
+        <tr class="module-details-row">
+          <td class="module-details-item">Code:</td>
+          <td class="module-details-item" style="text-align: left">{{setting?.code}}</td>
         </tr>
-        <tr class="setting-details-row">
-          <td class="setting-details-item">Name:</td>
-          <td class="setting-details-item">
+        <tr class="module-details-row">
+          <td class="module-details-item">Name:</td>
+          <td class="module-details-item">
             <mat-form-field>
               <input matInput value="{{setting?.name}}" name="name" formControlName="name" [errorStateMatcher]="matcher">
               <mat-error *ngIf="control.name.hasError('required')">
@@ -30,9 +30,9 @@
           </td>
         </tr>
 
-        <tr class="setting-details-row">
-          <td class="setting-details-item">Description:</td>
-          <td class="setting-details-item">
+        <tr class="module-details-row">
+          <td class="module-details-item">Description:</td>
+          <td class="module-details-item">
             <mat-form-field>
               <input matInput value="{{setting?.description}}" name="description" formControlName="description" [errorStateMatcher]="matcher">
               <mat-error *ngIf="control.description.hasError('required')">
@@ -42,9 +42,9 @@
           </td>
         </tr>
 
-        <tr class="setting-details-row">
-          <td class="setting-details-item">Type:</td>
-          <td class="setting-details-item">
+        <tr class="module-details-row">
+          <td class="module-details-item">Type:</td>
+          <td class="module-details-item">
             <mat-form-field class="type-value-fields">
               <mat-select formControlName="type" value="{{setting?.type}}">
                 <mat-option *ngFor="let type of settingType" [value]="type">
@@ -58,9 +58,9 @@
           </td>
         </tr>
 
-        <tr class="setting-details-row">
-          <td class="setting-details-item">Value:</td>
-          <td class="setting-details-item">
+        <tr class="module-details-row">
+          <td class="module-details-item">Value:</td>
+          <td class="module-details-item">
             <mat-form-field class="example-full-width mb-4 type-value-fields">
               <input matInput type="text" name="value" formControlName="value" [errorStateMatcher]="matcher" value="{{setting?.value}}">
               <mat-error *ngIf="control.value.hasError('required')">
@@ -79,22 +79,22 @@
           </td>
         </tr>
 
-        <tr class="setting-details-row">
-          <td class="setting-details-item">Status:</td>
-          <td class="setting-details-item setting-details-status" (click)="changeStatus()"
+        <tr class="module-details-row">
+          <td class="module-details-item">Status:</td>
+          <td class="module-details-item module-details-status" (click)="changeStatus()"
               [ngStyle]="{ 'background': setting.status === 'INACTIVE' ? '#828282' : '#28a745' }">{{setting?.status}}</td>
         </tr>
 
-        <tr class="setting-details-row">
-          <td class="setting-details-item">Created at:</td>
-          <td class="setting-details-item" style="text-align: left">{{setting?.createdAt}}</td>
+        <tr class="module-details-row">
+          <td class="module-details-item">Created at:</td>
+          <td class="module-details-item" style="text-align: left">{{setting?.createdAt}}</td>
         </tr>
       </table>
 
-      <mat-card-actions class="setting-edit-actions">
-        <button mat-raised-button class="setting-edit-btn" color="primary">Save changes</button>
-        <a mat-raised-button class="setting-edit-btn" (click)="clearChanges()" color="accent">Clear changes</a>
-        <a mat-raised-button class="settings-edit-btn" color="warn" (click)="removeSetting()">Remove setting</a>
+      <mat-card-actions class="module-edit-actions">
+        <button mat-raised-button class="module-edit-btn" color="primary">Save changes</button>
+        <a mat-raised-button class="module-edit-btn" (click)="clearChanges()" color="accent">Clear changes</a>
+        <a mat-raised-button class="module-edit-btn" color="warn" (click)="removeSetting()">Remove setting</a>
       </mat-card-actions>
 
     </form>

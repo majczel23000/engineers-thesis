@@ -11,17 +11,7 @@ mat-form-field {
   width: 100%;
 }
 
-.image-add-card {
-  margin: 0 auto;
-  width: 90%;
-  padding: 20px 30px;
-}
-
-.image-add-title {
-  font-size: 1.5rem;
-}
-
-.image-add-btn {
+.module-add-btn {
   width: 100%;
   margin: 0px !important;
 }

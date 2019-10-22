@@ -1,6 +1,9 @@
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import '~bootstrap/dist/css/bootstrap.min.css';
 @import '~@fortawesome/fontawesome-free/css/all.css';
+@import 'assets/css/details.css';
+@import 'assets/css/lists.css';
+@import 'assets/css/add.css';
 
 html, body {
   margin: 0;
@@ -44,5 +47,11 @@ table {
   }
   .cdk-overlay-pane {
     width: 100% !important;
+  }
+}
+
+@media only screen and (min-width: 650px) {
+  .desktop-display-none {
+    display: none !important;
   }
 }

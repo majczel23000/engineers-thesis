@@ -1,30 +1,30 @@
 <app-current-path *ngIf="page" [currentPathItems]="['pages', page.name]"></app-current-path>
 <app-module-navigation [navigation]="pageService.getPagesNavigation()"></app-module-navigation>
 
-<mat-card class="page-details-card pb-2 mt-4">
+<mat-card class="module-details-card pb-2 mt-4">
 
   <mat-card-header class="pt-4">
     <mat-card-title>
-      <h1 class="page-details-title">Page: {{page?.code}}</h1>
+      <h1 class="module-details-title">Page: {{page?.code}}</h1>
     </mat-card-title>
   </mat-card-header>
 
   <mat-tab-group color="primary" backgroundColor="primary">
 
     <mat-tab label="General">
-      <form class="page-details-form" [formGroup]="editPageFormGroup" *ngIf="page" (ngSubmit)="editPage()">
+      <form class="module-details-form" [formGroup]="editPageFormGroup" *ngIf="page" (ngSubmit)="editPage()">
 
-        <table class="page-details-table">
+        <table class="module-details-table">
 
-          <tr class="page-details-row">
-            <td class="page-details-item">Code:</td>
-            <td class="page-details-item" style="text-align: left">{{page?.code}}</td>
+          <tr class="module-details-row">
+            <td class="module-details-item">Code:</td>
+            <td class="module-details-item" style="text-align: left">{{page?.code}}</td>
           </tr>
 
-          <tr class="page-details-row">
-            <td class="page-details-item">Name:</td>
-            <td class="page-details-item">
-              <mat-form-field class="page-details-form-field">
+          <tr class="module-details-row">
+            <td class="module-details-item">Name:</td>
+            <td class="module-details-item">
+              <mat-form-field class="module-details-form-field">
                 <input matInput value="{{page?.name}}" name="name" formControlName="name" [errorStateMatcher]="matcher">
                 <mat-error *ngIf="!control.name.hasError('required') && control.name.hasError('minlength')">
                   Name must have at least 5 characters
@@ -36,28 +36,28 @@
             </td>
           </tr>
 
-          <tr class="page-details-row">
-            <td class="page-details-item">Description:</td>
-            <td class="page-details-item">
-              <mat-form-field class="page-details-form-field">
+          <tr class="module-details-row">
+            <td class="module-details-item">Description:</td>
+            <td class="module-details-item">
+              <mat-form-field class="module-details-form-field">
                 <input matInput value="{{page?.description}}" name="description" formControlName="description">
               </mat-form-field>
             </td>
           </tr>
 
-          <tr class="page-details-row">
-            <td class="page-details-item">Created at:</td>
-            <td class="page-details-item" style="text-align: left">{{page?.createdAt}}</td>
+          <tr class="module-details-row">
+            <td class="module-details-item">Created at:</td>
+            <td class="module-details-item" style="text-align: left">{{page?.createdAt}}</td>
           </tr>
 
-          <tr class="page-details-row">
-            <td class="page-details-item">Updated at:</td>
-            <td class="page-details-item" style="text-align: left">{{page?.updatedAt}}</td>
+          <tr class="module-details-row">
+            <td class="module-details-item">Updated at:</td>
+            <td class="module-details-item" style="text-align: left">{{page?.updatedAt}}</td>
           </tr>
 
-          <tr class="page-details-row">
-            <td class="page-details-item">Status:</td>
-            <td class="page-details-item page-details-status" (click)="changeStatus()"
+          <tr class="module-details-row">
+            <td class="module-details-item">Status:</td>
+            <td class="module-details-item module-details-status" (click)="changeStatus()"
                 [ngStyle]="{ 'background': page.status === 'INACTIVE' ? '#828282' : page.status === 'ACTIVE' ? '#28a745' : 'blue' }">{{page?.status}}</td>
           </tr>
 
@@ -67,100 +67,100 @@
 
     <mat-tab label="Content">
       <app-ngx-editor height="300px" [(ngModel)]="contentValue" [spellcheck]="true"></app-ngx-editor>
-      <table class="page-details-table">
-        <tr class="page-details-row">
-          <td class="page-details-item">
-            <mat-form-field class="page-details-form-field" [ngClass]="{'mat-form-field-invalid ng-dirty ng-invalid ng-touched' : !selector.value.length}">
+      <table class="module-details-table">
+        <tr class="module-details-row">
+          <td class="module-details-item">
+            <mat-form-field class="module-details-form-field" [ngClass]="{'mat-form-field-invalid ng-dirty ng-invalid ng-touched' : !selector.value.length}">
               <input #selector matInput name="selector" [(ngModel)]="contentSelector">
             </mat-form-field>
           </td>
           <td>
-            <a mat-raised-button class="page-edit-btn" (click)="addPageContent()" color="primary">Add content</a>
+            <a mat-raised-button class="module-edit-btn" (click)="addPageContent()" color="primary">Add content</a>
           </td>
         </tr>
 
       </table>
 
-      <table class="page-details-table">
-        <tr class="page-details-row" *ngIf="!pageContents.length">
-          <td class="page-details-item" colspan="2">No defined contents</td>
+      <table class="module-details-table">
+        <tr class="module-details-row" *ngIf="!pageContents.length">
+          <td class="module-details-item" colspan="2">No defined contents</td>
         </tr>
 
-        <tr *ngFor="let pageContent of pageContents; let i = index" class="page-details-row">
-          <td class="page-details-item-element">
+        <tr *ngFor="let pageContent of pageContents; let i = index" class="module-details-row">
+          <td class="module-details-item-element">
             {{pageContent.selector}}
           </td>
-          <td class="page-details-item-element">
+          <td class="module-details-item-element">
             {{pageContent.content}}
           </td>
-          <td class="page-details-item-delete">
-            <a mat-raised-button class="page-edit-btn" color="warn" (click)="removePageContent(i)"><i class="material-icons">delete</i></a>
+          <td class="module-details-item-delete">
+            <a mat-raised-button class="module-edit-btn" color="warn" (click)="removePageContent(i)"><i class="material-icons">delete</i></a>
           </td>
         </tr>
       </table>
     </mat-tab>
 
     <mat-tab label="Styles">
-      <table class="page-details-table">
+      <table class="module-details-table">
 
-        <tr class="page-details-row">
-          <td class="page-details-item" colspan="3">
-            <a mat-raised-button class="page-edit-btn" (click)="addPageStyle()" color="primary">Add style</a>
+        <tr class="module-details-row">
+          <td class="module-details-item" colspan="3">
+            <a mat-raised-button class="module-edit-btn" (click)="addPageStyle()" color="primary">Add style</a>
           </td>
         </tr>
 
-        <tr class="page-details-row" *ngIf="!pageStyles.length">
-          <td class="page-details-item">No defined styles</td>
+        <tr class="module-details-row" *ngIf="!pageStyles.length">
+          <td class="module-details-item">No defined styles</td>
         </tr>
 
-        <tr *ngFor="let pageStyle of pageStyles; let i = index" class="page-details-row">
-          <td class="page-details-item-element">
-            <mat-form-field class="page-details-form-field" [ngClass]="{'mat-form-field-invalid ng-dirty ng-invalid ng-touched' : !pageStyle.property.length}">
+        <tr *ngFor="let pageStyle of pageStyles; let i = index" class="module-details-row">
+          <td class="module-details-item-element">
+            <mat-form-field class="module-details-form-field" [ngClass]="{'mat-form-field-invalid ng-dirty ng-invalid ng-touched' : !pageStyle.property.length}">
                   <textarea #property matInput value="{{pageStyle?.property}}" name="property" placeholder="Property {{i+1}}"
                             (change)="pageStyle.property = property.value"></textarea>
             </mat-form-field>
           </td>
-          <td class="page-details-item-element">
-            <mat-form-field class="page-details-form-field" [ngClass]="{'mat-form-field-invalid ng-dirty ng-invalid ng-touched' : !pageStyle.value.length}">
+          <td class="module-details-item-element">
+            <mat-form-field class="module-details-form-field" [ngClass]="{'mat-form-field-invalid ng-dirty ng-invalid ng-touched' : !pageStyle.value.length}">
                   <textarea #value matInput value="{{pageStyle?.value}}" name="value" placeholder="Value {{i+1}}"
                             (change)="pageStyle.value = value.value"></textarea>
             </mat-form-field>
           </td>
-          <td class="page-details-item-delete">
-            <a mat-raised-button class="page-edit-btn" color="warn" (click)="removePageStyle(i)"><i class="material-icons">delete</i></a>
+          <td class="module-details-item-delete">
+            <a mat-raised-button class="module-edit-btn" color="warn" (click)="removePageStyle(i)"><i class="material-icons">delete</i></a>
           </td>
         </tr>
 
       </table>
     </mat-tab>
     <mat-tab label="Meta tags">
-      <table class="page-details-table">
+      <table class="module-details-table">
 
-        <tr class="page-details-row">
-          <td class="page-details-item" colspan="3">
-            <a mat-raised-button class="page-edit-btn" (click)="addPageMetaTag()" color="primary">Add meta tag</a>
+        <tr class="module-details-row">
+          <td class="module-details-item" colspan="3">
+            <a mat-raised-button class="module-edit-btn" (click)="addPageMetaTag()" color="primary">Add meta tag</a>
           </td>
         </tr>
 
-        <tr class="page-details-row" *ngIf="!pageMetaTags.length">
-          <td class="page-details-item">No defined meta tags</td>
+        <tr class="module-details-row" *ngIf="!pageMetaTags.length">
+          <td class="module-details-item">No defined meta tags</td>
         </tr>
 
-        <tr *ngFor="let pageMetaTag of pageMetaTags; let i = index" class="page-details-row">
-          <td class="page-details-item-element">
-            <mat-form-field class="page-details-form-field" [ngClass]="{'mat-form-field-invalid ng-dirty ng-invalid ng-touched' : !pageMetaTag.name.length}">
+        <tr *ngFor="let pageMetaTag of pageMetaTags; let i = index" class="module-details-row">
+          <td class="module-details-item-element">
+            <mat-form-field class="module-details-form-field" [ngClass]="{'mat-form-field-invalid ng-dirty ng-invalid ng-touched' : !pageMetaTag.name.length}">
                   <textarea #name matInput value="{{pageMetaTag?.name}}" name="property" placeholder="Name {{i+1}}"
                             (change)="pageMetaTag.name = name.value"></textarea>
             </mat-form-field>
           </td>
-          <td class="page-details-item-element">
-            <mat-form-field class="page-details-form-field" [ngClass]="{'mat-form-field-invalid ng-dirty ng-invalid ng-touched' : !pageMetaTag.content.length}">
+          <td class="module-details-item-element">
+            <mat-form-field class="module-details-form-field" [ngClass]="{'mat-form-field-invalid ng-dirty ng-invalid ng-touched' : !pageMetaTag.content.length}">
                   <textarea #content matInput value="{{pageMetaTag?.content}}" name="value" placeholder="Content {{i+1}}"
                             (change)="pageMetaTag.content = content.value"></textarea>
             </mat-form-field>
           </td>
-          <td class="page-details-item-delete">
-            <a mat-raised-button class="page-edit-btn" color="warn" (click)="removePageMetaTag(i)"><i class="material-icons">delete</i></a>
+          <td class="module-details-item-delete">
+            <a mat-raised-button class="module-edit-btn" color="warn" (click)="removePageMetaTag(i)"><i class="material-icons">delete</i></a>
           </td>
         </tr>
 
@@ -168,10 +168,10 @@
     </mat-tab>
   </mat-tab-group>
 
-  <mat-card-actions class="page-edit-actions pb-4 pt-4">
-    <button type="submit" mat-raised-button class="page-edit-btn" color="primary" (click)="runEditPage()">Save changes</button>
-    <a mat-raised-button class="page-edit-btn" (click)="clearChanges()" color="accent">Clear changes</a>
-    <a mat-raised-button class="page-edit-btn" color="warn" (click)="removePage()">Remove page</a>
+  <mat-card-actions class="module-edit-actions pb-4 pt-4">
+    <button type="submit" mat-raised-button class="module-edit-btn" color="primary" (click)="runEditPage()">Save changes</button>
+    <a mat-raised-button class="module-edit-btn" (click)="clearChanges()" color="accent">Clear changes</a>
+    <a mat-raised-button class="module-edit-btn" color="warn" (click)="removePage()">Remove page</a>
   </mat-card-actions>
 
 </mat-card>
