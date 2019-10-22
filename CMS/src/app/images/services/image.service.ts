@@ -4,6 +4,7 @@ import { ImageListResponseModel } from '../../shared/models/image/ImageListRespo
 import { ImageModel } from '../../shared/models/image/Image.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { ModuleNavigationModel } from '../../shared/models/module-navigation/moduleNavigation.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,20 @@ import { environment } from '../../../environments/environment';
 export class ImageService {
 
   apiUrl = environment.setting.apiUrl;
-  
+
+  imagesNavigation: ModuleNavigationModel = {
+    items: [
+      {
+        label: 'Images list',
+        routerLink: '/images'
+      },
+      {
+        label: 'Add new image',
+        routerLink: '/images/add'
+      }
+    ]
+  }
+
   constructor(private httpClient: HttpClient) { }
 
   getAllImages() {
@@ -36,5 +50,9 @@ export class ImageService {
 
   removeImage(_id: string) {
     return this.httpClient.delete(`${this.apiUrl}/image/${_id}`);
+  }
+
+  getImagesNavigation(): ModuleNavigationModel {
+    return this.imagesNavigation;
   }
 }

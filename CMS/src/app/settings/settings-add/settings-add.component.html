@@ -1,5 +1,5 @@
 <app-current-path [currentPathItems]="['settings', 'add']"></app-current-path>
-<app-settings-navigation></app-settings-navigation>
+<app-module-navigation [navigation]="settingsService.getSettingsNavigation()"></app-module-navigation>
 <mat-card class="settings-add-card pb-2 mt-4">
 
   <mat-card-header>

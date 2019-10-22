@@ -1,5 +1,5 @@
 <app-current-path [currentPathItems]="['users']"></app-current-path>
-<app-user-navigation></app-user-navigation>
+<app-module-navigation [navigation]="userService.getUsersNavigation()"></app-module-navigation>
 
 <mat-form-field class="users-filter">
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">

@@ -1,29 +1,28 @@
-.users-btn {
+.navigation-btn {
   margin: 0 20px !important;
   border-radius: 0px;
 }
 
-.user-navigation-container {
+.navigation-navigation-container {
   margin: 0 auto;
   width: 90%;
 }
 
-.user-navigation-row {
+.navigation-navigation-row {
   display: flex;
   justify-content: center;
 }
 
-
 @media only screen and (max-width: 650px) {
-  .user-navigation-container {
+  .navigation-navigation-container {
     height: auto;
     padding: 20px 20px 0px 20px;
   }
-  .users-btn {
+  .navigation-btn {
     flex: 1 0 100%;
     margin-bottom: 20px !important;
   }
-  .user-navigation-row {
+  .navigation-navigation-row {
     flex-wrap: wrap;
     height: auto;
   }

@@ -1,5 +1,5 @@
 <app-current-path [currentPathItems]="['menus']"></app-current-path>
-<app-menu-navigation></app-menu-navigation>
+<app-module-navigation [navigation]="menuService.getMenusNavigation()"></app-module-navigation>
 
 <mat-form-field class="menus-filter">
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">

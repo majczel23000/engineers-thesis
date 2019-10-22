@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { SettingsRoutingModule } from './settings-routing.module';
 import { SettingsListComponent } from './settings-list/settings-list.component';
 import { SettingsAddComponent } from './settings-add/settings-add.component';
-import { SettingsNavigationComponent } from './settings-navigation/settings-navigation.component';
 import { SharedModule } from '../shared/shared.module';
 import { MatInputModule, MatButtonModule, MatCardModule,
   MatTableModule, MatPaginatorModule, MatPaginatorIntl,
@@ -16,7 +15,7 @@ import { SettingDetailsComponent } from './setting-details/setting-details.compo
 
 
 @NgModule({
-  declarations: [SettingsListComponent, SettingsAddComponent, SettingsNavigationComponent, SettingDetailsComponent],
+  declarations: [SettingsListComponent, SettingsAddComponent, SettingDetailsComponent],
   imports: [
     CommonModule,
     SettingsRoutingModule,

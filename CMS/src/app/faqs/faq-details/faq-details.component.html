@@ -1,5 +1,5 @@
 <app-current-path *ngIf="faq" [currentPathItems]="['faqs', faq.name]"></app-current-path>
-<app-faq-navigation></app-faq-navigation>
+<app-module-navigation [navigation]="faqService.getFaqsNavigation()"></app-module-navigation>
 <mat-card class="faq-details-card pb-2 mt-4">
 
   <mat-card-header>

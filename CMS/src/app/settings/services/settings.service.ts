@@ -4,6 +4,7 @@ import { environment } from '../../../environments/environment';
 import { SettingsListResponseModel } from 'src/app/shared/models/settings/SettingsListResponse.model';
 import { SettingResponseModel } from 'src/app/shared/models/settings/SettingResponse.model';
 import { SettingModel } from 'src/app/shared/models/settings/Setting.model';
+import { ModuleNavigationModel } from '../../shared/models/module-navigation/moduleNavigation.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,19 @@ import { SettingModel } from 'src/app/shared/models/settings/Setting.model';
 export class SettingsService {
 
   apiUrl = environment.setting.apiUrl;
+
+  settingsNavigation: ModuleNavigationModel = {
+    items: [
+      {
+        label: 'Settings list',
+        routerLink: '/settings'
+      },
+      {
+        label: 'Add new setting',
+        routerLink: '/settings/add'
+      }
+    ]
+  }
 
   constructor(private httpClient: HttpClient) { }
 
@@ -40,6 +54,10 @@ export class SettingsService {
 
   removeSetting(_id: string) {
     return this.httpClient.delete(`${this.apiUrl}/settings/${_id}`);
+  }
+
+  getSettingsNavigation(): ModuleNavigationModel {
+    return this.settingsNavigation;
   }
 
 }

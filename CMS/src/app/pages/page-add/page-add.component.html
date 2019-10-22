@@ -1,5 +1,5 @@
 <app-current-path [currentPathItems]="['pages', 'add']"></app-current-path>
-<app-page-navigation></app-page-navigation>
+<app-module-navigation [navigation]="pageService.getPagesNavigation()"></app-module-navigation>
 <mat-card class="page-add-card pb-2 mt-4">
 
   <mat-card-header>

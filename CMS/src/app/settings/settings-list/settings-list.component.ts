@@ -20,7 +20,7 @@ export class SettingsListComponent implements OnInit {
   dataSource = new MatTableDataSource<SettingModel>();
   loadingData = true;
   settings: SettingModel[];
-  
+
   constructor(private router: Router,
     private paginatorIntl: MatPaginatorIntl,
     private settingsService: SettingsService) { }

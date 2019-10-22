@@ -1,5 +1,5 @@
 <app-current-path [currentPathItems]="['menus', 'add']"></app-current-path>
-<app-menu-navigation></app-menu-navigation>
+<app-module-navigation [navigation]="menuService.getMenusNavigation()"></app-module-navigation>
 <mat-card class="menu-add-card pb-2 mt-4">
 
   <mat-card-header>

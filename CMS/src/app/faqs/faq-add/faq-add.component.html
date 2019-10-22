@@ -1,5 +1,5 @@
 <app-current-path [currentPathItems]="['faqs', 'add']"></app-current-path>
-<app-faq-navigation></app-faq-navigation>
+<app-module-navigation [navigation]="faqService.getFaqsNavigation()"></app-module-navigation>
 <mat-card class="faq-add-card pb-2 mt-4">
 
   <mat-card-header>

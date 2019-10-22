@@ -4,6 +4,7 @@ import { FaqListResponseModel} from '../../shared/models/faq/FaqListResponse.mod
 import { FaqModel } from '../../shared/models/faq/Faq.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { ModuleNavigationModel } from '../../shared/models/module-navigation/moduleNavigation.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,19 @@ import { environment } from '../../../environments/environment';
 export class FaqService {
 
   apiUrl = environment.setting.apiUrl;
+
+  faqsNavigation: ModuleNavigationModel = {
+    items: [
+      {
+        label: 'Faqs list',
+        routerLink: '/faqs'
+      },
+      {
+        label: 'Add new faq',
+        routerLink: '/faqs/add'
+      }
+    ]
+  }
 
   constructor(private httpClient: HttpClient) { }
 
@@ -40,5 +54,9 @@ export class FaqService {
 
   editFaq(_id: string, faqData) {
     return this.httpClient.put<FaqResponseModel>(`${this.apiUrl}/faq/${_id}`, faqData);
+  }
+
+  getFaqsNavigation(): ModuleNavigationModel {
+    return this.faqsNavigation;
   }
 }

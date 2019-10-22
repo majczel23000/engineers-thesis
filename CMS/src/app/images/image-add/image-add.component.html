@@ -1,5 +1,5 @@
 <app-current-path [currentPathItems]="['images', 'add']"></app-current-path>
-<app-image-navigation></app-image-navigation>
+<app-module-navigation [navigation]="imageService.getImagesNavigation()"></app-module-navigation>
 <mat-card class="image-add-card pb-2 mt-4">
 
   <mat-card-header>

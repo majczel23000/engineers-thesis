@@ -1,6 +1,6 @@
 <app-current-path *ngIf="setting" [currentPathItems]="['settings', setting.name]"></app-current-path>
 
-<app-settings-navigation></app-settings-navigation>
+<app-module-navigation [navigation]="settingsService.getSettingsNavigation()"></app-module-navigation>
 
 <mat-card class="setting-details-card pb-5 mt-4">
 

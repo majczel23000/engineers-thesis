@@ -1,5 +1,5 @@
 <app-current-path [currentPathItems]="['users', 'register']"></app-current-path>
-<app-user-navigation></app-user-navigation>
+<app-module-navigation [navigation]="userService.getUsersNavigation()"></app-module-navigation>
 <mat-card class="user-add-card pb-2 mt-4">
 
   <mat-card-header>

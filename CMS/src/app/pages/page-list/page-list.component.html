@@ -1,5 +1,5 @@
 <app-current-path [currentPathItems]="['pages']"></app-current-path>
-<app-page-navigation></app-page-navigation>
+<app-module-navigation [navigation]="pageService.getPagesNavigation()"></app-module-navigation>
 
 <mat-form-field class="pages-filter">
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">

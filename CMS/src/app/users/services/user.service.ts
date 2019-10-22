@@ -6,6 +6,7 @@ import { environment } from '../../../environments/environment';
 import { AddUserModel } from '../../shared/models/AddUser.model';
 import { UserResponseModel } from '../../shared/models/UserResponse.model';
 import { RoleListResponseModel } from '../../shared/models/RoleListResponse.model';
+import { ModuleNavigationModel } from '../../shared/models/module-navigation/moduleNavigation.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,19 @@ import { RoleListResponseModel } from '../../shared/models/RoleListResponse.mode
 export class UserService {
 
   apiUrl = environment.setting.apiUrl;
+
+  usersNavigation: ModuleNavigationModel = {
+    items: [
+      {
+        label: 'Users list',
+        routerLink: '/users'
+      },
+      {
+        label: 'Add new user',
+        routerLink: '/users/add'
+      }
+    ]
+  }
 
   constructor(private httpClient: HttpClient) { }
 
@@ -46,6 +60,10 @@ export class UserService {
 
   removeUser(_id: string) {
     return this.httpClient.delete(`${this.apiUrl}/users/${_id}`);
+  }
+
+  getUsersNavigation(): ModuleNavigationModel {
+    return this.usersNavigation;
   }
 
 }

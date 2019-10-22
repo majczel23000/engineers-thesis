@@ -4,6 +4,7 @@ import { environment } from '../../../environments/environment';
 import { PageModel } from '../../shared/models/page/Page.model';
 import { PageResponseModel } from '../../shared/models/page/PageResponse.model';
 import { PageListResponseModel } from '../../shared/models/page/PageListResponse.model';
+import { ModuleNavigationModel } from '../../shared/models/module-navigation/moduleNavigation.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,19 @@ import { PageListResponseModel } from '../../shared/models/page/PageListResponse
 export class PageService {
 
   apiUrl = environment.setting.apiUrl;
+
+  pagesNavigation: ModuleNavigationModel = {
+    items: [
+      {
+        label: 'Pages list',
+        routerLink: '/pages'
+      },
+      {
+        label: 'Add new page',
+        routerLink: '/pages/add'
+      }
+    ]
+  }
 
   constructor(private httpClient: HttpClient) { }
 
@@ -40,5 +54,9 @@ export class PageService {
 
   editPage(_id: string, pageData: PageModel) {
     return this.httpClient.put<PageResponseModel>(`${this.apiUrl}/page/${_id}`, pageData);
+  }
+
+  getPagesNavigation(): ModuleNavigationModel {
+    return this.pagesNavigation;
   }
 }

@@ -1,5 +1,5 @@
 <app-current-path *ngIf="menu" [currentPathItems]="['menus', menu.name]"></app-current-path>
-<app-menu-navigation></app-menu-navigation>
+<app-module-navigation [navigation]="menuService.getMenusNavigation()"></app-module-navigation>
 <mat-card class="menu-details-card pb-2 mt-4">
 
   <mat-card-header>

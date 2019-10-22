@@ -12,11 +12,10 @@ import { DialogConfirmComponent } from '../shared/components/dialog-confirm/dial
 import { PageAddComponent } from './page-add/page-add.component';
 import { PageDetailsComponent } from './page-details/page-details.component';
 import { PageListComponent } from './page-list/page-list.component';
-import { PageNavigationComponent } from './page-navigation/page-navigation.component';
 import { NgxEditorModule } from 'ngx-editor';
 
 @NgModule({
-  declarations: [PageAddComponent, PageDetailsComponent, PageListComponent, PageNavigationComponent],
+  declarations: [PageAddComponent, PageDetailsComponent, PageListComponent],
   imports: [
     CommonModule,
     PagesRoutingModule,

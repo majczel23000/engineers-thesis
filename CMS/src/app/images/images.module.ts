@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { ImagesRoutingModule } from './images-routing.module';
 import { ImageAddComponent } from './image-add/image-add.component';
 import { ImageListComponent } from './image-list/image-list.component';
-import { ImageNavigationComponent } from './image-navigation/image-navigation.component';
 import { SharedModule } from '../shared/shared.module';
 import { MatInputModule, MatButtonModule, MatCardModule,
   MatTableModule, MatPaginatorModule, MatPaginatorIntl,
@@ -15,7 +14,7 @@ import { DialogConfirmComponent } from '../shared/components/dialog-confirm/dial
 import { ImageDetailsComponent } from './image-details/image-details.component';
 
 @NgModule({
-  declarations: [ImageAddComponent, ImageListComponent, ImageNavigationComponent, ImageDetailsComponent],
+  declarations: [ImageAddComponent, ImageListComponent, ImageDetailsComponent],
   imports: [
     CommonModule,
     ImagesRoutingModule,

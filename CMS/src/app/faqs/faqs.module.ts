@@ -4,7 +4,6 @@ import { FaqsRoutingModule } from './faqs-routing.module';
 import { FaqAddComponent } from './faq-add/faq-add.component';
 import { FaqDetailsComponent } from './faq-details/faq-details.component';
 import { FaqListComponent } from './faq-list/faq-list.component';
-import { FaqNavigationComponent } from './faq-navigation/faq-navigation.component';
 import { SharedModule } from '../shared/shared.module';
 import { MatInputModule, MatButtonModule, MatCardModule,
   MatTableModule, MatPaginatorModule, MatPaginatorIntl,
@@ -15,7 +14,7 @@ import { DialogConfirmComponent } from '../shared/components/dialog-confirm/dial
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
-  declarations: [FaqAddComponent, FaqDetailsComponent, FaqListComponent, FaqNavigationComponent],
+  declarations: [FaqAddComponent, FaqDetailsComponent, FaqListComponent],
   imports: [
     CommonModule,
     FaqsRoutingModule,

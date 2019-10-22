@@ -4,7 +4,6 @@ import { MenusRoutingModule } from './menus-routing.module';
 import { MenuAddComponent } from './menu-add/menu-add.component';
 import { MenuDetailsComponent } from './menu-details/menu-details.component';
 import { MenuListComponent } from './menu-list/menu-list.component';
-import { MenuNavigationComponent } from './menu-navigation/menu-navigation.component';
 import { SharedModule } from '../shared/shared.module';
 import { MatInputModule, MatButtonModule, MatCardModule,
   MatTableModule, MatPaginatorModule, MatPaginatorIntl,
@@ -14,7 +13,7 @@ import { CdkColumnDef } from '@angular/cdk/table';
 import { DialogConfirmComponent } from '../shared/components/dialog-confirm/dialog-confirm.component';
 
 @NgModule({
-  declarations: [MenuAddComponent, MenuDetailsComponent, MenuListComponent, MenuNavigationComponent],
+  declarations: [MenuAddComponent, MenuDetailsComponent, MenuListComponent],
   imports: [
     CommonModule,
     MenusRoutingModule,

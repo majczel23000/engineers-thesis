@@ -1,5 +1,5 @@
 <app-current-path [currentPathItems]="['images']"></app-current-path>
-<app-image-navigation></app-image-navigation>
+<app-module-navigation [navigation]="imageService.getImagesNavigation()"></app-module-navigation>
 
 <mat-form-field class="images-filter">
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">

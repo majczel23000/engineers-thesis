@@ -1,5 +1,5 @@
 <app-current-path [currentPathItems]="['settings']"></app-current-path>
-<app-settings-navigation></app-settings-navigation>
+<app-module-navigation [navigation]="settingsService.getSettingsNavigation()"></app-module-navigation>
 
 <mat-form-field class="settings-filter">
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">

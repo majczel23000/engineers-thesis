@@ -1,5 +1,5 @@
 <app-current-path [currentPathItems]="['faqs']"></app-current-path>
-<app-faq-navigation></app-faq-navigation>
+<app-module-navigation [navigation]="faqService.getFaqsNavigation()"></app-module-navigation>
 
 <mat-form-field class="faqs-filter">
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">

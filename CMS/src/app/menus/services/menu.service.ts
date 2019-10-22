@@ -4,6 +4,7 @@ import { MenuListResponseModel } from '../../shared/models/menu/MenuListResponse
 import { MenuModel } from '../../shared/models/menu/Menu.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { ModuleNavigationModel } from '../../shared/models/module-navigation/moduleNavigation.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,19 @@ import { environment } from '../../../environments/environment';
 export class MenuService {
 
   apiUrl = environment.setting.apiUrl;
+
+  menusNavigation: ModuleNavigationModel = {
+    items: [
+      {
+        label: 'Menus list',
+        routerLink: '/menus'
+      },
+      {
+        label: 'Add new menu',
+        routerLink: '/menus/add'
+      }
+    ]
+  }
 
   constructor(private httpClient: HttpClient) { }
 
@@ -40,5 +54,9 @@ export class MenuService {
 
   editMenu(_id: string, menuData) {
     return this.httpClient.put<MenuResponseModel>(`${this.apiUrl}/menu/${_id}`, menuData);
+  }
+
+  getMenusNavigation(): ModuleNavigationModel {
+    return this.menusNavigation;
   }
 }
