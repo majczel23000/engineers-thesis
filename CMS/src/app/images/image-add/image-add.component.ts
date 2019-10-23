@@ -50,7 +50,6 @@ export class ImageAddComponent {
       const imageData = this.prepareDataToSend();
       this.imageService.addImage(imageData).subscribe(
         res => {
-          console.log(res);
           this.router.navigate(['/images']);
           this.snackBar.open(res.message, 'X', {
             duration: 5000,

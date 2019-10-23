@@ -50,7 +50,6 @@ export class SettingsAddComponent implements OnInit {
     if (this.addSettingFormGroup.valid) {
       this.settingsService.addSetting(this.addSettingFormGroup.value).subscribe(
         res => {
-          console.log(res);
           this.router.navigate(['/settings']);
           this.snackBar.open(res.message, 'X', {
             duration: 5000,

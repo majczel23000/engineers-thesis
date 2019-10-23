@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LoginService } from '../shared/services/login.service';
+import { SpinnerService } from '../shared/services/spinner.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -56,7 +57,8 @@ export class SidebarComponent {
     }
   ];
 
-  constructor(public loginService: LoginService) {
+  constructor(public loginService: LoginService,
+              public spinnerService: SpinnerService) {
   }
 
   logout(): void {

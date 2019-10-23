@@ -39,7 +39,6 @@ export class MenuAddComponent {
     if (this.addMenuFormGroup.valid) {
       this.menuService.addMenu(this.addMenuFormGroup.value).subscribe(
         res => {
-          console.log(res);
           this.router.navigate(['/menus']);
           this.snackBar.open(res.message, 'X', {
             duration: 5000,

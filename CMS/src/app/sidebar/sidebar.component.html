@@ -46,7 +46,13 @@
     </mat-sidenav>
 
     <mat-sidenav-content class="sidenav-content">
+
+      <div class="spinner" *ngIf="spinnerService.getSpinner()">
+        <mat-spinner></mat-spinner>
+      </div>
+
       <router-outlet></router-outlet>
+
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>

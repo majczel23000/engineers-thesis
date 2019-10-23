@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material';
 import { MatPaginator, MatTableDataSource, MatPaginatorIntl, MatSort } from '@angular/material';
 import { SettingsService } from '../services/settings.service';
 import { SettingModel } from '../../shared/models/settings/Setting.model';
+import { SpinnerService } from '../../shared/services/spinner.service';
 
 @Component({
   selector: 'app-settings-list',
@@ -22,8 +23,12 @@ export class SettingsListComponent implements OnInit {
   settings: SettingModel[];
 
   constructor(private router: Router,
-    private paginatorIntl: MatPaginatorIntl,
-    private settingsService: SettingsService) { }
+              private paginatorIntl: MatPaginatorIntl,
+              private settingsService: SettingsService,
+              private spinnerService: SpinnerService,
+              private snackBar: MatSnackBar) {
+    this.spinnerService.setSpinner(true);
+  }
 
   ngOnInit() {
     this.getSettings();
@@ -33,6 +38,7 @@ export class SettingsListComponent implements OnInit {
     this.settingsService.getAllSettings()
     .pipe(
       finalize( () => {
+        this.spinnerService.setSpinner(false);
         this.loadingData = false;
         this.dataSource.paginator = this.paginator;
         setTimeout(() => {
@@ -46,7 +52,12 @@ export class SettingsListComponent implements OnInit {
       this.dataSource.data = res.data;
     },
     err => {
-      console.log(err);
+      this.snackBar.open(err.error.message, 'X', {
+        duration: 5000,
+        horizontalPosition: 'right',
+        panelClass: ['error-snackbar']
+      });
+      this.router.navigate(['/error']);
     }
   );
   }

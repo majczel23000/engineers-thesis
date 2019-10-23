@@ -42,7 +42,6 @@ export class FaqAddComponent implements OnInit {
     if (this.addFaqFormGroup.valid) {
       this.faqService.addFaq(this.addFaqFormGroup.value).subscribe(
         res => {
-          console.log(res);
           this.router.navigate(['/faqs']);
           this.snackBar.open(res.message, 'X', {
             duration: 5000,

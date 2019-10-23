@@ -39,7 +39,6 @@ export class PageAddComponent {
     if (this.addPageFormGroup.valid) {
       this.pageService.addPage(this.addPageFormGroup.value).subscribe(
         res => {
-          console.log(res);
           this.router.navigate(['/pages']);
           this.snackBar.open(res.message, 'X', {
             duration: 5000,

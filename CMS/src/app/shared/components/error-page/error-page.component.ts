@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { SpinnerService } from '../../services/spinner.service';
 
 @Component({
   selector: 'app-error-page',
@@ -9,7 +10,9 @@ export class ErrorPageComponent implements OnInit {
 
   @Input() message;
 
-  constructor() { }
+  constructor(private spinnerService: SpinnerService) {
+    this.spinnerService.setSpinner(false);
+  }
 
   ngOnInit() {
   }

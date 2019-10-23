@@ -7,7 +7,7 @@ import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainModule } from './main/main.module';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { MatToolbarModule, MatSidenavModule, MatMenuModule, MatIconModule, MatListModule, MatSnackBarModule } from '@angular/material';
+import { MatToolbarModule, MatSidenavModule, MatMenuModule, MatIconModule, MatListModule, MatSnackBarModule, MatProgressSpinnerModule } from '@angular/material';
 import { TokenInterceptorService } from './shared/interceptors/token-interceptor.service';
 
 @NgModule({
@@ -27,7 +27,8 @@ import { TokenInterceptorService } from './shared/interceptors/token-interceptor
     MatListModule,
     MatSnackBarModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {

@@ -5,6 +5,7 @@ import { finalize } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
 import { MatPaginator, MatTableDataSource, MatPaginatorIntl, MatSort } from '@angular/material';
 import { FaqModel } from '../../shared/models/faq/Faq.model';
+import { SpinnerService } from '../../shared/services/spinner.service';
 
 @Component({
   selector: 'app-faq-list',
@@ -24,7 +25,10 @@ export class FaqListComponent implements OnInit {
     constructor(private faqService: FaqService,
               private router: Router,
               private paginatorIntl: MatPaginatorIntl,
-              private snackBar: MatSnackBar) { }
+              private snackBar: MatSnackBar,
+                private spinnerService: SpinnerService) {
+      this.spinnerService.setSpinner(true);
+    }
 
   ngOnInit() {
     this.getFaqs();
@@ -36,6 +40,7 @@ export class FaqListComponent implements OnInit {
         .pipe(
           finalize( () => {
             this.loadingData = false;
+            this.spinnerService.setSpinner(false);
             this.dataSource.paginator = this.paginator;
             setTimeout( () => {
               this.dataSource.sort = this.sort;

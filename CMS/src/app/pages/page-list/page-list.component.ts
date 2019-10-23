@@ -6,6 +6,7 @@ import { MatPaginator, MatTableDataSource, MatPaginatorIntl, MatSort } from '@an
 import { PageModel } from '../../shared/models/page/Page.model';
 import { PageService } from '../services/page.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { SpinnerService } from '../../shared/services/spinner.service';
 
 @Component({
   selector: 'app-page-list',
@@ -26,7 +27,10 @@ export class PageListComponent implements OnInit {
               private paginatorIntl: MatPaginatorIntl,
               private snackBar: MatSnackBar,
               private pageService: PageService,
-              private _sanitizer: DomSanitizer) { }
+              private _sanitizer: DomSanitizer,
+              private spinnerService: SpinnerService) {
+    this.spinnerService.setSpinner(true);
+  }
 
   ngOnInit() {
     this.getPages();
@@ -38,6 +42,7 @@ export class PageListComponent implements OnInit {
       .pipe(
         finalize( () => {
           this.loadingData = false;
+          this.spinnerService.setSpinner(false);
           this.dataSource.paginator = this.paginator;
           setTimeout( () => {
             this.dataSource.sort = this.sort;
@@ -54,7 +59,6 @@ export class PageListComponent implements OnInit {
             horizontalPosition: 'right',
             panelClass: ['error-snackbar']
           });
-          this.router.navigate(['/error']);
           this.router.navigate(['/error']);
         }
       );

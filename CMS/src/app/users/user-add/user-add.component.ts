@@ -51,7 +51,6 @@ export class UserAddComponent implements OnInit {
       const userData = this.prepareDataToSend();
       this.userService.addUser(userData).subscribe(
         (res) => {
-          console.log(res);
           this.router.navigate(['/users']);
           this.snackBar.open(res.message, 'X', {
             duration: 5000,

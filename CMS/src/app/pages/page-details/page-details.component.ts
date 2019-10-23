@@ -9,6 +9,7 @@ import { PageModel } from '../../shared/models/page/Page.model';
 import { PageStyleModel } from '../../shared/models/page/PageStyle.model';
 import { PageMetaTagModel } from '../../shared/models/page/PageMetaTag.model';
 import { PageContentModel } from '../../shared/models/page/PageContent.model';
+import { SpinnerService } from '../../shared/services/spinner.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -45,7 +46,10 @@ export class PageDetailsComponent implements OnInit {
               private snackBar: MatSnackBar,
               public dialog: MatDialog,
               private router: Router,
-              private pageService: PageService) { }
+              private pageService: PageService,
+              private spinnerService: SpinnerService) {
+    this.spinnerService.setSpinner(true);
+  }
 
   ngOnInit() {
     this.getPageById();
@@ -56,6 +60,7 @@ export class PageDetailsComponent implements OnInit {
     this.pageService.getPageById(this.pageId).subscribe(
       res => {
         this.page = res.data;
+        this.spinnerService.setSpinner(false);
         this.cloneStyles();
         this.cloneMetaTags();
         this.cloneContents();
@@ -65,7 +70,11 @@ export class PageDetailsComponent implements OnInit {
         });
       },
       err => {
-        console.log(err);
+        this.snackBar.open(err.error.message, 'X', {
+          duration: 5000,
+          horizontalPosition: 'right',
+          panelClass: ['error-snackbar']
+        });
         this.router.navigate(['/error']);
       }
     );

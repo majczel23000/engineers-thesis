@@ -8,6 +8,7 @@ import { AbstractControl, FormGroup, FormControl, Validators, FormGroupDirective
 import { FaqModel } from '../../shared/models/faq/Faq.model';
 import { FaqElementModel } from '../../shared/models/faq/FaqElement.model';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { SpinnerService } from '../../shared/services/spinner.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -42,7 +43,10 @@ export class FaqDetailsComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private snackBar: MatSnackBar,
               public dialog: MatDialog,
-              private router: Router) { }
+              private router: Router,
+              private spinnerService: SpinnerService) {
+    this.spinnerService.setSpinner(true);
+  }
 
   ngOnInit() {
     this.getFaqById();
@@ -53,6 +57,7 @@ export class FaqDetailsComponent implements OnInit {
     this.faqService.getFaqById(this.faqId).subscribe(
       res => {
         this.faq = res.data;
+        this.spinnerService.setSpinner(false);
         this.cloneElements();
         this.editFaqFormGroup = new FormGroup({
           name: new FormControl(this.faq.name, [ Validators.required, Validators.minLength(5)]),
@@ -60,7 +65,11 @@ export class FaqDetailsComponent implements OnInit {
         });
       },
       err => {
-        console.log(err);
+        this.snackBar.open(err.error.message, 'X', {
+          duration: 5000,
+          horizontalPosition: 'right',
+          panelClass: ['error-snackbar']
+        });
         this.router.navigate(['/error']);
       }
     );
@@ -74,8 +83,6 @@ export class FaqDetailsComponent implements OnInit {
   }
 
   clearChanges(): void {
-    console.log('elements: ', this.faqElements);
-    console.log('faq: ', this.faq.elements);
     this.editFaqFormGroup.controls.name.setValue(this.faq.name);
     this.editFaqFormGroup.controls.description.setValue(this.faq.description);
     this.cloneElements();

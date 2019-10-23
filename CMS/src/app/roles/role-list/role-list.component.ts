@@ -4,6 +4,8 @@ import { MatPaginator, MatTableDataSource, MatPaginatorIntl, MatSort } from '@an
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { RoleModel } from '../../shared/models/Role.model';
+import { SpinnerService } from '../../shared/services/spinner.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-role-list',
@@ -21,7 +23,11 @@ export class RoleListComponent implements OnInit {
   roles: RoleModel[];
   constructor(private router: Router,
               private paginatorIntl: MatPaginatorIntl,
-              private roleService: RoleService) { }
+              private roleService: RoleService,
+              private snackBar: MatSnackBar,
+              private spinnerService: SpinnerService) {
+    this.spinnerService.setSpinner(true);
+  }
 
   ngOnInit() {
     this.getRoles();
@@ -33,6 +39,7 @@ export class RoleListComponent implements OnInit {
       .pipe(
         finalize( () => {
           this.loadingData = false;
+          this.spinnerService.setSpinner(false);
           this.dataSource.paginator = this.paginator;
           setTimeout(() => {
             this.dataSource.sort = this.sort;
@@ -45,7 +52,12 @@ export class RoleListComponent implements OnInit {
         this.dataSource.data = res.data;
       },
       err => {
-        console.log(err);
+        this.snackBar.open(err.error.message, 'X', {
+          duration: 5000,
+          horizontalPosition: 'right',
+          panelClass: ['error-snackbar']
+        });
+        this.router.navigate(['/error']);
       }
     );
   }

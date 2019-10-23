@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material';
 import { MatPaginator, MatTableDataSource, MatPaginatorIntl, MatSort } from '@angular/material';
 import { MenuModel } from '../../shared/models/menu/Menu.model';
 import { MenuService } from '../services/menu.service';
+import { SpinnerService } from '../../shared/services/spinner.service';
 
 @Component({
   selector: 'app-menu-list',
@@ -24,7 +25,10 @@ export class MenuListComponent implements OnInit {
   constructor(private menuService: MenuService,
               private router: Router,
               private paginatorIntl: MatPaginatorIntl,
-              private snackBar: MatSnackBar) { }
+              private snackBar: MatSnackBar,
+              private spinnerService: SpinnerService) {
+    this.spinnerService.setSpinner(true);
+  }
 
   ngOnInit() {
     this.getMenus();
@@ -36,6 +40,7 @@ export class MenuListComponent implements OnInit {
       .pipe(
         finalize( () => {
           this.loadingData = false;
+          this.spinnerService.setSpinner(false);
           this.dataSource.paginator = this.paginator;
           setTimeout( () => {
             this.dataSource.sort = this.sort;
@@ -52,7 +57,6 @@ export class MenuListComponent implements OnInit {
             horizontalPosition: 'right',
             panelClass: ['error-snackbar']
           });
-          this.router.navigate(['/error']);
           this.router.navigate(['/error']);
         }
       );

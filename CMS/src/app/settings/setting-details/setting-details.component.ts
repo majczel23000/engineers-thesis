@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { SettingModel } from '../../shared/models/settings/Setting.model';
 import { SettingsService } from '../services/settings.service';
 import { Router } from '@angular/router';
+import { SpinnerService } from '../../shared/services/spinner.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -40,10 +41,13 @@ export class SettingDetailsComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
 
   constructor(private activatedRoute: ActivatedRoute,
-    private settingsService: SettingsService,
-    public dialog: MatDialog,
-    private snackBar: MatSnackBar,
-    private router: Router) { }
+              private settingsService: SettingsService,
+              public dialog: MatDialog,
+              private snackBar: MatSnackBar,
+              private router: Router,
+              private spinnerService: SpinnerService) {
+    this.spinnerService.setSpinner(true);
+  }
 
   ngOnInit() {
     this.getSettingById();
@@ -54,18 +58,24 @@ export class SettingDetailsComponent implements OnInit {
     this.settingsService.getSettingById(this.settingId).subscribe(
       res => {
         this.setting = res.data;
+        this.spinnerService.setSpinner(false);
         this.editSettingFormGroup = new FormGroup({
           code: new FormControl(this.setting.code, [ Validators.required, Validators.minLength(5) ]),
           name: new FormControl(this.setting.name, [ Validators.required, Validators.minLength(5) ]),
           description: new FormControl(''),
           type: new FormControl(this.setting.type, Validators.required),
           value: new FormControl(this.setting.value, Validators.required)
-        })
+        });
       },
       err => {
-        console.log(err);
+        this.snackBar.open(err.error.message, 'X', {
+          duration: 5000,
+          horizontalPosition: 'right',
+          panelClass: ['error-snackbar']
+        });
+        this.router.navigate(['/error']);
       }
-    )
+    );
   }
 
   clearChanges(): void {

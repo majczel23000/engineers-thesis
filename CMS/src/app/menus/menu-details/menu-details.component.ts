@@ -7,6 +7,7 @@ import { AbstractControl, FormGroup, FormControl, Validators, FormGroupDirective
 import { MenuService } from '../services/menu.service';
 import { MenuModel } from '../../shared/models/menu/Menu.model';
 import { MenuElementModel } from '../../shared/models/menu/MenuElement.model';
+import { SpinnerService } from '../../shared/services/spinner.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -41,7 +42,10 @@ export class MenuDetailsComponent implements OnInit {
               private snackBar: MatSnackBar,
               public dialog: MatDialog,
               private router: Router,
-              private menuService: MenuService) { }
+              private menuService: MenuService,
+              private spinnerService: SpinnerService) {
+    this.spinnerService.setSpinner(true);
+  }
 
   ngOnInit() {
     this.getMenuById();
@@ -52,6 +56,7 @@ export class MenuDetailsComponent implements OnInit {
     this.menuService.getMenuById(this.menuId).subscribe(
       res => {
         this.menu = res.data;
+        this.spinnerService.setSpinner(false);
         this.cloneElements();
         this.editMenuFormGroup = new FormGroup({
           name: new FormControl(this.menu.name, [ Validators.required, Validators.minLength(5)]),
@@ -59,7 +64,11 @@ export class MenuDetailsComponent implements OnInit {
         });
       },
       err => {
-        console.log(err);
+        this.snackBar.open(err.error.message, 'X', {
+          duration: 5000,
+          horizontalPosition: 'right',
+          panelClass: ['error-snackbar']
+        });
         this.router.navigate(['/error']);
       }
     );

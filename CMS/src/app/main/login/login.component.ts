@@ -38,7 +38,6 @@ export class LoginComponent {
     if (this.loginFormGroup.valid) {
       this.loginService.loginUser(this.loginFormGroup.value).subscribe(
         (res) => {
-          console.log(res);
           this.loginService.setToken(res.data.token);
           this.loginService.setUser(res.data.user);
           this.router.navigate(['/dashboard']);
@@ -49,7 +48,6 @@ export class LoginComponent {
           });
         },
         (err) => {
-          console.log(err.error);
           this.snackBar.open(err.error.message, 'X', {
             duration: 5000,
             horizontalPosition: 'right',

@@ -4,6 +4,7 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 import { DialogConfirmComponent } from '../../shared/components/dialog-confirm/dialog-confirm.component';
 import { ImageService } from '../services/image.service';
 import { ImageModel } from '../../shared/models/image/Image.model';
+import { SpinnerService } from '../../shared/services/spinner.service';
 
 @Component({
   selector: 'app-image-details',
@@ -19,7 +20,10 @@ export class ImageDetailsComponent implements OnInit {
               private snackBar: MatSnackBar,
               public dialog: MatDialog,
               private router: Router,
-              private imageService: ImageService) { }
+              private imageService: ImageService,
+              private spinnerService: SpinnerService) {
+    this.spinnerService.setSpinner(true);
+  }
 
   ngOnInit() {
     this.getImageById();
@@ -30,9 +34,14 @@ export class ImageDetailsComponent implements OnInit {
     this.imageService.getImageById(this.imageId).subscribe(
       res => {
         this.image = res.data;
+        this.spinnerService.setSpinner(false);
       },
       err => {
-        console.log(err);
+        this.snackBar.open(err.error.message, 'X', {
+          duration: 5000,
+          horizontalPosition: 'right',
+          panelClass: ['error-snackbar']
+        });
         this.router.navigate(['/error']);
       }
     );

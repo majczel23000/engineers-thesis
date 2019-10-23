@@ -8,6 +8,7 @@ import { RoleModel } from '../../shared/models/Role.model';
 import { MatCheckbox, MatSnackBar } from '@angular/material';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogConfirmComponent } from '../../shared/components/dialog-confirm/dialog-confirm.component';
+import { SpinnerService } from '../../shared/services/spinner.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -40,7 +41,10 @@ export class UserDetailsComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private snackBar: MatSnackBar,
               public dialog: MatDialog,
-              private router: Router) { }
+              private router: Router,
+              private spinnerService: SpinnerService) {
+    this.spinnerService.setSpinner(true);
+  }
 
   ngOnInit() {
     this.getAllRoles();
@@ -52,7 +56,7 @@ export class UserDetailsComponent implements OnInit {
     this.userService.getUserById(this.userId).subscribe(
       res => {
         this.user = res.data;
-        console.log(this.user);
+        this.spinnerService.setSpinner(false);
         for (let i = 0; i < this.user.roles.length; i++) {
           this.checkedCheckboxes.push(this.user.roles[i]);
         }
@@ -64,7 +68,11 @@ export class UserDetailsComponent implements OnInit {
         });
       },
       err => {
-        console.log(err);
+        this.snackBar.open(err.error.message, 'X', {
+          duration: 5000,
+          horizontalPosition: 'right',
+          panelClass: ['error-snackbar']
+        });
         this.router.navigate(['/error']);
       }
     );

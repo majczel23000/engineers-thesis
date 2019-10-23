@@ -5,6 +5,7 @@ import { finalize } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
 import { MatPaginator, MatTableDataSource, MatPaginatorIntl, MatSort } from '@angular/material';
 import { ImageModel } from '../../shared/models/image/Image.model';
+import { SpinnerService } from '../../shared/services/spinner.service';
 
 @Component({
   selector: 'app-image-list',
@@ -24,7 +25,10 @@ export class ImageListComponent implements OnInit {
   constructor(private router: Router,
               private paginatorIntl: MatPaginatorIntl,
               private snackBar: MatSnackBar,
-              private imageService: ImageService) { }
+              private imageService: ImageService,
+              private spinnerService: SpinnerService) {
+    this.spinnerService.setSpinner(true);
+  }
 
 
   ngOnInit() {
@@ -37,6 +41,7 @@ export class ImageListComponent implements OnInit {
       .pipe(
         finalize( () => {
           this.loadingData = false;
+          this.spinnerService.setSpinner(false);
           this.dataSource.paginator = this.paginator;
           setTimeout( () => {
             this.dataSource.sort = this.sort;

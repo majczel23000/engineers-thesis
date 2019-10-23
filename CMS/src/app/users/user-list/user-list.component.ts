@@ -5,6 +5,7 @@ import { User } from 'src/app/shared/models/user.model';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
+import { SpinnerService } from '../../shared/services/spinner.service';
 
 @Component({
   selector: 'app-user-list',
@@ -24,7 +25,10 @@ export class UserListComponent implements OnInit {
   constructor(private userService: UserService,
               private router: Router,
               private paginatorIntl: MatPaginatorIntl,
-              private snackBar: MatSnackBar) { }
+              private snackBar: MatSnackBar,
+              private spinnerService: SpinnerService) {
+    this.spinnerService.setSpinner(true);
+  }
 
   ngOnInit() {
     this.getUsers();
@@ -36,6 +40,7 @@ export class UserListComponent implements OnInit {
     .pipe(
       finalize(() => {
         this.loadingData = false;
+        this.spinnerService.setSpinner(false);
         this.dataSource.paginator = this.paginator;
         setTimeout(() => {
           this.dataSource.sort = this.sort;
