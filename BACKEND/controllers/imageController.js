@@ -17,6 +17,7 @@ exports.addImage = async (req, res) => {
         res.status(409).send(errorResponse(409, messages.images.errors.codeLength));
         return;
     } else if (!(/^[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u.test(req.body.code))) {
+        console.log('wrong');
         res.status(409).send(errorResponse(409, messages.images.errors.codeRegexp));
         return;
     }

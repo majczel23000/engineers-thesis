@@ -46,12 +46,12 @@ export class SidebarComponent {
       icon: 'image'
     },
     {
-      routerLink: '/carousels',
+      routerLink: '/',
       text: 'Carousels',
       icon: 'view_carousel'
     },
     {
-      routerLink: '/settings',
+      routerLink: '/',
       text: 'Settings',
       icon: 'settings'
     }

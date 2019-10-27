@@ -52,7 +52,7 @@ module.exports = {
                 codeLength: "Field Code must have at least 5 characters",
                 codeRegexp: "Field Code contains wrong characters",
                 nameLength: "Field Name must have at least 5 characters",
-                nameRegexp: "Field Code contains wrong characters",
+                nameRegexp: "Field Name contains wrong characters",
                 idNotFound: "Faq with specified id not found",
                 codeExists: "Faq with specified code already exists"
             },
@@ -70,7 +70,7 @@ module.exports = {
                 codeLength: "Field Code must have at least 5 characters",
                 codeRegexp: "Field Code contains wrong characters",
                 nameLength: "Field Name must have at least 5 characters",
-                nameRegexp: "Field Code contains wrong characters",
+                nameRegexp: "Field Name contains wrong characters",
                 idNotFound: "Menu with specified id not found",
                 codeExists: "Menu with specified code already exists"
             },
@@ -109,7 +109,7 @@ module.exports = {
                 codeLength: "Field Code must have at least 5 characters",
                 codeRegexp: "Field Code contains wrong characters",
                 nameLength: "Field Name must have at least 5 characters",
-                nameRegexp: "Field Code contains wrong characters",
+                nameRegexp: "Field Name contains wrong characters",
                 idNotFound: "Image with specified id not found",
                 codeExists: "Image with specified code already exists"
             },
@@ -127,7 +127,7 @@ module.exports = {
                 codeLength: "Field Code must have at least 5 characters",
                 codeRegexp: "Field Code contains wrong characters",
                 nameLength: "Field Name must have at least 5 characters",
-                nameRegexp: "Field Code contains wrong characters",
+                nameRegexp: "Field Name contains wrong characters",
                 idNotFound: "Setting with specified id not found",
                 codeExists: "Setting with specified code already exists",
                 invalidType: "Field Type have invalid value",
