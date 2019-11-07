@@ -69,7 +69,7 @@ exports.getImageById = (req, res) => {
 };
 
 exports.deleteImage = (req, res) => {
-    Image.findOneAndRemove(req.params.id, (err) => {
+    Image.findOneAndRemove({ _id: req.params.id }, (err) => {
         if (err) {
             res.send(err);
         } else {

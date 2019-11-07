@@ -121,19 +121,15 @@ exports.deactivate = (req, res) => {
 };
 
 exports.update = (req, res) => {
-    req.body.status = "INACTIVE";
-    const validateFieldsResult = validateFields(Settings.schema.obj, req.body);
-    if (!validateFieldsResult.status) {
-        res.status(409).send(errorResponse(409, validateFieldsResult.message));
-        return;
-    }
-    if (req.body.code.length < 5) {
-        res.status(409).send(errorResponse(409, messages.settings.errors.codeLength));
-        return;
-    } else if (!(/^[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u.test(req.body.code))) {
-        res.status(409).send(errorResponse(409, messages.settings.errors.codeRegexp));
-        return;
-    }
+    if (req.body.code)
+        delete req.body.code;
+    if (req.body.createdAt)
+        delete req.body.createdAt;
+    if (req.body.updatedAt)
+        delete req.body.updatedAt;
+    req.body.updatedAt = new Date();
+    if (req.body.status)
+        delete req.body.status;
     if (req.body.name.length < 5) {
         res.status(409).send(errorResponse(409, messages.settings.errors.codeLength));
         return;
@@ -165,7 +161,7 @@ exports.update = (req, res) => {
         } else if (setting) {
             res.status(200).json(successResponse(200, messages.settings.success.updated, setting));
         } else {
-            res.status(409).json(errorResponse(409, validateFieldsResult));
+            res.status(409).json(errorResponse(409, messages.settings.errors.idNotFound));
         }
     })
 }

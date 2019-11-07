@@ -20,7 +20,7 @@
 
         <tr class="module-details-row">
           <td class="module-details-item">Name:</td>
-          <td class="module-details-item">
+          <td *ngIf="faq.status !== 'DELETED'" class="module-details-item">
             <mat-form-field class="module-details-form-field">
               <input matInput value="{{faq?.name}}" name="name" formControlName="name" [errorStateMatcher]="matcher">
               <mat-error *ngIf="!control.name.hasError('required') && control.name.hasError('minlength')">
@@ -31,15 +31,17 @@
               </mat-error>
             </mat-form-field>
           </td>
+          <td *ngIf="faq.status === 'DELETED'" class="module-details-item" style="text-align: left">{{faq?.name}}</td>
         </tr>
 
         <tr class="module-details-row">
           <td class="module-details-item">Description:</td>
-          <td class="module-details-item">
+          <td *ngIf="faq.status !== 'DELETED'" class="module-details-item">
             <mat-form-field class="module-details-form-field">
               <input matInput value="{{faq?.description}}" name="description" formControlName="description">
             </mat-form-field>
           </td>
+          <td *ngIf="faq.status === 'DELETED'" class="module-details-item" style="text-align: left">{{faq?.description}}</td>
         </tr>
 
         <tr class="module-details-row">
@@ -59,8 +61,9 @@
         </tr>
 
         <tr class="module-details-row">
-          <td class="module-details-item module-elements-title">Elements</td>
-          <td class="module-details-item">
+          <td *ngIf="faq.status === 'DELETED'" colspan="2" class="module-details-item module-elements-title">Elements</td>
+          <td *ngIf="faq.status !== 'DELETED'" class="module-details-item module-elements-title">Elements</td>
+          <td *ngIf="faq.status !== 'DELETED'" class="module-details-item">
             <a mat-raised-button class="module-edit-btn" color="primary" (click)="addFaqElement()" *ngIf="faqElementsVisibility">Add element</a>
             <a mat-raised-button class="module-edit-btn" color="primary" (click)="faqElementsVisibility = !faqElementsVisibility">
               <ng-container *ngIf="!faqElementsVisibility">Show</ng-container>
@@ -71,7 +74,7 @@
 
       </table>
 
-      <table cdkDropList (cdkDropListDropped)="drop($event)">
+      <table *ngIf="faq.status !== 'DELETED'" cdkDropList (cdkDropListDropped)="drop($event)">
         <ng-container *ngIf="faqElementsVisibility && !faqElements.length">
           <tr class="module-details-row">
             <td class="module-details-item-none">
@@ -103,7 +106,30 @@
 
         </ng-container>
       </table>
-      <mat-card-actions class="module-edit-actions">
+
+      <table *ngIf="faq.status === 'DELETED'">
+        <ng-container *ngIf="faqElementsVisibility && !faqElements.length">
+          <tr class="module-details-row">
+            <td class="module-details-item-none">
+              This faq have no elements
+            </td>
+          </tr>
+        </ng-container>
+        <ng-container *ngIf="faqElementsVisibility">
+
+          <tr *ngFor="let faqElement of faqElements; let i = index" class="module-details-row">
+            <td class="module-details-item-element">
+              {{faqElement.question}}
+            </td>
+            <td class="module-details-item-element">
+              {{faqElement.answear}}
+            </td>
+          </tr>
+
+        </ng-container>
+      </table>
+
+      <mat-card-actions *ngIf="faq.status !== 'DELETED'" class="module-edit-actions">
         <button mat-raised-button class="module-edit-btn" color="primary">Save changes</button>
         <a mat-raised-button class="module-edit-btn" (click)="clearChanges()" color="accent">Clear changes</a>
         <a mat-raised-button class="module-edit-btn" color="warn" (click)="removeFaq()">Remove faq</a>

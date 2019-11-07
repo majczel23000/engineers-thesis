@@ -20,7 +20,7 @@
 
         <tr class="module-details-row">
           <td class="module-details-item">Name:</td>
-          <td class="module-details-item">
+          <td *ngIf="menu.status !== 'DELETED'" class="module-details-item">
             <mat-form-field class="module-details-form-field">
               <input matInput value="{{menu?.name}}" name="name" formControlName="name" [errorStateMatcher]="matcher">
               <mat-error *ngIf="!control.name.hasError('required') && control.name.hasError('minlength')">
@@ -31,15 +31,17 @@
               </mat-error>
             </mat-form-field>
           </td>
+          <td *ngIf="menu.status === 'DELETED'" class="module-details-item" style="text-align: left">{{menu.name}}</td>
         </tr>
 
         <tr class="module-details-row">
           <td class="module-details-item">Description:</td>
-          <td class="module-details-item">
+          <td *ngIf="menu.status !== 'DELETED'" class="module-details-item">
             <mat-form-field class="module-details-form-field">
               <input matInput value="{{menu?.description}}" name="description" formControlName="description">
             </mat-form-field>
           </td>
+          <td *ngIf="menu.status === 'DELETED'" class="module-details-item" style="text-align: left">{{menu.description}}</td>
         </tr>
 
         <tr class="module-details-row">
@@ -59,8 +61,9 @@
         </tr>
 
         <tr class="module-details-row">
-          <td class="module-details-item module-elements-title">Elements</td>
-          <td class="module-details-item">
+          <td *ngIf="menu.status === 'DELETED'" colspan="2" class="module-details-item module-elements-title">Elements</td>
+          <td *ngIf="menu.status !== 'DELETED'" class="module-details-item module-elements-title">Elements</td>
+          <td *ngIf="menu.status !== 'DELETED'" class="module-details-item">
             <a mat-raised-button class="module-edit-btn" color="primary" (click)="addMenuElement()" *ngIf="menuElementsVisibility">Add element</a>
             <a mat-raised-button class="module-edit-btn" color="primary" (click)="menuElementsVisibility = !menuElementsVisibility">
               <ng-container *ngIf="!menuElementsVisibility">Show</ng-container>
@@ -71,7 +74,7 @@
 
       </table>
 
-      <table>
+      <table *ngIf="menu.status !== 'DELETED'">
 
         <ng-container *ngIf="menuElementsVisibility && !menuElements.length">
           <tr class="module-details-row">
@@ -162,7 +165,65 @@
         </ng-container>
 
       </table>
-      <mat-card-actions class="module-edit-actions">
+
+      <table *ngIf="menu.status === 'DELETED'">
+
+        <ng-container *ngIf="menuElementsVisibility && !menuElements.length">
+          <tr class="module-details-row">
+            <td class="module-details-item-none">
+              This menu have no elements
+            </td>
+          </tr>
+        </ng-container>
+
+        <ng-container *ngIf="menuElementsVisibility">
+          <ng-container *ngFor="let menuElement of menuElements; let i = index">
+
+            <tr class="module-details-row first" >
+              <td class="module-details-item-element" style="text-align: left">
+                <span style="font-size: 12px">Url {{i+1}}:</span> {{menuElement.url}}
+              </td>
+              <td class="module-details-item-element" style="text-align: left">
+                <span style="font-size: 12px">Text {{i+1}}:</span> {{menuElement.text}}
+              </td>
+            </tr>
+
+            <ng-container *ngIf="menuElement.children && menuElement.children.length">
+              <ng-container *ngFor="let subEl1 of menuElement.children; let j = index">
+
+                <tr class="module-details-row second">
+                  <td class="module-details-item-element" style="text-align: left">
+                    <span style="font-size: 12px">Url {{i+1}}.{{j+1}}:</span> {{subEl1.url}}
+                  </td>
+                  <td class="module-details-item-element" style="text-align: left">
+                    <span style="font-size: 12px">Url {{i+1}}.{{j+1}}:</span> {{subEl1.text}}
+                  </td>
+                </tr>
+
+                <ng-container *ngIf="subEl1.children && subEl1.children.length">
+                  <ng-container *ngFor="let subEl2 of subEl1.children; let k = index">
+
+                    <tr class="module-details-row second">
+                      <td class="module-details-item-element" style="text-align: left">
+                        <span style="font-size: 12px">Url {{i+1}}.{{j+1}}.{{k+1}}:</span> {{subEl2.url}}
+                      </td>
+                      <td class="module-details-item-element" style="text-align: left">
+                        <span style="font-size: 12px">Url {{i+1}}.{{j+1}}.{{k+1}}:</span> {{subEl2.text}}
+                      </td>
+                    </tr>
+
+                  </ng-container>
+                </ng-container>
+
+              </ng-container>
+            </ng-container>
+
+          </ng-container>
+        </ng-container>
+
+      </table>
+
+      <mat-card-actions *ngIf="menu.status !== 'DELETED'" class="module-edit-actions">
         <button mat-raised-button class="module-edit-btn" color="primary">Save changes</button>
         <a mat-raised-button class="module-edit-btn" (click)="clearChanges()" color="accent">Clear changes</a>
         <a mat-raised-button class="module-edit-btn" color="warn" (click)="removeMenu()">Remove menu</a>

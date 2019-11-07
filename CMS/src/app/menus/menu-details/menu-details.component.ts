@@ -56,6 +56,9 @@ export class MenuDetailsComponent implements OnInit {
     this.menuService.getMenuById(this.menuId).subscribe(
       res => {
         this.menu = res.data;
+        if (this.menu.status === 'DELETED') {
+          this.menuElementsVisibility = true;
+        }
         this.spinnerService.setSpinner(false);
         this.cloneElements();
         this.editMenuFormGroup = new FormGroup({

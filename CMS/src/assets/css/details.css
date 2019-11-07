@@ -26,6 +26,15 @@
   word-break: break-word;
 }
 
+.module-details-item-100 {
+  text-align: center;
+  padding: 20px;
+  font-size: 1rem;
+  border-right: 1px solid #ddd;
+  width: 100%;
+  word-break: break-word;
+}
+
 .role-list {
   display: flex;
   flex-wrap: wrap;
@@ -145,6 +154,9 @@ a.module-edit-btn:hover {
   }
   .module-details-item-element mat-form-field .mat-form-field-wrapper {
    padding: 0;
+  }
+  .module-details-card {
+    padding: 0 !important;
   }
 }
 

@@ -12,7 +12,7 @@ mat-form-field {
 }
 
 .image-row {
-  width: 100%;
+  width: 50%;
 }
 
 @media only screen and (max-width: 650px) {

@@ -57,6 +57,9 @@ export class FaqDetailsComponent implements OnInit {
     this.faqService.getFaqById(this.faqId).subscribe(
       res => {
         this.faq = res.data;
+        if (this.faq.status === 'DELETED') {
+          this.faqElementsVisibility = true;
+        }
         this.spinnerService.setSpinner(false);
         this.cloneElements();
         this.editFaqFormGroup = new FormGroup({

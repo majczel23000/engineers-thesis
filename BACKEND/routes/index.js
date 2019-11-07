@@ -93,7 +93,8 @@ export default (app) => {
         .get(verifyToken, checkRoleAndStatus(roles.settings.getAll), settings.getAllSettings);
     app.route('/settings/:id')
         .get(verifyToken, checkRoleAndStatus(roles.settings.getId), settings.getSettingById)
-        .delete(verifyToken, checkRoleAndStatus(roles.settings.delete), settings.deleteSetting);
+        .delete(verifyToken, checkRoleAndStatus(roles.settings.delete), settings.deleteSetting)
+        .put(verifyToken, checkRoleAndStatus(roles.settings.update), settings.update);
     app.route('/settings/:id/activate')
         .post(verifyToken, checkRoleAndStatus(roles.settings.update), settings.activate);
     app.route('/settings/:id/deactivate')

@@ -62,7 +62,7 @@ export class SettingDetailsComponent implements OnInit {
         this.editSettingFormGroup = new FormGroup({
           code: new FormControl(this.setting.code, [ Validators.required, Validators.minLength(5) ]),
           name: new FormControl(this.setting.name, [ Validators.required, Validators.minLength(5) ]),
-          description: new FormControl(''),
+          description: new FormControl(this.setting.description),
           type: new FormControl(this.setting.type, Validators.required),
           value: new FormControl(this.setting.value, Validators.required)
         });
@@ -84,7 +84,7 @@ export class SettingDetailsComponent implements OnInit {
   }
 
   changeStatus(): void {
-    if (!this.setting.code.includes('SETTINGS')) {
+    if (this.setting.status !== 'DELETED') {
       const dialogRef = this.dialog.open(DialogConfirmComponent, {
         width: '40%',
         data: {
@@ -111,7 +111,8 @@ export class SettingDetailsComponent implements OnInit {
           duration: 5000,
           horizontalPosition: 'right',
           panelClass: ['success-snackbar']
-        });
+        })
+        this.setting = res.data;
       },
       err => {
         this.snackBar.open(err.error.message, 'X', {
@@ -120,7 +121,7 @@ export class SettingDetailsComponent implements OnInit {
           panelClass: ['error-snackbar']
         });
       }
-    )
+    );
   }
 
   removeSetting(): void {
