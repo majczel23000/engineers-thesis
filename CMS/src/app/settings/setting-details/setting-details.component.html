@@ -20,7 +20,7 @@
         </tr>
         <tr class="module-details-row">
           <td class="module-details-item">Name:</td>
-          <td class="module-details-item">
+          <td *ngIf="setting.status !== 'DELETED'" class="module-details-item">
             <mat-form-field>
               <input matInput value="{{setting?.name}}" name="name" formControlName="name" [errorStateMatcher]="matcher">
               <mat-error *ngIf="control.name.hasError('required')">
@@ -28,11 +28,12 @@
               </mat-error>
             </mat-form-field>
           </td>
+          <td class="module-details-item" style="text-align: left" *ngIf="setting.status === 'DELETED'">{{setting?.name}}</td>
         </tr>
 
         <tr class="module-details-row">
           <td class="module-details-item">Description:</td>
-          <td class="module-details-item">
+          <td *ngIf="setting.status !== 'DELETED'" class="module-details-item">
             <mat-form-field>
               <input matInput value="{{setting?.description}}" name="description" formControlName="description" [errorStateMatcher]="matcher">
               <mat-error *ngIf="control.description.hasError('required')">
@@ -40,11 +41,12 @@
               </mat-error>
             </mat-form-field>
           </td>
+          <td class="module-details-item" style="text-align: left" *ngIf="setting.status === 'DELETED'">{{setting?.description}}</td>
         </tr>
 
         <tr class="module-details-row">
           <td class="module-details-item">Type:</td>
-          <td class="module-details-item">
+          <td *ngIf="setting.status !== 'DELETED'" class="module-details-item">
             <mat-form-field class="type-value-fields">
               <mat-select formControlName="type" value="{{setting?.type}}">
                 <mat-option *ngFor="let type of settingType" [value]="type">
@@ -56,11 +58,12 @@
               </mat-error>
             </mat-form-field>
           </td>
+          <td class="module-details-item" style="text-align: left" *ngIf="setting.status === 'DELETED'">{{setting?.type}}</td>
         </tr>
 
         <tr class="module-details-row">
           <td class="module-details-item">Value:</td>
-          <td class="module-details-item">
+          <td *ngIf="setting.status !== 'DELETED'" class="module-details-item">
             <mat-form-field class="example-full-width mb-4 type-value-fields">
               <input matInput type="text" name="value" formControlName="value" [errorStateMatcher]="matcher" value="{{setting?.value}}">
               <mat-error *ngIf="control.value.hasError('required')">
@@ -77,6 +80,7 @@
               </mat-error>
             </mat-form-field>
           </td>
+          <td class="module-details-item" style="text-align: left" *ngIf="setting.status === 'DELETED'">{{setting?.value}}</td>
         </tr>
 
         <tr class="module-details-row">
@@ -89,9 +93,14 @@
           <td class="module-details-item">Created at:</td>
           <td class="module-details-item" style="text-align: left">{{setting?.createdAt}}</td>
         </tr>
+
+        <tr class="module-details-row">
+          <td class="module-details-item">Updated at:</td>
+          <td class="module-details-item" style="text-align: left">{{setting?.updatedAt}}</td>
+        </tr>
       </table>
 
-      <mat-card-actions class="module-edit-actions">
+      <mat-card-actions *ngIf="setting.status !== 'DELETED'" class="module-edit-actions">
         <button mat-raised-button class="module-edit-btn" color="primary">Save changes</button>
         <a mat-raised-button class="module-edit-btn" (click)="clearChanges()" color="accent">Clear changes</a>
         <a mat-raised-button class="module-edit-btn" color="warn" (click)="removeSetting()">Remove setting</a>

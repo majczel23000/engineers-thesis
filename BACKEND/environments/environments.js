@@ -143,6 +143,27 @@ module.exports = {
                 deactivated: "Setting successfully deactivated"
             }
         },
+        dictionaries: {
+            errors: {
+                codeLength: "Field Code must have at least 5 characters",
+                codeRegexp: "Field Code contains wrong characters",
+                nameLength: "Field Name must have at least 5 characters",
+                nameRegexp: "Field Name contains wrong characters",
+                idNotFound: "Setting with specified id not found",
+                codeExists: "Setting with specified code already exists",
+                invalidType: "Field Type have invalid value",
+                invalidBooleanValue: "Invalid value for boolean type",
+                invalidNumberValue: "Invalid value for number type"
+            },
+            success: {
+                created: "Dictionary successfully created",
+                fetched: "Dictionary successfully fetched",
+                updated: "Dictionary successfully updated",
+                removed: "Dictionary successfully removed",
+                activated: "Dictionary successfully activated",
+                deactivated: "Dictionary successfully deactivated"
+            }
+        },
     },
     roles: {
         users: {
@@ -193,6 +214,13 @@ module.exports = {
             create: "SETTINGS/CREATE",
             update: "SETTINGS/UPDATE",
             delete: "SETTINGS/DELETE"
-        }
+        },
+        dictionary: {
+            getAll: "DICTIONARY/GET_ALL",
+            getId: "DICTIONARY/GET_ID",
+            create: "DICTIONARY/CREATE",
+            update: "DICTIONARY/UPDATE",
+            delete: "DICTIONARY/DELETE"
+        },
     }
 }

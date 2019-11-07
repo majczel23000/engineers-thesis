@@ -37,7 +37,12 @@ module.exports = {
             { code: 'SETTINGS/GET_ID', name: 'Get specified setting', description: 'Get specified setting', createdAt: date, status: 'ACTIVE' },
             { code: 'SETTINGS/CREATE', name: 'Create setting', description: 'Create setting', createdAt: date, status: 'ACTIVE' },
             { code: 'SETTINGS/UPDATE', name: 'Update setting', description: 'Update setting', createdAt: date, status: 'ACTIVE' },
-            { code: 'SETTINGS/DELETE', name: 'Delete setting', description: 'Delete setting', createdAt: date, status: 'ACTIVE' }
+            { code: 'SETTINGS/DELETE', name: 'Delete setting', description: 'Delete setting', createdAt: date, status: 'ACTIVE' },
+            { code: 'DICTIONARIES/GET_ALL', name: 'Get all dictionaries', description: 'Get all dictionaries', createdAt: date, status: 'ACTIVE'},
+            { code: 'DICTIONARIES/GET_ID', name: 'Get specified dictionary', description: 'Get specified dictionary', createdAt: date, status: 'ACTIVE' },
+            { code: 'DICTIONARIES/CREATE', name: 'Create dictionary', description: 'Create dictionary', createdAt: date, status: 'ACTIVE' },
+            { code: 'DICTIONARIES/UPDATE', name: 'Update dictionary', description: 'Update dictionary', createdAt: date, status: 'ACTIVE' },
+            { code: 'DICTIONARIES/DELETE', name: 'Delete dictionary', description: 'Delete dictionary', createdAt: date, status: 'ACTIVE' },
         ];
         MongoClient.connect('mongodb://localhost:27017/', function(err, db) {
             if(err)
