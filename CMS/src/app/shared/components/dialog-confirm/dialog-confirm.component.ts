@@ -9,6 +9,7 @@ import { MenuService } from '../../../menus/services/menu.service';
 import { PageService } from '../../../pages/services/page.service';
 import { ImageService } from '../../../images/services/image.service';
 import { SettingsService } from '../../../settings/services/settings.service';
+import { DictionaryService } from '../../../dictionaries/services/dictionary.service';
 
 @Component({
   selector: 'app-dialog-confirm',
@@ -26,7 +27,8 @@ export class DialogConfirmComponent {
               private menuService: MenuService,
               private pageService: PageService,
               private imageService: ImageService,
-              private settingsService: SettingsService) { }
+              private settingsService: SettingsService,
+              private dictionaryService: DictionaryService) { }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -365,6 +367,56 @@ export class DialogConfirmComponent {
       case 'REMOVE_SETTING': {
         this.data.status = 'REMOVED';
         this.settingsService.removeSetting(this.data._id).subscribe(
+          res => {
+            console.log(res);
+          },
+          err => {
+            console.log(err);
+          }
+        );
+        break;
+      }
+      case 'CHANGE_DICTIONARY_STATUS': {
+        if (this.data.status === 'INACTIVE') {
+          this.dictionaryService.activateDictionary(this.data._id).subscribe(
+            res => {
+              this.snackBar.open(res.message, 'X', {
+                duration: 5000,
+                horizontalPosition: 'right',
+                panelClass: ['success-snackbar']
+              });
+            },
+            err => {
+              this.snackBar.open(err.error.message, 'X', {
+                duration: 5000,
+                horizontalPosition: 'right',
+                panelClass: ['error-snackbar']
+              });
+            }
+          );
+        } else {
+          this.dictionaryService.deactivateDictionary(this.data._id).subscribe(
+            res => {
+              this.snackBar.open(res.message, 'X', {
+                duration: 5000,
+                horizontalPosition: 'right',
+                panelClass: ['success-snackbar']
+              });
+            },
+            err => {
+              this.snackBar.open(err.error.message, 'X', {
+                duration: 5000,
+                horizontalPosition: 'right',
+                panelClass: ['error-snackbar']
+              });
+            }
+          );
+        }
+        break;
+      }
+      case 'REMOVE_DICTIONARY': {
+        this.data.status = 'REMOVED';
+        this.dictionaryService.removeDictionary(this.data._id).subscribe(
           res => {
             console.log(res);
           },

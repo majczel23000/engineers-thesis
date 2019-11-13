@@ -3,6 +3,7 @@ import Menu from '../models/menuModel';
 import Page from '../models/pageModel';
 import Image from '../models/imageModel';
 import Settings from '../models/settingsModel';
+import Dictionary from '../models/dictionaryModel';
 
 module.exports = {
     validateEmail: function(email) {
@@ -109,6 +110,13 @@ module.exports = {
     checkSettingsCode: async function(code) {
         try {
             return Settings.findOne({ code: code })
+        } catch(error) {
+            throw new Error(error)
+        }
+    },
+    checkDictionaryCode: async function(code) {
+        try {
+            return Dictionary.findOne({ code: code })
         } catch(error) {
             throw new Error(error)
         }

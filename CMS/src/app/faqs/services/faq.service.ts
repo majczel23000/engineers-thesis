@@ -24,7 +24,7 @@ export class FaqService {
         routerLink: '/faqs/add'
       }
     ]
-  }
+  };
 
   constructor(private httpClient: HttpClient) { }
 

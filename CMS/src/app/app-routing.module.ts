@@ -49,6 +49,10 @@ const routes: Routes = [
     loadChildren: './settings/settings.module#SettingsModule'
   },
   {
+    path: 'dictionaries',
+    loadChildren: './dictionaries/dictionaries.module#DictionariesModule'
+  },
+  {
     path: 'error',
     component: ErrorPageComponent
   }

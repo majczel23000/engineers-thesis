@@ -153,7 +153,9 @@ module.exports = {
                 codeExists: "Setting with specified code already exists",
                 invalidType: "Field Type have invalid value",
                 invalidBooleanValue: "Invalid value for boolean type",
-                invalidNumberValue: "Invalid value for number type"
+                invalidNumberValue: "Invalid value for number type",
+                languageLength: "Field Language must have maximum 3 characters",
+                elementsLength: "All elements must contain text"
             },
             success: {
                 created: "Dictionary successfully created",
@@ -215,12 +217,12 @@ module.exports = {
             update: "SETTINGS/UPDATE",
             delete: "SETTINGS/DELETE"
         },
-        dictionary: {
-            getAll: "DICTIONARY/GET_ALL",
-            getId: "DICTIONARY/GET_ID",
-            create: "DICTIONARY/CREATE",
-            update: "DICTIONARY/UPDATE",
-            delete: "DICTIONARY/DELETE"
+        dictionaries: {
+            getAll: "DICTIONARIES/GET_ALL",
+            getId: "DICTIONARIES/GET_ID",
+            create: "DICTIONARIES/CREATE",
+            update: "DICTIONARIES/UPDATE",
+            delete: "DICTIONARIES/DELETE"
         },
     }
 }

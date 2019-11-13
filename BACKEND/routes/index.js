@@ -5,6 +5,7 @@ import menu from '../controllers/menuController';
 import page from '../controllers/pageController';
 import image from '../controllers/imageController';
 import settings from '../controllers/settingsController';
+import dictionaries from '../controllers/dictionariesController';
 let verifyToken = require('../middlewares/verifyToken').verifyToken;
 let checkRoleAndStatus = require('../middlewares/checkRole').checkRoleAndStatus;
 let roles = require('../environments/environments').roles;
@@ -99,4 +100,17 @@ export default (app) => {
         .post(verifyToken, checkRoleAndStatus(roles.settings.update), settings.activate);
     app.route('/settings/:id/deactivate')
         .post(verifyToken, checkRoleAndStatus(roles.settings.update), settings.deactivate);
+
+    // === DICTIONARIES ===
+    app.route('/dictionaries')
+        .post(verifyToken, checkRoleAndStatus(roles.dictionaries.create), dictionaries.createDictionary)
+        .get(verifyToken, checkRoleAndStatus(roles.dictionaries.getAll), dictionaries.getAllDictionaries);
+    app.route('/dictionaries/:id')
+        .get(verifyToken, checkRoleAndStatus(roles.dictionaries.getId), dictionaries.getDictionaryById)
+        .delete(verifyToken, checkRoleAndStatus(roles.dictionaries.delete), dictionaries.deleteDictionary)
+        .put(verifyToken, checkRoleAndStatus(roles.dictionaries.update), dictionaries.update);
+    app.route('/dictionaries/:id/activate')
+        .post(verifyToken, checkRoleAndStatus(roles.dictionaries.update), dictionaries.activate);
+    app.route('/dictionaries/:id/deactivate')
+        .post(verifyToken, checkRoleAndStatus(roles.dictionaries.update), dictionaries.deactivate);
 };

@@ -4,7 +4,11 @@ const DictionaryElementSchema = new Schema();
 
 DictionaryElementSchema.add({
     language: String,
-    elements: [String]
+    elements: [
+        {
+            value: String
+        }
+    ]
 })
 
 const DictionaryModel = new Schema({
