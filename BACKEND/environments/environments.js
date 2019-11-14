@@ -166,6 +166,24 @@ module.exports = {
                 deactivated: "Dictionary successfully deactivated"
             }
         },
+        carousels: {
+            errors: {
+                codeLength: "Field Code must have at least 5 characters",
+                codeRegexp: "Field Code contains wrong characters",
+                nameLength: "Field Name must have at least 5 characters",
+                nameRegexp: "Field Name contains wrong characters",
+                idNotFound: "Carousel with specified id not found",
+                codeExists: "Carousel with specified code already exists"
+            },
+            success: {
+                created: "Carousel successfully created",
+                fetched: "Carousel successfully fetched",
+                updated: "Carousel successfully updated",
+                removed: "Carousel successfully removed",
+                activated: "Carousel successfully activated",
+                deactivated: "Carousel successfully deactivated"
+            }
+        }
     },
     roles: {
         users: {
@@ -223,6 +241,13 @@ module.exports = {
             create: "DICTIONARIES/CREATE",
             update: "DICTIONARIES/UPDATE",
             delete: "DICTIONARIES/DELETE"
+        },
+        carousels: {
+            getAll: "CAROUSELS/GET_ALL",
+            getId: "CAROUSELS/GET_ID",
+            create: "CAROUSELS/CREATE",
+            update: "CAROUSELS/UPDATE",
+            delete: "CAROUSELS/DELETE"
         },
     }
 }

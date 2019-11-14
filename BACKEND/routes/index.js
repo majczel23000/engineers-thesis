@@ -6,6 +6,7 @@ import page from '../controllers/pageController';
 import image from '../controllers/imageController';
 import settings from '../controllers/settingsController';
 import dictionaries from '../controllers/dictionariesController';
+import carousels from '../controllers/carouselController';
 let verifyToken = require('../middlewares/verifyToken').verifyToken;
 let checkRoleAndStatus = require('../middlewares/checkRole').checkRoleAndStatus;
 let roles = require('../environments/environments').roles;
@@ -113,4 +114,17 @@ export default (app) => {
         .post(verifyToken, checkRoleAndStatus(roles.dictionaries.update), dictionaries.activate);
     app.route('/dictionaries/:id/deactivate')
         .post(verifyToken, checkRoleAndStatus(roles.dictionaries.update), dictionaries.deactivate);
+
+    // === CAROUSELS ===
+    app.route('/carousels')
+        .post(verifyToken, checkRoleAndStatus(roles.carousels.create), carousels.createCarousel)
+        .get(verifyToken, checkRoleAndStatus(roles.carousels.getAll), carousels.getAllCarousels);
+    app.route('/carousels/:id')
+        .get(verifyToken, checkRoleAndStatus(roles.carousels.getId), carousels.getCarouselById)
+        .delete(verifyToken, checkRoleAndStatus(roles.carousels.delete), carousels.deleteCarousel)
+        .put(verifyToken, checkRoleAndStatus(roles.carousels.update), carousels.update);
+    app.route('/carousels/:id/activate')
+        .post(verifyToken, checkRoleAndStatus(roles.carousels.update), carousels.activate);
+    app.route('/carousels/:id/deactivate')
+        .post(verifyToken, checkRoleAndStatus(roles.carousels.update), carousels.deactivate);
 };

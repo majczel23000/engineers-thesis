@@ -43,6 +43,11 @@ module.exports = {
             { code: 'DICTIONARIES/CREATE', name: 'Create dictionary', description: 'Create dictionary', createdAt: date, status: 'ACTIVE' },
             { code: 'DICTIONARIES/UPDATE', name: 'Update dictionary', description: 'Update dictionary', createdAt: date, status: 'ACTIVE' },
             { code: 'DICTIONARIES/DELETE', name: 'Delete dictionary', description: 'Delete dictionary', createdAt: date, status: 'ACTIVE' },
+            { code: 'CAROUSELS/GET_ALL', name: 'Get all carousels', description: 'Get all carousels', createdAt: date, status: 'ACTIVE'},
+            { code: 'CAROUSELS/GET_ID', name: 'Get specified carousel', description: 'Get specified carousel', createdAt: date, status: 'ACTIVE' },
+            { code: 'CAROUSELS/CREATE', name: 'Create carousel', description: 'Create carousel', createdAt: date, status: 'ACTIVE' },
+            { code: 'CAROUSELS/UPDATE', name: 'Update carousel', description: 'Update carousel', createdAt: date, status: 'ACTIVE' },
+            { code: 'CAROUSELS/DELETE', name: 'Delete carousel', description: 'Delete carousel', createdAt: date, status: 'ACTIVE' },
         ];
         MongoClient.connect('mongodb://localhost:27017/', function(err, db) {
             if(err)

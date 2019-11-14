@@ -53,6 +53,10 @@ const routes: Routes = [
     loadChildren: './dictionaries/dictionaries.module#DictionariesModule'
   },
   {
+    path: 'carousels',
+    loadChildren: './carousels/carousels.module#CarouselsModule'
+  },
+  {
     path: 'error',
     component: ErrorPageComponent
   }

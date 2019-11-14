@@ -10,6 +10,7 @@ import { PageService } from '../../../pages/services/page.service';
 import { ImageService } from '../../../images/services/image.service';
 import { SettingsService } from '../../../settings/services/settings.service';
 import { DictionaryService } from '../../../dictionaries/services/dictionary.service';
+import { CarouselService } from '../../../carousels/services/carousel.service';
 
 @Component({
   selector: 'app-dialog-confirm',
@@ -28,7 +29,8 @@ export class DialogConfirmComponent {
               private pageService: PageService,
               private imageService: ImageService,
               private settingsService: SettingsService,
-              private dictionaryService: DictionaryService) { }
+              private dictionaryService: DictionaryService,
+              private carouselService: CarouselService) { }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -417,6 +419,56 @@ export class DialogConfirmComponent {
       case 'REMOVE_DICTIONARY': {
         this.data.status = 'REMOVED';
         this.dictionaryService.removeDictionary(this.data._id).subscribe(
+          res => {
+            console.log(res);
+          },
+          err => {
+            console.log(err);
+          }
+        );
+        break;
+      }
+      case 'CHANGE_CAROUSEL_STATUS': {
+        if (this.data.status === 'INACTIVE') {
+          this.carouselService.activateCarousel(this.data._id).subscribe(
+            res => {
+              this.snackBar.open(res.message, 'X', {
+                duration: 5000,
+                horizontalPosition: 'right',
+                panelClass: ['success-snackbar']
+              });
+            },
+            err => {
+              this.snackBar.open(err.error.message, 'X', {
+                duration: 5000,
+                horizontalPosition: 'right',
+                panelClass: ['error-snackbar']
+              });
+            }
+          );
+        } else {
+          this.carouselService.deactivateCarousel(this.data._id).subscribe(
+            res => {
+              this.snackBar.open(res.message, 'X', {
+                duration: 5000,
+                horizontalPosition: 'right',
+                panelClass: ['success-snackbar']
+              });
+            },
+            err => {
+              this.snackBar.open(err.error.message, 'X', {
+                duration: 5000,
+                horizontalPosition: 'right',
+                panelClass: ['error-snackbar']
+              });
+            }
+          );
+        }
+        break;
+      }
+      case 'REMOVE_CAROUSEL': {
+        this.data.status = 'REMOVED';
+        this.carouselService.removeCarousel(this.data._id).subscribe(
           res => {
             console.log(res);
           },

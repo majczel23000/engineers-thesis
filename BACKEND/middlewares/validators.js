@@ -4,6 +4,7 @@ import Page from '../models/pageModel';
 import Image from '../models/imageModel';
 import Settings from '../models/settingsModel';
 import Dictionary from '../models/dictionaryModel';
+import Carousel from '../models/carouselModel';
 
 module.exports = {
     validateEmail: function(email) {
@@ -117,6 +118,13 @@ module.exports = {
     checkDictionaryCode: async function(code) {
         try {
             return Dictionary.findOne({ code: code })
+        } catch(error) {
+            throw new Error(error)
+        }
+    },
+    checkCarouselCode: async function(code) {
+        try {
+            return Carousel.findOne({ code: code })
         } catch(error) {
             throw new Error(error)
         }
