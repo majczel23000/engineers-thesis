@@ -8,7 +8,6 @@ let validateFields = require('../middlewares/validators').validateFields;
 let BRYPT_SALT_ROUNDS = 12;
 let messages = require('../environments/environments').messages;
 
-// CREATE: Create new user and return user node
 exports.createUser = (req, res) => {
     req.body.status = "INACTIVE";
     const validateFieldsResult = validateFields(User.schema.obj, req.body);
@@ -46,7 +45,9 @@ exports.createUser = (req, res) => {
                     if (err) {
                         res.send(err);
                     } else {
-                        res.status(200).json(successResponse(200, messages.users.success.created, user2));
+                        res.status(200).json(
+                            successResponse(200, messages.users.success.created, user2)
+                        );
                     }
                 }) 
             });           
@@ -54,7 +55,6 @@ exports.createUser = (req, res) => {
     })
 }
 
-// GET-ALL: Return all user nodes
 exports.getAllUsers = (req, res) => {
     User.find({ status: { $in: ['ACTIVE', 'INACTIVE', 'DELETED'] }}, 'firstName lastName email status', (err, users) => {
         if (err) {
@@ -65,7 +65,6 @@ exports.getAllUsers = (req, res) => {
     })
 }
 
-// GET-ID: Return user with specified id
 exports.getUserById = (req, res) => {
     User.findById(req.params.id, (err, user) => {
         if (err) {
@@ -78,7 +77,6 @@ exports.getUserById = (req, res) => {
     });
 };
 
-// UPDATE: Update user and return updated user node
 exports.updateUser = (req, res) => {
     if (req.body.email)
         delete req.body.email;
@@ -113,7 +111,6 @@ exports.updateUser = (req, res) => {
     });
 };
 
-// REMOVE: Remove user from database (change status flag to deleted)
 exports.deleteUser = (req, res) => {
     User.findByIdAndUpdate(req.params.id, { status: 'DELETED'}, { new: true }, (err, user) => {
         if (err) {
@@ -126,7 +123,6 @@ exports.deleteUser = (req, res) => {
     })
 };
 
-// LOGIN: Login user to system
 exports.login = (req, res) => {
     User.findOne({email: req.body.email}, (err, user) => {
         if(err){
@@ -151,8 +147,6 @@ exports.login = (req, res) => {
     });
 }
 
-
-// ACTIVATE: Activate user in database
 exports.activate = (req, res) => {
     User.findByIdAndUpdate(req.params.id, { status: 'ACTIVE', updatedAt: new Date() }, { new: true }, (err, user) => {
         if (err) {
@@ -165,7 +159,6 @@ exports.activate = (req, res) => {
     })
 }
 
-// DEACTIVATE: Deactivate user in database
 exports.deactivate = (req, res) => {
     User.findByIdAndUpdate(req.params.id, { status: 'INACTIVE', updatedAt: new Date() }, { new: true }, (err, user) => {
         if (err) {

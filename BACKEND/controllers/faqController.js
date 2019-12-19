@@ -5,32 +5,18 @@ let messages = require('../environments/environments').messages;
 let validateFields = require('../middlewares/validators').validateFields;
 let checkFaqCode = require('../middlewares/validators').checkFaqCode;
 
-// CREATE: Create new FAQ and return new FAQ node
 exports.createFaq = async (req, res) => {
-    req.body.status = "INACTIVE";
     const validateFieldsResult = validateFields(Faq.schema.obj, req.body);
     if (!validateFieldsResult.status) {
         res.status(409).send(errorResponse(409, validateFieldsResult.message));
         return;
     }
-    if (req.body.code.length < 5) {
-        res.status(409).send(errorResponse(409, messages.faqs.errors.codeLength));
-        return;
-    } else if (!(/^[0-9a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u.test(req.body.code))) {
-        res.status(409).send(errorResponse(409, messages.faqs.errors.codeRegexp));
-        return;
-    }
-    if (req.body.name.length < 5) {
-        res.status(409).send(errorResponse(409, messages.faqs.errors.codeLength));
-        return;
-    } else if (!(/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u.test(req.body.name))) {
-        res.status(409).send(errorResponse(409, messages.faqs.errors.nameRegexp));
-        return;
-    }
 
     const faqCode = await checkFaqCode(req.body.code);
     if (faqCode) {
-        res.status(404).json(errorResponse(409, messages.faqs.errors.codeExists));
+        res.status(404).json(
+            errorResponse(409, messages.faqs.errors.codeExists)
+        );
     } else {
         const date = new Date();
         req.body.createdAt = date;
@@ -40,24 +26,27 @@ exports.createFaq = async (req, res) => {
             if (err) {
                 res.send(err);
             } else {
-                res.status(200).json(successResponse(200, messages.faqs.success.created, faq));
+                res.status(200).json(
+                    successResponse(200, messages.faqs.success.created, faq)
+                );
             }
         })
     }
 };
 
-// GET ALL: Return all faqs nodes
 exports.getAllFaqs = (req, res) => {
-    Faq.find({status: { $in: ['ACTIVE', 'INACTIVE', 'DELETED'] }}, 'code name status', (err, faqs) => {
+    Faq.find({status: { $in: ['ACTIVE', 'INACTIVE', 'DELETED'] }}, 
+    'code name status', (err, faqs) => {
         if (err) {
             res.send(err);
         } else {
-            res.status(200).json(successResponse(200, messages.faqs.success.fetched, faqs));
+            res.status(200).json(
+                successResponse(200, messages.faqs.success.fetched, faqs)
+            );
         }
     })
 };
 
-// GET ID: Return faq with specified id
 exports.getFaqById = (req, res) => {
     Faq.findById(req.params.id, (err, faq) => {
         if (err) {
@@ -70,7 +59,6 @@ exports.getFaqById = (req, res) => {
     })
 };
 
-// REMOVE: Remove faq (change status flag to deleted)
 exports.deleteFaq = (req, res) => {
     Faq.findByIdAndUpdate(req.params.id, { status: 'DELETED' }, { new: true }, (err, faq) => {
         if (err) {
@@ -83,7 +71,6 @@ exports.deleteFaq = (req, res) => {
     })
 };
 
-// ACTIVATE: Activate faq in database
 exports.activate = (req, res) => {
     Faq.findByIdAndUpdate(req.params.id, { status: 'ACTIVE', updatedAt: new Date() }, { new: true }, (err, faq) => {
         if (err) {
@@ -96,7 +83,6 @@ exports.activate = (req, res) => {
     })
 };
 
-// DEACTIVATE: Deactivate faq in database
 exports.deactivate = (req, res) => {
     Faq.findByIdAndUpdate(req.params.id, { status: 'INACTIVE', updatedAt: new Date() }, { new: true }, (err, faq) => {
         if (err) {
@@ -109,7 +95,6 @@ exports.deactivate = (req, res) => {
     })
 };
 
-// UPDATE: Update faq and return updated faq node
 exports.updateFaq = (req, res) => {
     if (req.body.code)
         delete req.body.code;

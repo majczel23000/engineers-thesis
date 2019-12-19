@@ -21,6 +21,8 @@ const RoleSchema = new Schema({
         type: String,
         required: true
     }
-})
+});
 
 export default mongoose.model('Roles', RoleSchema);
+
+
