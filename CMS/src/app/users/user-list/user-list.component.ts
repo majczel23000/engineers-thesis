@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
 import { SpinnerService } from '../../shared/services/spinner.service';
+import { LanguageService } from 'src/app/shared/services/language.service';
 
 @Component({
   selector: 'app-user-list',
@@ -26,13 +27,14 @@ export class UserListComponent implements OnInit {
               private router: Router,
               private paginatorIntl: MatPaginatorIntl,
               private snackBar: MatSnackBar,
-              private spinnerService: SpinnerService) {
+              private spinnerService: SpinnerService,
+              public languageService: LanguageService) {
     this.spinnerService.setSpinner(true);
   }
 
   ngOnInit() {
     this.getUsers();
-    this.paginatorIntl.itemsPerPageLabel = 'Users per page';
+    this.paginatorIntl.itemsPerPageLabel = this.languageService.getTranslation('userItemsPerPage');
   }
 
   getUsers(): void {

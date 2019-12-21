@@ -19,11 +19,13 @@ export class UserService {
     items: [
       {
         label: 'Users list',
-        routerLink: '/users'
+        routerLink: '/users',
+        code: 'UsersListNav'
       },
       {
         label: 'Add new user',
-        routerLink: '/users/add'
+        routerLink: '/users/add',
+        code: 'UsersAddNav'
       }
     ]
   }

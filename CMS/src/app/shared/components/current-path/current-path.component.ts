@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-current-path',
@@ -9,7 +10,7 @@ export class CurrentPathComponent implements OnInit {
 
   @Input() currentPathItems: string[];
 
-  constructor() { }
+  constructor(public languageService: LanguageService) { }
 
   ngOnInit() {
   }

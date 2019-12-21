@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ModuleNavigationModel } from '../../models/module-navigation/moduleNavigation.model';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-module-navigation',
@@ -10,6 +11,6 @@ export class ModuleNavigationComponent {
 
   @Input() navigation: ModuleNavigationModel;
 
-  constructor() { }
+  constructor(public languageService: LanguageService) { }
 
 }

@@ -6,6 +6,7 @@ import { MatCheckbox, MatSnackBar} from '@angular/material';
 import { UserService } from '../services/user.service';
 import { User } from '../../shared/models/user.model';
 import { RoleModel } from '../../shared/models/Role.model';
+import { LanguageService } from 'src/app/shared/services/language.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -40,7 +41,8 @@ export class UserAddComponent implements OnInit {
 
   constructor(private router: Router,
               private snackBar: MatSnackBar,
-              private userService: UserService) { }
+              private userService: UserService,
+              public languageService: LanguageService) { }
 
   ngOnInit() {
     this.getAllRoles();

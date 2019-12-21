@@ -9,6 +9,7 @@ import { MatCheckbox, MatSnackBar } from '@angular/material';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogConfirmComponent } from '../../shared/components/dialog-confirm/dialog-confirm.component';
 import { SpinnerService } from '../../shared/services/spinner.service';
+import { LanguageService } from 'src/app/shared/services/language.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -42,7 +43,8 @@ export class UserDetailsComponent implements OnInit {
               private snackBar: MatSnackBar,
               public dialog: MatDialog,
               private router: Router,
-              private spinnerService: SpinnerService) {
+              private spinnerService: SpinnerService,
+              public languageService: LanguageService) {
     this.spinnerService.setSpinner(true);
   }
 

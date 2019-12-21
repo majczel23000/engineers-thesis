@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../shared/services/login.service';
+import { LanguageService } from 'src/app/shared/services/language.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,7 +9,8 @@ import { LoginService } from '../../shared/services/login.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService,
+    public languageService: LanguageService) { }
 
   private user;
   private modules = {

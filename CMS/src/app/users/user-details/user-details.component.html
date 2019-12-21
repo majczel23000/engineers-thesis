@@ -1,10 +1,10 @@
-<app-current-path *ngIf="user" [currentPathItems]="['users', user.email]"></app-current-path>
+<app-current-path *ngIf="user" [currentPathItems]="[languageService.getTranslation('locationUsers'), user.email]"></app-current-path>
 <app-module-navigation [navigation]="userService.getUsersNavigation()"></app-module-navigation>
 <mat-card class="module-details-card pb-2 mt-4">
 
   <mat-card-header>
     <mat-card-title>
-      <h1 class="module-details-title">User: {{user?.firstName}} {{user?.lastName}}</h1>
+      <h1 class="module-details-title">{{languageService.getTranslation('user')}}: {{user?.firstName}} {{user?.lastName}}</h1>
     </mat-card-title>
   </mat-card-header>
 
@@ -13,7 +13,7 @@
 
       <table class="module-details-table desktop">
         <tr class="module-details-row">
-          <td class="module-details-item">First Name:</td>
+          <td class="module-details-item">{{languageService.getTranslation('firstName')}}:</td>
           <td *ngIf="user.status !== 'DELETED'" class="module-details-item">
             <mat-form-field>
               <input matInput value="{{user?.firstName}}" name="firstName" formControlName="firstName" [errorStateMatcher]="matcher">
@@ -25,7 +25,7 @@
           <td *ngIf="user.status === 'DELETED'" class="module-details-item" style="text-align: left">{{user?.firstName}}</td>
         </tr>
         <tr class="module-details-row">
-          <td class="module-details-item">Last Name:</td>
+          <td class="module-details-item">{{languageService.getTranslation('lastName')}}:</td>
           <td *ngIf="user.status !== 'DELETED'" class="module-details-item">
             <mat-form-field class="module-details-form-field">
               <input matInput value="{{user?.lastName}}" name="lastName" formControlName="lastName" [errorStateMatcher]="matcher">
@@ -41,20 +41,20 @@
           <td class="module-details-item" style="text-align: left">{{user?.email}}</td>
         </tr>
         <tr class="module-details-row">
-          <td class="module-details-item">Created at:</td>
+          <td class="module-details-item">{{languageService.getTranslation('createdAt')}}:</td>
           <td class="module-details-item" style="text-align: left">{{user?.createdAt}}</td>
         </tr>
         <tr class="module-details-row">
-          <td class="module-details-item">Updated at:</td>
+          <td class="module-details-item">{{languageService.getTranslation('updatedAt')}}:</td>
           <td class="module-details-item" style="text-align: left">{{user?.updatedAt}}</td>
         </tr>
         <tr class="module-details-row">
-          <td class="module-details-item">Status:</td>
+          <td class="module-details-item">{{languageService.getTranslation('status')}}:</td>
           <td class="module-details-item module-details-status" (click)="changeStatus()"
               [ngStyle]="{ 'background': user.status === 'INACTIVE' ? '#828282' : user.status === 'ACTIVE' ? '#28a745' : 'blue' }">{{user?.status}}</td>
         </tr>
         <tr *ngIf="user.status !== 'DELETED'" class="module-details-row">
-          <td class="module-details-item">Password:</td>
+          <td class="module-details-item">{{languageService.getTranslation('password')}}:</td>
           <td class="module-details-item">
             <mat-form-field>
               <input matInput name="password" type="password" formControlName="password" [errorStateMatcher]="matcher">
@@ -68,7 +68,7 @@
           </td>
         </tr>
         <tr class="module-details-row">
-          <td class="module-details-item">Roles:</td>
+          <td class="module-details-item">{{languageService.getTranslation('roles')}}:</td>
           <td *ngIf="user.status !== 'DELETED'"  class="module-details-item" style="text-align: left">
             <div class="role-list" *ngIf="user?.roles">
               <mat-checkbox [checked]="checkIfUserHasThisRole(role.code)" color="primary" #checkbox class="role-list-item" (change)="onCheckboxChange(role.code, checkbox)"
@@ -84,9 +84,9 @@
       </table>
 
       <mat-card-actions class="module-edit-actions" *ngIf="user.status !== 'DELETED'">
-        <button mat-raised-button class="module-edit-btn" color="primary">Save changes</button>
-        <button mat-raised-button class="module-edit-btn" (click)="clearChanges()" color="accent">Clear changes</button>
-        <button mat-raised-button class="module-edit-btn" color="warn" (click)="removeUser()">Remove user</button>
+        <button mat-raised-button class="module-edit-btn" color="primary">{{languageService.getTranslation('saveChanges')}}</button>
+        <button mat-raised-button class="module-edit-btn" (click)="clearChanges()" color="accent">{{languageService.getTranslation('clearChanges')}}</button>
+        <button mat-raised-button class="module-edit-btn" color="warn" (click)="removeUser()">{{languageService.getTranslation('removeUser')}}</button>
       </mat-card-actions>
     </form>
   </mat-card-content>

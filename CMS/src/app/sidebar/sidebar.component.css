@@ -81,7 +81,7 @@ h3.header-app-author-logout {
 
 .header-user-menu { 
     position: absolute;
-    right: 5%;
+    right: 20%;
 }
 .material-icons{
     color: white;
@@ -130,4 +130,18 @@ a .material-icons{
 
 ::ng-deep .cdk-overlay-pane {
   justify-content: flex-end !important;
+}
+
+.languageContainer {
+  position: absolute;
+  right: 1%;
+  
+}
+
+.languageContainer button {
+  background: orange;
+  text-align: center;
+  font-size: 0.7rem;
+  border: none;
+  margin: 1px !important;
 }
