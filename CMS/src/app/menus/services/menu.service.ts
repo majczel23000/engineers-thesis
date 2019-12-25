@@ -17,11 +17,13 @@ export class MenuService {
     items: [
       {
         label: 'Menus list',
-        routerLink: '/menus'
+        routerLink: '/menus',
+        code: 'MenusListNav'
       },
       {
         label: 'Add new menu',
-        routerLink: '/menus/add'
+        routerLink: '/menus/add',
+        code: 'MenusAddNav'
       }
     ]
   }
@@ -29,31 +31,31 @@ export class MenuService {
   constructor(private httpClient: HttpClient) { }
 
   getAllMenus() {
-    return this.httpClient.get<MenuListResponseModel>(`${this.apiUrl}/menu`);
+    return this.httpClient.get<MenuListResponseModel>(`${this.apiUrl}/menus`);
   }
 
   addMenu(menuData: MenuModel) {
-    return this.httpClient.post<MenuResponseModel>(`${this.apiUrl}/menu`, menuData);
+    return this.httpClient.post<MenuResponseModel>(`${this.apiUrl}/menus`, menuData);
   }
 
   getMenuById(_id: string) {
-    return this.httpClient.get<MenuResponseModel>(`${this.apiUrl}/menu/${_id}`);
+    return this.httpClient.get<MenuResponseModel>(`${this.apiUrl}/menus/${_id}`);
   }
 
   activateMenu(_id: string) {
-    return this.httpClient.post<MenuResponseModel>(`${this.apiUrl}/menu/${_id}/activate`, {});
+    return this.httpClient.post<MenuResponseModel>(`${this.apiUrl}/menus/${_id}/activate`, {});
   }
 
   deactivateMenu(_id: string) {
-    return this.httpClient.post<MenuResponseModel>(`${this.apiUrl}/menu/${_id}/deactivate`, {});
+    return this.httpClient.post<MenuResponseModel>(`${this.apiUrl}/menus/${_id}/deactivate`, {});
   }
 
   removeMenu(_id: string) {
-    return this.httpClient.delete(`${this.apiUrl}/menu/${_id}`);
+    return this.httpClient.delete(`${this.apiUrl}/menus/${_id}`);
   }
 
   editMenu(_id: string, menuData) {
-    return this.httpClient.put<MenuResponseModel>(`${this.apiUrl}/menu/${_id}`, menuData);
+    return this.httpClient.put<MenuResponseModel>(`${this.apiUrl}/menus/${_id}`, menuData);
   }
 
   getMenusNavigation(): ModuleNavigationModel {

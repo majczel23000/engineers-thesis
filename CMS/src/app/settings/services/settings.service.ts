@@ -17,11 +17,13 @@ export class SettingsService {
     items: [
       {
         label: 'Settings list',
-        routerLink: '/settings'
+        routerLink: '/settings',
+        code: 'SettingsListNav'
       },
       {
         label: 'Add new setting',
-        routerLink: '/settings/add'
+        routerLink: '/settings/add',
+        code: 'SettingsAddNav'
       }
     ]
   }

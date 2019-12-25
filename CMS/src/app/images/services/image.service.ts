@@ -17,11 +17,13 @@ export class ImageService {
     items: [
       {
         label: 'Images list',
-        routerLink: '/images'
+        routerLink: '/images',
+        code: 'ImagesListNav'
       },
       {
         label: 'Add new image',
-        routerLink: '/images/add'
+        routerLink: '/images/add',
+        code: 'ImagesAddNav'
       }
     ]
   }
@@ -29,27 +31,27 @@ export class ImageService {
   constructor(private httpClient: HttpClient) { }
 
   getAllImages() {
-    return this.httpClient.get<ImageListResponseModel>(`${this.apiUrl}/image`);
+    return this.httpClient.get<ImageListResponseModel>(`${this.apiUrl}/images`);
   }
 
   addImage(imageData: ImageModel) {
-    return this.httpClient.post<ImageResponseModel>(`${this.apiUrl}/image`, imageData);
+    return this.httpClient.post<ImageResponseModel>(`${this.apiUrl}/images`, imageData);
   }
 
   getImageById(_id: string) {
-    return this.httpClient.get<ImageResponseModel>(`${this.apiUrl}/image/${_id}`);
+    return this.httpClient.get<ImageResponseModel>(`${this.apiUrl}/images/${_id}`);
   }
 
   activateImage(_id: string) {
-    return this.httpClient.post<ImageResponseModel>(`${this.apiUrl}/image/${_id}/activate`, {});
+    return this.httpClient.post<ImageResponseModel>(`${this.apiUrl}/images/${_id}/activate`, {});
   }
 
   deactivateImage(_id: string) {
-    return this.httpClient.post<ImageResponseModel>(`${this.apiUrl}/image/${_id}/deactivate`, {});
+    return this.httpClient.post<ImageResponseModel>(`${this.apiUrl}/images/${_id}/deactivate`, {});
   }
 
   removeImage(_id: string) {
-    return this.httpClient.delete(`${this.apiUrl}/image/${_id}`);
+    return this.httpClient.delete(`${this.apiUrl}/images/${_id}`);
   }
 
   getImagesNavigation(): ModuleNavigationModel {

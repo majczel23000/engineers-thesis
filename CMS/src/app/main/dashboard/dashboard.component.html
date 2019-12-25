@@ -7,7 +7,7 @@
   <div class="content-box text-center">
     <p class="content-description">{{languageService.getTranslation('welcomeText2')}}</p>
     <span class="roles-item" *ngFor="let item of modules | keyvalue">
-      <ng-container *ngIf="item.value">{{item.key}} </ng-container>
+      <ng-container *ngIf="item.value">{{item.key}}<br/> </ng-container>
     </span>
   </div>
   

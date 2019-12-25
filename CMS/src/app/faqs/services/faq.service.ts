@@ -17,11 +17,13 @@ export class FaqService {
     items: [
       {
         label: 'Faqs list',
-        routerLink: '/faqs'
+        routerLink: '/faqs',
+        code: 'FaqsListNav'
       },
       {
         label: 'Add new faq',
-        routerLink: '/faqs/add'
+        routerLink: '/faqs/add',
+        code: 'FaqsAddNav'
       }
     ]
   };
@@ -29,31 +31,31 @@ export class FaqService {
   constructor(private httpClient: HttpClient) { }
 
   getAllFaqs() {
-    return this.httpClient.get<FaqListResponseModel>(`${this.apiUrl}/faq`);
+    return this.httpClient.get<FaqListResponseModel>(`${this.apiUrl}/faqs`);
   }
 
   addFaq(faqData: FaqModel) {
-    return this.httpClient.post<FaqResponseModel>(`${this.apiUrl}/faq`, faqData);
+    return this.httpClient.post<FaqResponseModel>(`${this.apiUrl}/faqs`, faqData);
   }
 
   getFaqById(_id: string) {
-    return this.httpClient.get<FaqResponseModel>(`${this.apiUrl}/faq/${_id}`);
+    return this.httpClient.get<FaqResponseModel>(`${this.apiUrl}/faqs/${_id}`);
   }
 
   activateFaq(_id: string) {
-    return this.httpClient.post<FaqResponseModel>(`${this.apiUrl}/faq/${_id}/activate`, {});
+    return this.httpClient.post<FaqResponseModel>(`${this.apiUrl}/faqs/${_id}/activate`, {});
   }
 
   deactivateFaq(_id: string) {
-    return this.httpClient.post<FaqResponseModel>(`${this.apiUrl}/faq/${_id}/deactivate`, {});
+    return this.httpClient.post<FaqResponseModel>(`${this.apiUrl}/faqs/${_id}/deactivate`, {});
   }
 
   removeFaq(_id: string) {
-    return this.httpClient.delete(`${this.apiUrl}/faq/${_id}`);
+    return this.httpClient.delete(`${this.apiUrl}/faqs/${_id}`);
   }
 
   editFaq(_id: string, faqData) {
-    return this.httpClient.put<FaqResponseModel>(`${this.apiUrl}/faq/${_id}`, faqData);
+    return this.httpClient.put<FaqResponseModel>(`${this.apiUrl}/faqs/${_id}`, faqData);
   }
 
   getFaqsNavigation(): ModuleNavigationModel {

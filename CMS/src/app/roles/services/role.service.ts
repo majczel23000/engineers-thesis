@@ -15,7 +15,8 @@ export class RoleService {
     items: [
       {
         label: 'Roles list',
-        routerLink: '/roles'
+        routerLink: '/roles',
+        code: 'RolesListNav'
       }
     ]
   }

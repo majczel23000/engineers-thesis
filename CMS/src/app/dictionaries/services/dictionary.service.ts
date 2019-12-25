@@ -17,11 +17,13 @@ export class DictionaryService {
     items: [
       {
         label: 'Dictionaries list',
-        routerLink: '/dictionaries'
+        routerLink: '/dictionaries',
+        code: 'DictionariesListNav'
       },
       {
         label: 'Add new dictionary',
-        routerLink: '/dictionaries/add'
+        routerLink: '/dictionaries/add',
+        code: 'DictionariesAddNav'
       }
     ]
   };

@@ -139,7 +139,9 @@ a .material-icons{
 }
 
 .languageContainer button {
-  background: orange;
+  background: #f6f6f6;
+  color: #333;
+  font-weight: bold;
   text-align: center;
   font-size: 0.7rem;
   border: none;

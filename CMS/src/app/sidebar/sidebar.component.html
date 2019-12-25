@@ -4,6 +4,7 @@
       <div style="display:flex; justify-content: center">
           <i class="material-icons" style="line-height: unset">menu</i>
           <h1 class="header-app-name">{{languageService.getTranslation('appName')}}</h1>
+          <h3 class="header-app-author-logout">miraCMS</h3>
           <h1 class="header-app-name-mobile">CMS</h1>
       </div>
     </button>
@@ -16,8 +17,8 @@
     </button>
 
     <div class="languageContainer">
-      <button mat-raised-button class="module-edit-btn" (click)="languageService.changeLanguageCode('en')" color="accent">EN</button>
-      <button mat-raised-button class="module-edit-btn" (click)="languageService.changeLanguageCode('es')" color="accent">ES</button>
+      <button mat-raised-button class="module-edit-btn" (click)="languageService.changeLanguageCode('en')" color="accent">en</button>
+      <button mat-raised-button class="module-edit-btn" (click)="languageService.changeLanguageCode('es')" color="accent">es</button>
     </div>
     
     <mat-menu #menu="matMenu">
@@ -30,11 +31,13 @@
   <mat-toolbar color="primary" class="header-toolbar" *ngIf="!loginService.isUserLogged()">
     <div class="header-app-name-container">
       <h1 class="header-app-name-logout">{{languageService.getTranslation('appName')}}</h1>
-      <h3 class="header-app-author-logout">Michał Raźny</h3>
+      <h3 class="header-app-author-logout">miraCMS</h3>
     </div>
     <div class="header-app-name-container-mobile">
       <h1 class="header-app-name-logout">CMS</h1>
+      <h3 class="header-app-author-logout">miraCMS</h3>
     </div>
+    
   </mat-toolbar>
 
   <!-- SIDENAV MENU AND CONTENT-->

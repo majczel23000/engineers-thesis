@@ -17,11 +17,13 @@ export class PageService {
     items: [
       {
         label: 'Pages list',
-        routerLink: '/pages'
+        routerLink: '/pages',
+        code: 'PagesListNav'
       },
       {
         label: 'Add new page',
-        routerLink: '/pages/add'
+        routerLink: '/pages/add',
+        code: 'PagesAddNav'
       }
     ]
   }
@@ -29,31 +31,31 @@ export class PageService {
   constructor(private httpClient: HttpClient) { }
 
   getAllPages() {
-    return this.httpClient.get<PageListResponseModel>(`${this.apiUrl}/page`);
+    return this.httpClient.get<PageListResponseModel>(`${this.apiUrl}/pages`);
   }
 
   addPage(pageData: PageModel) {
-    return this.httpClient.post<PageResponseModel>(`${this.apiUrl}/page`, pageData);
+    return this.httpClient.post<PageResponseModel>(`${this.apiUrl}/pages`, pageData);
   }
 
   getPageById(_id: string) {
-    return this.httpClient.get<PageResponseModel>(`${this.apiUrl}/page/${_id}`);
+    return this.httpClient.get<PageResponseModel>(`${this.apiUrl}/pages/${_id}`);
   }
 
   activatePage(_id: string) {
-    return this.httpClient.post<PageResponseModel>(`${this.apiUrl}/page/${_id}/activate`, {});
+    return this.httpClient.post<PageResponseModel>(`${this.apiUrl}/pages/${_id}/activate`, {});
   }
 
   deactivatePage(_id: string) {
-    return this.httpClient.post<PageResponseModel>(`${this.apiUrl}/page/${_id}/deactivate`, {});
+    return this.httpClient.post<PageResponseModel>(`${this.apiUrl}/pages/${_id}/deactivate`, {});
   }
 
   removePage(_id: string) {
-    return this.httpClient.delete(`${this.apiUrl}/page/${_id}`);
+    return this.httpClient.delete(`${this.apiUrl}/pages/${_id}`);
   }
 
   editPage(_id: string, pageData: PageModel) {
-    return this.httpClient.put<PageResponseModel>(`${this.apiUrl}/page/${_id}`, pageData);
+    return this.httpClient.put<PageResponseModel>(`${this.apiUrl}/pages/${_id}`, pageData);
   }
 
   getPagesNavigation(): ModuleNavigationModel {

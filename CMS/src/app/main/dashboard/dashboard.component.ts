@@ -19,7 +19,10 @@ export class DashboardComponent implements OnInit {
     'FAQS': false,
     'MENUS': false,
     'IMAGES': false,
-    'PAGES': false
+    'PAGES': false,
+    'SETTINGS': false,
+    'CAROUSELS': false,
+    'DICTIONARIES': false
   }
 
   ngOnInit() {

@@ -28,5 +28,5 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="module-table-row" [routerLink]="['/roles/role', row._id]"></tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]" showFirstLastButtons></mat-paginator>
 </div>

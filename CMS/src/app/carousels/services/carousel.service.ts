@@ -17,11 +17,13 @@ export class CarouselService {
     items: [
       {
         label: 'Carousels list',
-        routerLink: '/carousels'
+        routerLink: '/carousels',
+        code: 'CarouselsListNav'
       },
       {
         label: 'Add new carousel',
-        routerLink: '/carousels/add'
+        routerLink: '/carousels/add',
+        code: 'CarouselsAddNav'
       }
     ]
   };
