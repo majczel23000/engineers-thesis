@@ -6,7 +6,7 @@ let roles = require('../environments/environments').roles;
 const MainRolesRouter = require('express').Router();
 
 MainRolesRouter.route('/')
-    .get(verifyToken, checkRoleAndStatus(roles.roles.getAll), role.getAllRoles);
+    .get(role.getAllRoles);
 MainRolesRouter.route('/:id')
     .get(verifyToken, checkRoleAndStatus(roles.roles.getId), role.getRoleById)
     .put(verifyToken, checkRoleAndStatus(roles.roles.update), role.updateRole);

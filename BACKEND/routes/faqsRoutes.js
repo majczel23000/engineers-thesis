@@ -7,7 +7,7 @@ const MainFaqsRouter = require('express').Router();
 
 MainFaqsRouter.route('/')
     .post(verifyToken, checkRoleAndStatus(roles.faqs.create), faq.createFaq)
-    .get(verifyToken, checkRoleAndStatus(roles.faqs.getAll), faq.getAllFaqs);
+    .get(faq.getAllFaqs);
 MainFaqsRouter.route('/:id')
     .get(verifyToken, checkRoleAndStatus(roles.faqs.getId), faq.getFaqById)
     .delete(verifyToken, checkRoleAndStatus(roles.faqs.delete), faq.deleteFaq)
