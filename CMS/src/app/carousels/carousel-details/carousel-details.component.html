@@ -10,18 +10,18 @@
 
   <mat-tab-group color="primary" backgroundColor="primary">
 
-    <mat-tab label="General">
+    <mat-tab label="{{languageService.getTranslation('general')}}">
       <form class="module-details-form" [formGroup]="editCarouselFormGroup" *ngIf="carousel" (ngSubmit)="editCarousel()">
 
         <table class="module-details-table">
 
           <tr class="module-details-row">
-            <td class="module-details-item">Code:</td>
+            <td class="module-details-item">{{languageService.getTranslation('code')}}:</td>
             <td class="module-details-item" style="text-align: left">{{carousel?.code}}</td>
           </tr>
 
           <tr class="module-details-row">
-            <td class="module-details-item">Name:</td>
+            <td class="module-details-item">{{languageService.getTranslation('name')}}:</td>
             <td *ngIf="carousel?.status !== 'DELETED'" class="module-details-item">
               <mat-form-field class="module-details-form-field">
                 <input matInput value="{{carousel?.name}}" name="name" formControlName="name" [errorStateMatcher]="matcher">
@@ -37,7 +37,7 @@
           </tr>
 
           <tr class="module-details-row">
-            <td class="module-details-item">Description:</td>
+            <td class="module-details-item">{{languageService.getTranslation('description')}}:</td>
             <td *ngIf="carousel?.status !== 'DELETED'" class="module-details-item">
               <mat-form-field class="module-details-form-field">
                 <input matInput value="{{carousel?.description}}" name="description" formControlName="description">
@@ -47,17 +47,17 @@
           </tr>
 
           <tr class="module-details-row">
-            <td class="module-details-item">Created at:</td>
+            <td class="module-details-item">{{languageService.getTranslation('createdAt')}}:</td>
             <td class="module-details-item" style="text-align: left">{{carousel?.createdAt}}</td>
           </tr>
 
           <tr class="module-details-row">
-            <td class="module-details-item">Updated at:</td>
+            <td class="module-details-item">{{languageService.getTranslation('updatedAt')}}:</td>
             <td class="module-details-item" style="text-align: left">{{carousel?.updatedAt}}</td>
           </tr>
 
           <tr class="module-details-row">
-            <td class="module-details-item">Status:</td>
+            <td class="module-details-item">{{languageService.getTranslation('status')}}:</td>
             <td class="module-details-item module-details-status" (click)="changeStatus()"
                 [ngStyle]="{ 'background': carousel?.status === 'INACTIVE' ? '#828282' : carousel?.status === 'ACTIVE' ? '#28a745' : 'blue' }">{{carousel?.status}}</td>
           </tr>
@@ -66,19 +66,19 @@
       </form>
     </mat-tab>
 
-    <mat-tab label="Desktop">
+    <mat-tab label="{{languageService.getTranslation('desktop')}}">
       <table class="module-details-table" *ngIf="carousel?.status === 'DELETED'">
         <tr class="module-details-row" *ngIf="!carousel?.itemsDesktop.length">
-          <td class="module-details-item">There are no desktop slides.</td>
+          <td class="module-details-item">{{languageService.getTranslation('noElements')}}</td>
         </tr>
       </table>
 
       <table class="module-details-table" *ngIf="carousel?.status !== 'DELETED'">
         <tr class="module-details-row">
-          <td class="module-details-item"><button mat-raised-button class="module-edit-btn" color="primary" (click)="addDesktopItem()">Add</button></td>
+          <td class="module-details-item"><button mat-raised-button class="module-edit-btn" color="primary" (click)="addDesktopItem()">{{languageService.getTranslation('add')}}</button></td>
         </tr>
         <tr class="module-details-row" *ngIf="!carouselDesktopItems.length">
-          <td class="module-details-item">There are no desktop slides.</td>
+          <td class="module-details-item">{{languageService.getTranslation('noElements')}}</td>
         </tr>
         <ng-container *ngFor="let carouselDesktopItem of carouselDesktopItems; let i = index">
           <table class="module-details-table table-hover">
@@ -127,19 +127,19 @@
       </table>
     </mat-tab>
 
-    <mat-tab label="Mobile">
+    <mat-tab label="{{languageService.getTranslation('mobile')}}">
       <table class="module-details-table" *ngIf="carousel?.status === 'DELETED'">
         <tr class="module-details-row" *ngIf="!carousel?.itemsMobile.length">
-          <td class="module-details-item">There are no mobile slides.</td>
+          <td class="module-details-item">{{languageService.getTranslation('noElements')}}</td>
         </tr>
       </table>
 
       <table class="module-details-table" *ngIf="carousel?.status !== 'DELETED'">
         <tr class="module-details-row">
-          <td class="module-details-item"><button mat-raised-button class="module-edit-btn" color="primary" (click)="addMobileItem()">Add</button></td>
+          <td class="module-details-item"><button mat-raised-button class="module-edit-btn" color="primary" (click)="addMobileItem()">{{languageService.getTranslation('add')}}</button></td>
         </tr>
         <tr class="module-details-row" *ngIf="!carouselMobileItems.length">
-          <td class="module-details-item">There are no mobile slides.</td>
+          <td class="module-details-item">{{languageService.getTranslation('noElements')}}</td>
         </tr>
         <ng-container *ngFor="let carouselMobileItem of carouselMobileItems; let i = index">
           <table class="module-details-table table-hover">
@@ -188,7 +188,7 @@
       </table>
     </mat-tab>
 
-    <mat-tab label="Configuration">
+    <mat-tab label="{{languageService.getTranslation('configuration')}}">
       <table class="module-details-table" *ngIf="carousel?.status === 'DELETED'">
 
         <tr class="module-details-row">
@@ -329,9 +329,9 @@
   </mat-tab-group>
 
   <mat-card-actions *ngIf="carousel?.status !== 'DELETED'" class="module-edit-actions">
-    <button type="submit" mat-raised-button class="module-edit-btn" color="primary" (click)="runEditCarousel()">Save changes</button>
-    <a mat-raised-button class="module-edit-btn" (click)="clearChanges()" color="accent">Clear changes</a>
-    <a mat-raised-button class="module-edit-btn" color="warn" (click)="removeCarousel()">Remove carousel</a>
+    <button type="submit" mat-raised-button class="module-edit-btn" color="primary" (click)="runEditCarousel()">{{languageService.getTranslation('saveChanges')}}</button>
+    <a mat-raised-button class="module-edit-btn" (click)="clearChanges()" color="accent">{{languageService.getTranslation('clearChanges')}}</a>
+    <a mat-raised-button class="module-edit-btn" color="warn" (click)="removeCarousel()">{{languageService.getTranslation('remove')}}</a>
   </mat-card-actions>
 
 </mat-card>

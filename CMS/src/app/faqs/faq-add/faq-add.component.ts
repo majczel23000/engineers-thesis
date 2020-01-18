@@ -4,6 +4,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { MatSnackBar} from '@angular/material';
 import { FaqService } from '../services/faq.service';
+import { LanguageService } from 'src/app/shared/services/language.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -33,7 +34,8 @@ export class FaqAddComponent implements OnInit {
 
   constructor(private router: Router,
               private snackBar: MatSnackBar,
-              private faqService: FaqService) { }
+              private faqService: FaqService,
+              private languageService: LanguageService) { }
 
   ngOnInit() {
   }

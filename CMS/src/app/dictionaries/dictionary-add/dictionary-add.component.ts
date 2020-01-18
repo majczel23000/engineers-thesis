@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { MatSnackBar} from '@angular/material';
 import { DictionaryService } from '../services/dictionary.service';
 import {MyErrorStateMatcher} from "../../faqs/faq-add/faq-add.component";
+import { LanguageService } from 'src/app/shared/services/language.service';
 
 @Component({
   selector: 'app-dictionary-add',
@@ -27,7 +28,8 @@ export class DictionaryAddComponent implements OnInit {
 
   constructor(private router: Router,
               private snackBar: MatSnackBar,
-              private dictionaryService: DictionaryService) { }
+              private dictionaryService: DictionaryService,
+              private languageService: LanguageService) { }
 
   ngOnInit() {
   }

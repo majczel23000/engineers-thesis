@@ -14,12 +14,12 @@
       <table class="module-details-table">
 
         <tr class="module-details-row">
-          <td class="module-details-item">Code:</td>
+          <td class="module-details-item">{{languageService.getTranslation('code')}}:</td>
           <td class="module-details-item" style="text-align: left">{{menu?.code}}</td>
         </tr>
 
         <tr class="module-details-row">
-          <td class="module-details-item">Name:</td>
+          <td class="module-details-item">{{languageService.getTranslation('name')}}:</td>
           <td *ngIf="menu.status !== 'DELETED'" class="module-details-item">
             <mat-form-field class="module-details-form-field">
               <input matInput value="{{menu?.name}}" name="name" formControlName="name" [errorStateMatcher]="matcher">
@@ -35,7 +35,7 @@
         </tr>
 
         <tr class="module-details-row">
-          <td class="module-details-item">Description:</td>
+          <td class="module-details-item">{{languageService.getTranslation('description')}}:</td>
           <td *ngIf="menu.status !== 'DELETED'" class="module-details-item">
             <mat-form-field class="module-details-form-field">
               <input matInput value="{{menu?.description}}" name="description" formControlName="description">
@@ -45,29 +45,29 @@
         </tr>
 
         <tr class="module-details-row">
-          <td class="module-details-item">Created at:</td>
+          <td class="module-details-item">{{languageService.getTranslation('createdAt')}}:</td>
           <td class="module-details-item" style="text-align: left">{{menu?.createdAt}}</td>
         </tr>
 
         <tr class="module-details-row">
-          <td class="module-details-item">Updated at:</td>
+          <td class="module-details-item">{{languageService.getTranslation('updatedAt')}}:</td>
           <td class="module-details-item" style="text-align: left">{{menu?.updatedAt}}</td>
         </tr>
 
         <tr class="module-details-row">
-          <td class="module-details-item">Status:</td>
+          <td class="module-details-item">{{languageService.getTranslation('status')}}:</td>
           <td class="module-details-item module-details-status" (click)="changeStatus()"
               [ngStyle]="{ 'background': menu.status === 'INACTIVE' ? '#828282' : menu.status === 'ACTIVE' ? '#28a745' : 'blue' }">{{menu?.status}}</td>
         </tr>
 
         <tr class="module-details-row">
-          <td *ngIf="menu.status === 'DELETED'" colspan="2" class="module-details-item module-elements-title">Elements</td>
-          <td *ngIf="menu.status !== 'DELETED'" class="module-details-item module-elements-title">Elements</td>
+          <td *ngIf="menu.status === 'DELETED'" colspan="2" class="module-details-item module-elements-title">{{languageService.getTranslation('elements')}}</td>
+          <td *ngIf="menu.status !== 'DELETED'" class="module-details-item module-elements-title">{{languageService.getTranslation('elements')}}</td>
           <td *ngIf="menu.status !== 'DELETED'" class="module-details-item">
-            <a mat-raised-button class="module-edit-btn" color="primary" (click)="addMenuElement()" *ngIf="menuElementsVisibility">Add element</a>
+            <a mat-raised-button class="module-edit-btn" color="primary" (click)="addMenuElement()" *ngIf="menuElementsVisibility">{{languageService.getTranslation('add')}}</a>
             <a mat-raised-button class="module-edit-btn" color="primary" (click)="menuElementsVisibility = !menuElementsVisibility">
-              <ng-container *ngIf="!menuElementsVisibility">Show</ng-container>
-              <ng-container *ngIf="menuElementsVisibility">Hide</ng-container>
+              <ng-container *ngIf="!menuElementsVisibility">{{languageService.getTranslation('show')}}</ng-container>
+              <ng-container *ngIf="menuElementsVisibility">{{languageService.getTranslation('hide')}}</ng-container>
             </a>
           </td>
         </tr>
@@ -79,7 +79,7 @@
         <ng-container *ngIf="menuElementsVisibility && !menuElements.length">
           <tr class="module-details-row">
             <td class="module-details-item-none">
-              This menu have no elements
+              {{languageService.getTranslation('noElements')}}
             </td>
           </tr>
         </ng-container>
@@ -224,9 +224,9 @@
       </table>
 
       <mat-card-actions *ngIf="menu.status !== 'DELETED'" class="module-edit-actions">
-        <button mat-raised-button class="module-edit-btn" color="primary">Save changes</button>
-        <a mat-raised-button class="module-edit-btn" (click)="clearChanges()" color="accent">Clear changes</a>
-        <a mat-raised-button class="module-edit-btn" color="warn" (click)="removeMenu()">Remove menu</a>
+        <button mat-raised-button class="module-edit-btn" color="primary">{{languageService.getTranslation('saveChanges')}}</button>
+        <a mat-raised-button class="module-edit-btn" (click)="clearChanges()" color="accent">{{languageService.getTranslation('clearChanges')}}</a>
+        <a mat-raised-button class="module-edit-btn" color="warn" (click)="removeMenu()">{{languageService.getTranslation('remove')}}</a>
       </mat-card-actions>
     </form>
   </mat-card-content>

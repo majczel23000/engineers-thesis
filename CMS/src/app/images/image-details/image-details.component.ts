@@ -5,6 +5,7 @@ import { DialogConfirmComponent } from '../../shared/components/dialog-confirm/d
 import { ImageService } from '../services/image.service';
 import { ImageModel } from '../../shared/models/image/Image.model';
 import { SpinnerService } from '../../shared/services/spinner.service';
+import { LanguageService } from 'src/app/shared/services/language.service';
 
 @Component({
   selector: 'app-image-details',
@@ -21,7 +22,8 @@ export class ImageDetailsComponent implements OnInit {
               public dialog: MatDialog,
               private router: Router,
               private imageService: ImageService,
-              private spinnerService: SpinnerService) {
+              private spinnerService: SpinnerService,
+              private languageService: LanguageService) {
     this.spinnerService.setSpinner(true);
   }
 

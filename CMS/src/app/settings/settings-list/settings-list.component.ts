@@ -6,6 +6,7 @@ import { MatPaginator, MatTableDataSource, MatPaginatorIntl, MatSort } from '@an
 import { SettingsService } from '../services/settings.service';
 import { SettingModel } from '../../shared/models/settings/Setting.model';
 import { SpinnerService } from '../../shared/services/spinner.service';
+import { LanguageService } from 'src/app/shared/services/language.service';
 
 @Component({
   selector: 'app-settings-list',
@@ -26,7 +27,8 @@ export class SettingsListComponent implements OnInit {
               private paginatorIntl: MatPaginatorIntl,
               private settingsService: SettingsService,
               private spinnerService: SpinnerService,
-              private snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              private languageService: LanguageService) {
     this.spinnerService.setSpinner(true);
   }
 

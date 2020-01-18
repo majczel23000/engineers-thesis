@@ -8,6 +8,7 @@ import { MenuService } from '../services/menu.service';
 import { MenuModel } from '../../shared/models/menu/Menu.model';
 import { MenuElementModel } from '../../shared/models/menu/MenuElement.model';
 import { SpinnerService } from '../../shared/services/spinner.service';
+import { LanguageService } from 'src/app/shared/services/language.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -43,7 +44,8 @@ export class MenuDetailsComponent implements OnInit {
               public dialog: MatDialog,
               private router: Router,
               private menuService: MenuService,
-              private spinnerService: SpinnerService) {
+              private spinnerService: SpinnerService,
+              private languageService: LanguageService) {
     this.spinnerService.setSpinner(true);
   }
 

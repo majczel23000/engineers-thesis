@@ -14,12 +14,12 @@
       <table class="module-details-table">
 
         <tr class="module-details-row">
-          <td class="module-details-item">Code:</td>
+          <td class="module-details-item">{{languageService.getTranslation('code')}}:</td>
           <td class="module-details-item" style="text-align: left">{{faq?.code}}</td>
         </tr>
 
         <tr class="module-details-row">
-          <td class="module-details-item">Name:</td>
+          <td class="module-details-item">{{languageService.getTranslation('name')}}:</td>
           <td *ngIf="faq.status !== 'DELETED'" class="module-details-item">
             <mat-form-field class="module-details-form-field">
               <input matInput value="{{faq?.name}}" name="name" formControlName="name" [errorStateMatcher]="matcher">
@@ -35,7 +35,7 @@
         </tr>
 
         <tr class="module-details-row">
-          <td class="module-details-item">Description:</td>
+          <td class="module-details-item">{{languageService.getTranslation('description')}}:</td>
           <td *ngIf="faq.status !== 'DELETED'" class="module-details-item">
             <mat-form-field class="module-details-form-field">
               <input matInput value="{{faq?.description}}" name="description" formControlName="description">
@@ -45,29 +45,29 @@
         </tr>
 
         <tr class="module-details-row">
-          <td class="module-details-item">Created at:</td>
+          <td class="module-details-item">{{languageService.getTranslation('createdAt')}}:</td>
           <td class="module-details-item" style="text-align: left">{{faq?.createdAt}}</td>
         </tr>
 
         <tr class="module-details-row">
-          <td class="module-details-item">Updated at:</td>
+          <td class="module-details-item">{{languageService.getTranslation('updatedAt')}}:</td>
           <td class="module-details-item" style="text-align: left">{{faq?.updatedAt}}</td>
         </tr>
 
         <tr class="module-details-row">
-          <td class="module-details-item">Status:</td>
+          <td class="module-details-item">{{languageService.getTranslation('status')}}:</td>
           <td class="module-details-item module-details-status" (click)="changeStatus()"
               [ngStyle]="{ 'background': faq.status === 'INACTIVE' ? '#828282' : faq.status === 'ACTIVE' ? '#28a745' : 'blue' }">{{faq?.status}}</td>
         </tr>
 
         <tr class="module-details-row">
-          <td *ngIf="faq.status === 'DELETED'" colspan="2" class="module-details-item module-elements-title">Elements</td>
-          <td *ngIf="faq.status !== 'DELETED'" class="module-details-item module-elements-title">Elements</td>
+          <td *ngIf="faq.status === 'DELETED'" colspan="2" class="module-details-item module-elements-title">{{languageService.getTranslation('elements')}}</td>
+          <td *ngIf="faq.status !== 'DELETED'" class="module-details-item module-elements-title">{{languageService.getTranslation('elements')}}</td>
           <td *ngIf="faq.status !== 'DELETED'" class="module-details-item">
-            <a mat-raised-button class="module-edit-btn" color="primary" (click)="addFaqElement()" *ngIf="faqElementsVisibility">Add element</a>
+            <a mat-raised-button class="module-edit-btn" color="primary" (click)="addFaqElement()" *ngIf="faqElementsVisibility">{{languageService.getTranslation('add')}}</a>
             <a mat-raised-button class="module-edit-btn" color="primary" (click)="faqElementsVisibility = !faqElementsVisibility">
-              <ng-container *ngIf="!faqElementsVisibility">Show</ng-container>
-              <ng-container *ngIf="faqElementsVisibility">Hide</ng-container>
+              <ng-container *ngIf="!faqElementsVisibility">{{languageService.getTranslation('show')}}</ng-container>
+              <ng-container *ngIf="faqElementsVisibility">{{languageService.getTranslation('hide')}}</ng-container>
             </a>
           </td>
         </tr>
@@ -78,7 +78,7 @@
         <ng-container *ngIf="faqElementsVisibility && !faqElements.length">
           <tr class="module-details-row">
             <td class="module-details-item-none">
-              This faq have no elements
+              {{languageService.getTranslation('noElements')}}
             </td>
           </tr>
         </ng-container>
@@ -111,7 +111,7 @@
         <ng-container *ngIf="faqElementsVisibility && !faqElements.length">
           <tr class="module-details-row">
             <td class="module-details-item-none">
-              This faq have no elements
+              {{languageService.getTranslation('noElements')}}
             </td>
           </tr>
         </ng-container>
@@ -130,9 +130,9 @@
       </table>
 
       <mat-card-actions *ngIf="faq.status !== 'DELETED'" class="module-edit-actions">
-        <button mat-raised-button class="module-edit-btn" color="primary">Save changes</button>
-        <a mat-raised-button class="module-edit-btn" (click)="clearChanges()" color="accent">Clear changes</a>
-        <a mat-raised-button class="module-edit-btn" color="warn" (click)="removeFaq()">Remove faq</a>
+        <button mat-raised-button class="module-edit-btn" color="primary">{{languageService.getTranslation('saveChanges')}}</button>
+        <a mat-raised-button class="module-edit-btn" (click)="clearChanges()" color="accent">{{languageService.getTranslation('saveChanges')}}</a>
+        <a mat-raised-button class="module-edit-btn" color="warn" (click)="removeFaq()">{{languageService.getTranslation('remove')}}</a>
       </mat-card-actions>
     </form>
   </mat-card-content>

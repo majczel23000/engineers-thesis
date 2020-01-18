@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material';
 import { MatPaginator, MatTableDataSource, MatPaginatorIntl, MatSort } from '@angular/material';
 import { ImageModel } from '../../shared/models/image/Image.model';
 import { SpinnerService } from '../../shared/services/spinner.service';
+import { LanguageService } from 'src/app/shared/services/language.service';
 
 @Component({
   selector: 'app-image-list',
@@ -26,7 +27,8 @@ export class ImageListComponent implements OnInit {
               private paginatorIntl: MatPaginatorIntl,
               private snackBar: MatSnackBar,
               private imageService: ImageService,
-              private spinnerService: SpinnerService) {
+              private spinnerService: SpinnerService,
+              private languageService: LanguageService) {
     this.spinnerService.setSpinner(true);
   }
 

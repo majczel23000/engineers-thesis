@@ -9,6 +9,7 @@ import { SettingModel } from '../../shared/models/settings/Setting.model';
 import { SettingsService } from '../services/settings.service';
 import { Router } from '@angular/router';
 import { SpinnerService } from '../../shared/services/spinner.service';
+import { LanguageService } from 'src/app/shared/services/language.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -45,7 +46,8 @@ export class SettingDetailsComponent implements OnInit {
               public dialog: MatDialog,
               private snackBar: MatSnackBar,
               private router: Router,
-              private spinnerService: SpinnerService) {
+              private spinnerService: SpinnerService,
+              private languageService: LanguageService) {
     this.spinnerService.setSpinner(true);
   }
 

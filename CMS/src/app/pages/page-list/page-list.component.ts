@@ -7,6 +7,7 @@ import { PageModel } from '../../shared/models/page/Page.model';
 import { PageService } from '../services/page.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SpinnerService } from '../../shared/services/spinner.service';
+import { LanguageService } from 'src/app/shared/services/language.service';
 
 @Component({
   selector: 'app-page-list',
@@ -28,7 +29,8 @@ export class PageListComponent implements OnInit {
               private snackBar: MatSnackBar,
               private pageService: PageService,
               private _sanitizer: DomSanitizer,
-              private spinnerService: SpinnerService) {
+              private spinnerService: SpinnerService,
+              private languageService: LanguageService) {
     this.spinnerService.setSpinner(true);
   }
 

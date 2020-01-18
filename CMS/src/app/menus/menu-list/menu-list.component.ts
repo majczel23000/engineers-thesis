@@ -6,6 +6,7 @@ import { MatPaginator, MatTableDataSource, MatPaginatorIntl, MatSort } from '@an
 import { MenuModel } from '../../shared/models/menu/Menu.model';
 import { MenuService } from '../services/menu.service';
 import { SpinnerService } from '../../shared/services/spinner.service';
+import { LanguageService } from 'src/app/shared/services/language.service';
 
 @Component({
   selector: 'app-menu-list',
@@ -26,7 +27,8 @@ export class MenuListComponent implements OnInit {
               private router: Router,
               private paginatorIntl: MatPaginatorIntl,
               private snackBar: MatSnackBar,
-              private spinnerService: SpinnerService) {
+              private spinnerService: SpinnerService,
+              private languageService: LanguageService) {
     this.spinnerService.setSpinner(true);
   }
 

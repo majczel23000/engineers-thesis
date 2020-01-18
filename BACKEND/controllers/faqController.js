@@ -6,6 +6,7 @@ let validateFields = require('../middlewares/validators').validateFields;
 let checkFaqCode = require('../middlewares/validators').checkFaqCode;
 
 exports.createFaq = async (req, res) => {
+    req.body.status = "INACTIVE";
     const validateFieldsResult = validateFields(Faq.schema.obj, req.body);
     if (!validateFieldsResult.status) {
         res.status(409).send(errorResponse(409, validateFieldsResult.message));

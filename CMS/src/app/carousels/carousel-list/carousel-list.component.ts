@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
 import { MatPaginator, MatTableDataSource, MatPaginatorIntl, MatSort } from '@angular/material';
+import { LanguageService } from 'src/app/shared/services/language.service';
 
 @Component({
   selector: 'app-carousel-list',
@@ -26,7 +27,8 @@ export class CarouselListComponent implements OnInit {
               private paginatorIntl: MatPaginatorIntl,
               private snackBar: MatSnackBar,
               private spinnerService: SpinnerService,
-              private carouselService: CarouselService) {
+              private carouselService: CarouselService,
+              private languageService: LanguageService) {
     this.spinnerService.setSpinner(true);
   }
 

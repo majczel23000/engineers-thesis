@@ -9,6 +9,7 @@ import { DictionaryElementModel } from '../../shared/models/dictionary/Dictionar
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { SpinnerService } from '../../shared/services/spinner.service';
 import { DictionaryService } from '../services/dictionary.service';
+import { LanguageService } from 'src/app/shared/services/language.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -44,7 +45,8 @@ export class DictionaryDetailsComponent implements OnInit {
               public dialog: MatDialog,
               private router: Router,
               private spinnerService: SpinnerService,
-              private dictionaryService: DictionaryService) {
+              private dictionaryService: DictionaryService,
+              private languageService: LanguageService) {
     this.spinnerService.setSpinner(true);
   }
 

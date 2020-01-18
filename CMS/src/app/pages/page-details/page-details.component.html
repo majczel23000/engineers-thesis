@@ -5,24 +5,24 @@
 
   <mat-card-header class="pt-4">
     <mat-card-title>
-      <h1 class="module-details-title">Page: {{page?.code}}</h1>
+      <h1 class="module-details-title">{{languageService.getTranslation('page')}}: {{page?.code}}</h1>
     </mat-card-title>
   </mat-card-header>
 
   <mat-tab-group color="primary" backgroundColor="primary">
 
-    <mat-tab label="General">
+    <mat-tab label="{{languageService.getTranslation('general')}}">
       <form class="module-details-form" [formGroup]="editPageFormGroup" *ngIf="page" (ngSubmit)="editPage()">
 
         <table class="module-details-table">
 
           <tr class="module-details-row">
-            <td class="module-details-item">Code:</td>
+            <td class="module-details-item">{{languageService.getTranslation('code')}}:</td>
             <td class="module-details-item" style="text-align: left">{{page?.code}}</td>
           </tr>
 
           <tr class="module-details-row">
-            <td class="module-details-item">Name:</td>
+            <td class="module-details-item">{{languageService.getTranslation('name')}}:</td>
             <td *ngIf="page?.status !== 'DELETED'" class="module-details-item">
               <mat-form-field class="module-details-form-field">
                 <input matInput value="{{page?.name}}" name="name" formControlName="name" [errorStateMatcher]="matcher">
@@ -38,7 +38,7 @@
           </tr>
 
           <tr class="module-details-row">
-            <td class="module-details-item">Description:</td>
+            <td class="module-details-item">{{languageService.getTranslation('description')}}:</td>
             <td *ngIf="page?.status !== 'DELETED'" class="module-details-item">
               <mat-form-field class="module-details-form-field">
                 <input matInput value="{{page?.description}}" name="description" formControlName="description">
@@ -48,17 +48,17 @@
           </tr>
 
           <tr class="module-details-row">
-            <td class="module-details-item">Created at:</td>
+            <td class="module-details-item">{{languageService.getTranslation('createdAt')}}:</td>
             <td class="module-details-item" style="text-align: left">{{page?.createdAt}}</td>
           </tr>
 
           <tr class="module-details-row">
-            <td class="module-details-item">Updated at:</td>
+            <td class="module-details-item">{{languageService.getTranslation('updatedAt')}}:</td>
             <td class="module-details-item" style="text-align: left">{{page?.updatedAt}}</td>
           </tr>
 
           <tr class="module-details-row">
-            <td class="module-details-item">Status:</td>
+            <td class="module-details-item">{{languageService.getTranslation('status')}}:</td>
             <td class="module-details-item module-details-status" (click)="changeStatus()"
                 [ngStyle]="{ 'background': page.status === 'INACTIVE' ? '#828282' : page.status === 'ACTIVE' ? '#28a745' : 'blue' }">{{page?.status}}</td>
           </tr>
@@ -67,7 +67,7 @@
       </form>
     </mat-tab>
 
-    <mat-tab label="Content">
+    <mat-tab label="{{languageService.getTranslation('content')}}">
       <app-ngx-editor *ngIf="page?.status !== 'DELETED'" height="300px" [(ngModel)]="contentValue" [spellcheck]="true"></app-ngx-editor>
       <table *ngIf="page?.status !== 'DELETED'" class="module-details-table">
         <tr class="module-details-row">
@@ -77,7 +77,7 @@
             </mat-form-field>
           </td>
           <td>
-            <a mat-raised-button class="module-edit-btn" (click)="addPageContent()" color="primary">Add content</a>
+            <a mat-raised-button class="module-edit-btn" (click)="addPageContent()" color="primary">{{languageService.getTranslation('add')}}</a>
           </td>
         </tr>
 
@@ -85,7 +85,7 @@
 
       <table class="module-details-table">
         <tr class="module-details-row" *ngIf="!pageContents.length">
-          <td class="module-details-item" colspan="2">No defined contents</td>
+          <td class="module-details-item" colspan="2">{{languageService.getTranslation('noElements')}}</td>
         </tr>
 
         <tr *ngFor="let pageContent of pageContents; let i = index" class="module-details-row">
@@ -102,17 +102,17 @@
       </table>
     </mat-tab>
 
-    <mat-tab label="Styles">
+    <mat-tab label="{{languageService.getTranslation('styles')}}">
       <table class="module-details-table">
 
         <tr *ngIf="page?.status !== 'DELETED'" class="module-details-row">
           <td class="module-details-item" colspan="3">
-            <a mat-raised-button class="module-edit-btn" (click)="addPageStyle()" color="primary">Add style</a>
+            <a mat-raised-button class="module-edit-btn" (click)="addPageStyle()" color="primary">{{languageService.getTranslation('add')}}</a>
           </td>
         </tr>
 
         <tr class="module-details-row" *ngIf="!pageStyles.length">
-          <td class="module-details-item">No defined styles</td>
+          <td class="module-details-item">{{languageService.getTranslation('noElements')}}</td>
         </tr>
 
         <tr *ngFor="let pageStyle of pageStyles; let i = index" class="module-details-row">
@@ -141,17 +141,17 @@
 
       </table>
     </mat-tab>
-    <mat-tab label="Meta tags">
+    <mat-tab label=" {{languageService.getTranslation('metaTags')}}">
       <table class="module-details-table">
 
         <tr *ngIf="page?.status !== 'DELETED'" class="module-details-row">
           <td class="module-details-item" colspan="3">
-            <a mat-raised-button class="module-edit-btn" (click)="addPageMetaTag()" color="primary">Add meta tag</a>
+            <a mat-raised-button class="module-edit-btn" (click)="addPageMetaTag()" color="primary">{{languageService.getTranslation('add')}}</a>
           </td>
         </tr>
 
         <tr class="module-details-row" *ngIf="!pageMetaTags.length">
-          <td class="module-details-item">No defined meta tags</td>
+          <td class="module-details-item">{{languageService.getTranslation('noElements')}}</td>
         </tr>
 
         <tr *ngFor="let pageMetaTag of pageMetaTags; let i = index" class="module-details-row">
@@ -183,9 +183,9 @@
   </mat-tab-group>
 
   <mat-card-actions *ngIf="page?.status !== 'DELETED'" class="module-edit-actions pb-4 pt-4">
-    <button type="submit" mat-raised-button class="module-edit-btn" color="primary" (click)="runEditPage()">Save changes</button>
-    <a mat-raised-button class="module-edit-btn" (click)="clearChanges()" color="accent">Clear changes</a>
-    <a mat-raised-button class="module-edit-btn" color="warn" (click)="removePage()">Remove page</a>
+    <button type="submit" mat-raised-button class="module-edit-btn" color="primary" (click)="runEditPage()">{{languageService.getTranslation('saveChanges')}}</button>
+    <a mat-raised-button class="module-edit-btn" (click)="clearChanges()" color="accent">{{languageService.getTranslation('clearChanges')}}</a>
+    <a mat-raised-button class="module-edit-btn" color="warn" (click)="removePage()">{{languageService.getTranslation('remove')}}</a>
   </mat-card-actions>
 
 </mat-card>

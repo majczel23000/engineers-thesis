@@ -4,6 +4,7 @@ import { AbstractControl, FormControl, FormGroup, FormGroupDirective, NgForm, Va
 import { Router } from '@angular/router';
 import { MatSnackBar} from '@angular/material';
 import { PageService } from '../services/page.service';
+import { LanguageService } from 'src/app/shared/services/language.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -33,7 +34,8 @@ export class PageAddComponent {
 
   constructor(private router: Router,
               private snackBar: MatSnackBar,
-              private pageService: PageService) { }
+              private pageService: PageService,
+              private languageService: LanguageService) { }
 
   addPage(): void {
     if (this.addPageFormGroup.valid) {

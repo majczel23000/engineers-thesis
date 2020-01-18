@@ -6,6 +6,7 @@ import { finalize } from 'rxjs/operators';
 import { RoleModel } from '../../shared/models/Role.model';
 import { SpinnerService } from '../../shared/services/spinner.service';
 import { MatSnackBar } from '@angular/material';
+import { LanguageService } from 'src/app/shared/services/language.service';
 
 @Component({
   selector: 'app-role-list',
@@ -25,7 +26,8 @@ export class RoleListComponent implements OnInit {
               private paginatorIntl: MatPaginatorIntl,
               private roleService: RoleService,
               private snackBar: MatSnackBar,
-              private spinnerService: SpinnerService) {
+              private spinnerService: SpinnerService,
+              private languageService: LanguageService) {
     this.spinnerService.setSpinner(true);
   }
 

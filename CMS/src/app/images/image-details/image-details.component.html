@@ -20,27 +20,27 @@
         </tr>
 
         <tr class="module-details-row">
-          <td class="module-details-item">Code:</td>
+          <td class="module-details-item">{{languageService.getTranslation('code')}}:</td>
           <td class="module-details-item" style="text-align: left">{{image?.code}}</td>
         </tr>
 
         <tr class="module-details-row">
-          <td class="module-details-item">Name:</td>
+          <td class="module-details-item">{{languageService.getTranslation('name')}}:</td>
           <td class="module-details-item" style="text-align: left">{{image?.name}}</td>
         </tr>
 
         <tr class="module-details-row">
-          <td class="module-details-item">Created at:</td>
+          <td class="module-details-item">{{languageService.getTranslation('createdAt')}}:</td>
           <td class="module-details-item" style="text-align: left">{{image?.createdAt}}</td>
         </tr>
 
         <tr class="module-details-row">
-          <td class="module-details-item">Updated at:</td>
+          <td class="module-details-item">{{languageService.getTranslation('updatedAt')}}:</td>
           <td class="module-details-item" style="text-align: left">{{image?.updatedAt}}</td>
         </tr>
 
         <tr class="module-details-row">
-          <td class="module-details-item">Status:</td>
+          <td class="module-details-item">{{languageService.getTranslation('status')}}:</td>
           <td class="module-details-item module-details-status" (click)="changeStatus()"
               [ngStyle]="{ 'background': image.status === 'INACTIVE' ? '#828282' : image.status === 'ACTIVE' ? '#28a745' : 'blue' }">{{image?.status}}</td>
         </tr>
@@ -48,8 +48,8 @@
       </table>
 
       <mat-card-actions class="module-edit-actions">
-        <button mat-raised-button class="module-edit-btn" color="primary">Save changes</button>
-        <a mat-raised-button class="module-edit-btn" color="warn" (click)="removeImage()">Remove image</a>
+        <button mat-raised-button class="module-edit-btn" color="primary">{{languageService.getTranslation('saveChanges')}}</button>
+        <a mat-raised-button class="module-edit-btn" color="warn" (click)="removeImage()">{{languageService.getTranslation('remove')}}</a>
       </mat-card-actions>
     </form>
   </mat-card-content>

@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material';
 import { MatPaginator, MatTableDataSource, MatPaginatorIntl, MatSort } from '@angular/material';
 import { DictionaryService } from '../services/dictionary.service';
 import { DictionaryModel } from '../../shared/models/dictionary/Dictionary.model';
+import { LanguageService } from 'src/app/shared/services/language.service';
 
 @Component({
   selector: 'app-dictionary-list',
@@ -26,7 +27,8 @@ export class DictionaryListComponent implements OnInit {
               private paginatorIntl: MatPaginatorIntl,
               private snackBar: MatSnackBar,
               private spinnerService: SpinnerService,
-              private dictionaryService: DictionaryService) {
+              private dictionaryService: DictionaryService,
+              private languageService: LanguageService) {
     this.spinnerService.setSpinner(true);
   }
 

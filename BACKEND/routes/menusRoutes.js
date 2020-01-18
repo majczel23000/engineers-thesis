@@ -8,7 +8,7 @@ const MainMenusRouter = require('express').Router();
 MainMenusRouter.route('/')
     .post(verifyToken, checkRoleAndStatus(roles.menus.create), menu.createMenu)
     .get(verifyToken, checkRoleAndStatus(roles.menus.getAll), menu.getAllMenus);
-MainMenusRouter.route('//:id')
+MainMenusRouter.route('/:id')
     .put(verifyToken, checkRoleAndStatus(roles.menus.update), menu.updateMenu)
     .get(verifyToken, checkRoleAndStatus(roles.menus.getId), menu.getMenuById)
     .delete(verifyToken, checkRoleAndStatus(roles.menus.delete), menu.deleteMenu);

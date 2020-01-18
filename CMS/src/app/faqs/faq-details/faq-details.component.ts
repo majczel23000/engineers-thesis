@@ -9,6 +9,7 @@ import { FaqModel } from '../../shared/models/faq/Faq.model';
 import { FaqElementModel } from '../../shared/models/faq/FaqElement.model';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { SpinnerService } from '../../shared/services/spinner.service';
+import { LanguageService } from 'src/app/shared/services/language.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -44,7 +45,8 @@ export class FaqDetailsComponent implements OnInit {
               private snackBar: MatSnackBar,
               public dialog: MatDialog,
               private router: Router,
-              private spinnerService: SpinnerService) {
+              private spinnerService: SpinnerService,
+              private languageService: LanguageService) {
     this.spinnerService.setSpinner(true);
   }
 

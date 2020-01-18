@@ -11,6 +11,7 @@ import { CarouselItemModel } from '../../shared/models/carousels/CarouselItem.mo
 import { CarouselConfigurationModel } from '../../shared/models/carousels/CarouselConfiguration.model';
 import { ImageService } from '../../images/services/image.service';
 import { ImageModel } from '../../shared/models/image/Image.model';
+import { LanguageService } from 'src/app/shared/services/language.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -54,7 +55,8 @@ export class CarouselDetailsComponent implements OnInit {
                private router: Router,
                private spinnerService: SpinnerService,
                private carouselService: CarouselService,
-               private imageService: ImageService) {
+               private imageService: ImageService,
+               private languageService: LanguageService) {
     this.spinnerService.setSpinner(true);
   }
 

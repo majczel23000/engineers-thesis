@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { MatSnackBar} from '@angular/material';
 import { ImageService } from '../services/image.service';
 import { ImageModel } from '../../shared/models/image/Image.model';
+import { LanguageService } from 'src/app/shared/services/language.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -37,7 +38,8 @@ export class ImageAddComponent {
 
   constructor(private router: Router,
               private snackBar: MatSnackBar,
-              private imageService: ImageService) { }
+              private imageService: ImageService,
+              private languageService: LanguageService) { }
 
   addImage(): void {
     if (!this.image.length) {

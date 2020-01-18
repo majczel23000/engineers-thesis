@@ -10,6 +10,7 @@ import { PageStyleModel } from '../../shared/models/page/PageStyle.model';
 import { PageMetaTagModel } from '../../shared/models/page/PageMetaTag.model';
 import { PageContentModel } from '../../shared/models/page/PageContent.model';
 import { SpinnerService } from '../../shared/services/spinner.service';
+import { LanguageService } from 'src/app/shared/services/language.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -47,7 +48,8 @@ export class PageDetailsComponent implements OnInit {
               public dialog: MatDialog,
               private router: Router,
               private pageService: PageService,
-              private spinnerService: SpinnerService) {
+              private spinnerService: SpinnerService,
+              private languageService: LanguageService) {
     this.spinnerService.setSpinner(true);
   }
 

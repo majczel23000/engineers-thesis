@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material';
 import { MatPaginator, MatTableDataSource, MatPaginatorIntl, MatSort } from '@angular/material';
 import { FaqModel } from '../../shared/models/faq/Faq.model';
 import { SpinnerService } from '../../shared/services/spinner.service';
+import { LanguageService } from 'src/app/shared/services/language.service';
 
 @Component({
   selector: 'app-faq-list',
@@ -26,7 +27,8 @@ export class FaqListComponent implements OnInit {
               private router: Router,
               private paginatorIntl: MatPaginatorIntl,
               private snackBar: MatSnackBar,
-                private spinnerService: SpinnerService) {
+                private spinnerService: SpinnerService,
+                private languageService: LanguageService) {
       this.spinnerService.setSpinner(true);
     }
 
